@@ -1,2 +1,5 @@
+Version 1beta2 - released TODO
+cmb     added Czech translation (contributed by oldnema)
+
 Version 1beta1 - released 2012-09-29
 cmb	initial release
