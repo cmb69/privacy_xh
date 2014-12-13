@@ -18,6 +18,8 @@ if (!defined('CMSIMPLE_XH_VERSION')) {
     exit;
 }
 
+require_once $pth['folder']['plugin_classes'] . 'Controller.php';
+
 /**
  * The plugin version number.
  */
@@ -35,6 +37,8 @@ if (!defined('CMSIMPLE_URL')) {
         . preg_replace('/index.php$/', '', $_SERVER['PHP_SELF'])
     );
 }
+
+Privacy_Controller::dispatch();
 
 /**
  * Handles the privacy agreement.
