@@ -13,9 +13,20 @@
  * @link      http://3-magi.net/?CMSimple_XH/Privacy_XH
  */
 
-if (!defined('CMSIMPLE_XH_VERSION')) {
-    header('HTTP/1.0 403 Forbidden');
-    exit;
+/*
+ * Prevent direct access and usage from unsupported CMSimple_XH versions.
+ */
+if (!defined('CMSIMPLE_XH_VERSION')
+    || strpos(CMSIMPLE_XH_VERSION, 'CMSimple_XH') !== 0
+    || version_compare(CMSIMPLE_XH_VERSION, 'CMSimple_XH 1.6', 'lt')
+) {
+    header('HTTP/1.1 403 Forbidden');
+    header('Content-Type: text/plain; charset=UTF-8');
+    die(<<<EOT
+Privacy_XH detected an unsupported CMSimple_XH version.
+Uninstall Privacy_XH or upgrade to a supported CMSimple_XH version!
+EOT
+    );
 }
 
 require_once $pth['folder']['plugin_classes'] . 'Controller.php';
@@ -24,19 +35,6 @@ require_once $pth['folder']['plugin_classes'] . 'Controller.php';
  * The plugin version number.
  */
 define('PRIVACY_VERSION', '@PRIVACY_VERSION@');
-
-if (!defined('XH_ADM')) {
-    define('XH_ADM', $adm);
-}
-
-if (!defined('CMSIMPLE_URL')) {
-    define(
-        'CMSIMPLE_URL', 'http'
-        . (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 's' : '')
-        . '://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']
-        . preg_replace('/index.php$/', '', $_SERVER['PHP_SELF'])
-    );
-}
 
 Privacy_Controller::dispatch();
 
