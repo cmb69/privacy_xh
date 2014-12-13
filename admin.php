@@ -3,7 +3,7 @@
 /**
  * Back-End of Privacy_XH.
  *
- * Copyright (c) 2012 Christoph M. Becker (see license.txt)
+ * Copyright (c) 2014 Christoph M. Becker (see license.txt)
  */
 
 
@@ -27,7 +27,7 @@ function Privacy_version()
     return '<h1><a href="http://3-magi.net/?CMSimple_XH/Privacy_XH">Privacy_XH</a></h1>'
         . tag('img src="' . $pth['folder']['plugin'] . 'privacy.png" style="float:left"')
         . '<p>Version: ' . PRIVACY_VERSION . '</p>'
-        . '<p>Copyright &copy; 2012 <a href="http://3-magi.net">Christoph M. Becker</a></p>'
+        . '<p>Copyright &copy; 2014 <a href="http://3-magi.net">Christoph M. Becker</a></p>'
         . '<p style="text-align:justify">This program is free software: you can redistribute it and/or modify'
         . ' it under the terms of the GNU General Public License as published by'
         . ' the Free Software Foundation, either version 3 of the License, or'

@@ -3,7 +3,7 @@
 /**
  * Front-End of Privacy_XH.
  *
- * Copyright (c) 2012 Christoph M. Becker (see license.txt)
+ * Copyright (c) 2014 Christoph M. Becker (see license.txt)
  */
 
 
