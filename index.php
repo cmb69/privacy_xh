@@ -21,7 +21,7 @@ if (!defined('CMSIMPLE_XH_VERSION')) {
 /**
  * The plugin version number.
  */
-define('PRIVACY_VERSION', '1beta1');
+define('PRIVACY_VERSION', '@PRIVACY_VERSION@');
 
 if (!defined('XH_ADM')) {
     define('XH_ADM', $adm);
