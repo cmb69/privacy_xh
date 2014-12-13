@@ -36,7 +36,7 @@ function Privacy_version()
             . ' style="float:left"'
         )
         . '<p>Version: ' . PRIVACY_VERSION . '</p>'
-        . '<p>Copyright &copy; 2014 <a href="http://3-magi.net">Christoph M.'
+        . '<p>Copyright &copy; 2012-2014 <a href="http://3-magi.net">Christoph M.'
         . ' Becker</a></p>'
         . '<p style="text-align:justify">This program is free software: you can'
         . ' redistribute it and/or modify'
