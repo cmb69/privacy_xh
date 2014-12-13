@@ -1,55 +1,72 @@
 <?php
 
 /**
- * Back-End of Privacy_XH.
+ * Back-end of Schedule_XH.
  *
- * Copyright (c) 2014 Christoph M. Becker (see license.txt)
+ * PHP versions 4 and 5
+ *
+ * @category  CMSimple_XH
+ * @package   Privacy
+ * @author    Christoph M. Becker <cmbecker69@gmx.de>
+ * @copyright 2012-2014 Christoph M. Becker <http://3-magi.net>
+ * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
+ * @link      http://3-magi.net/?CMSimple_XH/Privacy_XH
  */
-
 
 if (!defined('CMSIMPLE_XH_VERSION')) {
     header('HTTP/1.0 403 Forbidden');
     exit;
 }
 
-
 /**
  * Returns the plugin version information view.
  *
  * Must be called in plugin loading stage only.
  *
- * @return string  The (X)HTML.
+ * @return string (X)HTML.
  */
 function Privacy_version()
 {
     global $pth;
 
-    return '<h1><a href="http://3-magi.net/?CMSimple_XH/Privacy_XH">Privacy_XH</a></h1>'
-        . tag('img src="' . $pth['folder']['plugin'] . 'privacy.png" style="float:left"')
+    return '<h1><a href="http://3-magi.net/?CMSimple_XH/Privacy_XH">Privacy_XH'
+        . '</a></h1>'
+        . tag(
+            'img src="' . $pth['folder']['plugin'] . 'privacy.png"'
+            . ' style="float:left"'
+        )
         . '<p>Version: ' . PRIVACY_VERSION . '</p>'
-        . '<p>Copyright &copy; 2014 <a href="http://3-magi.net">Christoph M. Becker</a></p>'
-        . '<p style="text-align:justify">This program is free software: you can redistribute it and/or modify'
+        . '<p>Copyright &copy; 2014 <a href="http://3-magi.net">Christoph M.'
+        . ' Becker</a></p>'
+        . '<p style="text-align:justify">This program is free software: you can'
+        . ' redistribute it and/or modify'
         . ' it under the terms of the GNU General Public License as published by'
         . ' the Free Software Foundation, either version 3 of the License, or'
         . ' (at your option) any later version.</p>'
-        . '<p style="text-align:justify">This program is distributed in the hope that it will be useful,'
+        . '<p style="text-align:justify">This program is distributed in the hope'
+        . ' that it will be useful,'
         . ' but WITHOUT ANY WARRANTY; without even the implied warranty of'
         . ' MERCHAN&shy;TABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the'
         . ' GNU General Public License for more details.</p>'
-        . '<p style="text-align:justify">You should have received a copy of the GNU General Public License'
+        . '<p style="text-align:justify">You should have received a copy of the'
+        . ' GNU General Public License'
         . ' along with this program.  If not, see'
-        . ' <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>';
+        . ' <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/'
+        . '</a>.</p>';
 }
-
 
 /**
  * Returns the requirements information view.
  *
  * Must be called in plugin loading stage only.
  *
- * @return string  The (X)HTML.
+ * @return string (X)HTML.
+ *
+ * @global array The paths of system files and folders.
+ * @global array The localization of the core.
+ * @global array The localization of the plugins.
  */
-function Privacy_systemCheck() // RELEASE-TODO
+function Privacy_systemCheck()
 {
     global $pth, $tx, $plugin_tx;
 
@@ -64,24 +81,24 @@ function Privacy_systemCheck() // RELEASE-TODO
         . '&nbsp;&nbsp;' . sprintf($ptx['syscheck_phpversion'], PRIVACY_PHP_VERSION)
         . tag('br');
     foreach (array('date', 'pcre') as $ext) {
-	$o .= (extension_loaded($ext) ? $ok : $fail)
-	    . '&nbsp;&nbsp;' . sprintf($ptx['syscheck_extension'], $ext) . tag('br');
+        $o .= (extension_loaded($ext) ? $ok : $fail)
+            . '&nbsp;&nbsp;' . sprintf($ptx['syscheck_extension'], $ext) . tag('br');
     }
     $o .= (!get_magic_quotes_runtime() ? $ok : $fail)
-	. '&nbsp;&nbsp;' . $ptx['syscheck_magic_quotes'] . tag('br') . tag('br');
+        . '&nbsp;&nbsp;' . $ptx['syscheck_magic_quotes'] . tag('br') . tag('br');
     $o .= (strtoupper($tx['meta']['codepage']) == 'UTF-8' ? $ok : $fail)
-	. '&nbsp;&nbsp;' . $ptx['syscheck_encoding'] . tag('br');
+        . '&nbsp;&nbsp;' . $ptx['syscheck_encoding'] . tag('br');
     $folders = array();
     foreach (array('config/', 'css/', 'languages/') as $folder) {
-	$folders[] = $pth['folder']['plugin'] . $folder;
+        $folders[] = $pth['folder']['plugin'] . $folder;
     }
     foreach ($folders as $folder) {
-	$o .= (is_writable($folder) ? $ok : $warn)
-	    . '&nbsp;&nbsp;' . sprintf($ptx['syscheck_writable'], $folder) . tag('br');
+        $o .= (is_writable($folder) ? $ok : $warn)
+            . '&nbsp;&nbsp;' . sprintf($ptx['syscheck_writable'], $folder)
+            . tag('br');
     }
     return $o;
 }
-
 
 /*
  * Handle the plugin administration.

@@ -1,39 +1,50 @@
 <?php
 
 /**
- * Front-End of Privacy_XH.
+ * Back-end of Schedule_XH.
  *
- * Copyright (c) 2014 Christoph M. Becker (see license.txt)
+ * PHP versions 4 and 5
+ *
+ * @category  CMSimple_XH
+ * @package   Privacy
+ * @author    Christoph M. Becker <cmbecker69@gmx.de>
+ * @copyright 2012-2014 Christoph M. Becker <http://3-magi.net>
+ * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
+ * @link      http://3-magi.net/?CMSimple_XH/Privacy_XH
  */
-
 
 if (!defined('CMSIMPLE_XH_VERSION')) {
     header('HTTP/1.0 403 Forbidden');
     exit;
 }
 
-
+/**
+ * The plugin version number.
+ */
 define('PRIVACY_VERSION', '1beta1');
-
 
 if (!defined('XH_ADM')) {
     define('XH_ADM', $adm);
 }
 
 if (!defined('CMSIMPLE_URL')) {
-    define('CMSIMPLE_URL', 'http'
+    define(
+        'CMSIMPLE_URL', 'http'
         . (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 's' : '')
         . '://' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']
-        . preg_replace('/index.php$/', '', $_SERVER['PHP_SELF']));
+        . preg_replace('/index.php$/', '', $_SERVER['PHP_SELF'])
+    );
 }
-
 
 /**
  * Handles the privacy agreement.
  *
- * @return  mixed
+ * @return mixed
+ *
+ * @global array The configuration of the core.
+ * @global array The configuration of the plugins.
  */
-function Privacy()
+function privacy()
 {
     global $plugin_cf, $plugin_tx;
     
@@ -61,23 +72,26 @@ function Privacy()
             . $ptx['message']
             . tag('input type="checkbox" id="privacy_agree" name="privacy_agree"')
             . '<label for="privacy_agree">' . $ptx['checkbox'] . '</label>'
-            . tag('input type="submit" class="submit" name="privacy_submit" value="'
-                  . $ptx['button'] . '"')
+            . tag(
+                'input type="submit" class="submit" name="privacy_submit" value="'
+                . $ptx['button'] . '"'
+            )
             . '</form>'
             . '<script type="text/javascript">/* <![CDATA[ */'
-            . 'if (typeof navigator.cookieEnabled != "undefined" && !navigator.cookieEnabled)'
+            . 'if (typeof navigator.cookieEnabled != "undefined"'
+            . ' && !navigator.cookieEnabled)'
             . ' document.forms.privacy.style.display="none"'
             . '/* ]]> */</script>';
     }
 }
 
-
 /**
  * Returns the result of calling $func with the variable arguments,
  * if the user already opted in. Otherwise doesn't call $func and returns ''.
  *
- * @param   string  $func  The name of the function.
- * @return  mixed
+ * @param string $func A function name.
+ *
+ * @return mixed
  */
 function Privacy_guard($func)
 {
