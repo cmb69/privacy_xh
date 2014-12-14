@@ -1,5 +1,20 @@
 /*
  * Privacy agreement form.
  */
-#privacy {border: 3px solid red; padding: 0.5em}
-#privacy label {padding: 0 0.5em}
+#privacy {
+    border: 3px solid red;
+    padding: 0.5em;
+}
+#privacy label {
+    padding: 0 0.5em;
+}
+
+/*
+ * Backend.
+ */
+.privacy_logo {
+    float: left;
+}
+.privacy_license {
+    text-align: justify;
+}

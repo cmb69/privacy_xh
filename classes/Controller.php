@@ -74,7 +74,7 @@ class Privacy_Controller
         $o .= print_plugin_admin('off');
         switch ($admin) {
         case '':
-            $o .= self::renderAboutView() . tag('hr') . self::renderSystemCheck();
+            $o .= self::renderAboutView() . self::renderSystemCheck();
             break;
         default:
             $o .= plugin_admin_common($action, $admin, 'privacy');
@@ -158,21 +158,18 @@ class Privacy_Controller
         global $tx, $plugin_tx;
 
         $ptx = $plugin_tx['privacy'];
-        $requiredPHPVersion = '4.0.7';
+        $requiredPHPVersion = '5.1.2';
         $res = array();
         $res[sprintf($ptx['syscheck_phpversion'], $requiredPHPVersion)]
             = version_compare(PHP_VERSION, $requiredPHPVersion) >= 0
                 ? self::OKAY
                 : self::FAIL;
-        foreach (array('date', 'pcre') as $ext) {
+        foreach (array('pcre') as $ext) {
             $res[sprintf($ptx['syscheck_extension'], $ext)]
                 = extension_loaded($ext) ? self::OKAY : self::FAIL;
         }
         $res[$ptx['syscheck_magic_quotes']]
             = !get_magic_quotes_runtime() ? self::OKAY : self::FAIL;
-        $res[$ptx['syscheck_encoding']]
-            = strtoupper($tx['meta']['codepage']) == 'UTF-8'
-                ? self::OKAY : self::FAIL;
         foreach (self::getWritableFolders() as $folder) {
             $res[sprintf($ptx['syscheck_writable'], $folder)]
                 = is_writable($folder) ? self::OKAY : self::WARN;
