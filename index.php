@@ -30,21 +30,29 @@ EOT
 }
 
 /**
- * The plugin controller.
- */
-require_once $pth['folder']['plugin_classes'] . 'Controller.php';
-
-/**
- * The views.
- */
-require_once $pth['folder']['plugin_classes'] . 'View.php';
-
-/**
  * The plugin version number.
  */
 define('PRIVACY_VERSION', '@PRIVACY_VERSION@');
 
-Privacy_Controller::dispatch();
+/**
+ * Autoloads the plugin classes.
+ *
+ * @param string $class A class name.
+ *
+ * @return void
+ *
+ * @global array The paths of system files and folders.
+ */
+function Privacy_autoload($class)
+{
+    global $pth;
+
+    $parts = explode('_', $class, 2);
+    if ($parts[0] == 'Privacy') {
+        include_once $pth['folder']['plugins'] . 'privacy/classes/'
+            . $parts[1] . '.php';
+    }
+}
 
 /**
  * Handles the privacy agreement.
@@ -73,5 +81,8 @@ function Privacy_guard($func)
     $func = array_shift($args);
     return call_user_func_array($func, $args);
 }
+
+spl_autoload_register('Privacy_autoload');
+Privacy_Controller::dispatch();
 
 ?>
