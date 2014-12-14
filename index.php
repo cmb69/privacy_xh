@@ -29,7 +29,15 @@ EOT
     );
 }
 
+/**
+ * The plugin controller.
+ */
 require_once $pth['folder']['plugin_classes'] . 'Controller.php';
+
+/**
+ * The views.
+ */
+require_once $pth['folder']['plugin_classes'] . 'View.php';
 
 /**
  * The plugin version number.
@@ -42,49 +50,10 @@ Privacy_Controller::dispatch();
  * Handles the privacy agreement.
  *
  * @return mixed
- *
- * @global array The configuration of the core.
- * @global array The configuration of the plugins.
  */
 function privacy()
 {
-    global $plugin_cf, $plugin_tx;
-    
-    if (XH_ADM) {
-        return;
-    }
-    
-    $pcf = $plugin_cf['privacy'];
-    $ptx = $plugin_tx['privacy'];
-    
-    if (isset($_POST['privacy_submit'])) {
-        if (isset($_POST['privacy_agree'])) {
-            $duration = !empty($pcf['duration'])
-                ? time() + 24 * 60 * 60 * $pcf['duration']
-                : 0;
-            setcookie('privacy_agreed', 'yes', $duration, CMSIMPLE_ROOT);
-        }
-        $qs = !empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '';
-        header('Location: ' . CMSIMPLE_URL . $qs, true, 303);
-        exit;
-    }
-    
-    if (!isset($_COOKIE['privacy_agreed'])) {
-        return '<form id="privacy" name="privacy" action="" method="POST">'
-            . $ptx['message']
-            . tag('input type="checkbox" id="privacy_agree" name="privacy_agree"')
-            . '<label for="privacy_agree">' . $ptx['checkbox'] . '</label>'
-            . tag(
-                'input type="submit" class="submit" name="privacy_submit" value="'
-                . $ptx['button'] . '"'
-            )
-            . '</form>'
-            . '<script type="text/javascript">/* <![CDATA[ */'
-            . 'if (typeof navigator.cookieEnabled != "undefined"'
-            . ' && !navigator.cookieEnabled)'
-            . ' document.forms.privacy.style.display="none"'
-            . '/* ]]> */</script>';
-    }
+    return Privacy_Controller::main();
 }
 
 /**
