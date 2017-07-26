@@ -31,21 +31,10 @@ class Plugin
     public function run()
     {
         if (XH_ADM) {
-            if ($this->isAdministrationRequested()) {
+            if (XH_wantsPluginAdministration('privacy')) {
                 $this->handleAdministration();
             }
         }
-    }
-
-    /**
-     * @return bool
-     */
-    private function isAdministrationRequested()
-    {
-        global $privacy;
-
-        return function_exists('XH_wantsPluginAdministration') && XH_wantsPluginAdministration('privacy')
-            || isset($privacy) && $privacy == 'true';
     }
 
     /**
