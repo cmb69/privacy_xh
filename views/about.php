@@ -1,7 +1,7 @@
-<h1>Privacy – <?php echo $this->text('info')?></h1>
-<img class="privacy_logo" src="<?php echo $this->logo()?>" alt="<?php echo $this->text('alt_logo')?>" />
+<h1>Privacy – <?=$this->text('info')?></h1>
+<img class="privacy_logo" src="<?=$this->logo()?>" alt="<?=$this->text('alt_logo')?>" />
 <p>
-    Version: <?php echo $this->version()?>
+    Version: <?=$this->version()?>
 </p>
 <p>
     Copyright © 2012-2017 Christoph M. Becker

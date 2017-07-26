@@ -134,7 +134,7 @@ class Controller
         global $tx, $plugin_tx;
 
         $ptx = $plugin_tx['privacy'];
-        $requiredPHPVersion = '5.3.0';
+        $requiredPHPVersion = '5.4.0';
         $res = array();
         $res[sprintf($ptx['syscheck_phpversion'], $requiredPHPVersion)]
             = version_compare(PHP_VERSION, $requiredPHPVersion) >= 0

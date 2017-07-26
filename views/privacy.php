@@ -1,9 +1,9 @@
 <form id="privacy" name="privacy" action="" method="post">
-    <?php echo $this->message()?>
+    <?=$this->message()?>
     <input type="checkbox" id="privacy_agree" name="privacy_agree" />
-    <label for="privacy_agree"><?php echo $this->text('checkbox')?></label>
+    <label for="privacy_agree"><?=$this->text('checkbox')?></label>
     <input type="submit" class="submit" name="privacy_submit"
-           value="<?php echo $this->text('button')?>" />
+           value="<?=$this->text('button')?>" />
 </form>
 <script type="text/javascript">/* <![CDATA[ */
     if (typeof navigator.cookieEnabled != "undefined" && !navigator.cookieEnabled) {
