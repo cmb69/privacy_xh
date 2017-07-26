@@ -74,8 +74,12 @@ class Controller
      */
     private static function renderAboutView()
     {
+        global $pth;
+
         $view = new View('about');
-        return $view->render();
+        $view->logo = "{$pth['folder']['plugins']}privacy/privacy.png";
+        $view->version = PRIVACY_VERSION;
+        return (string) $view;
     }
 
     /**
@@ -213,7 +217,10 @@ class Controller
      */
     private static function renderPrivacyForm()
     {
+        global $plugin_tx;
+
         $view = new View('privacy');
-        return $view->render();
+        $view->message = new HtmlString($plugin_tx['privacy']['message']);
+        return (string) $view;
     }
 }

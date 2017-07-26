@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2011-2017 Christoph M. Becker
+ * Copyright 2016-2017 Christoph M. Becker
  *
  * This file is part of Privacy_XH.
  *
@@ -26,47 +26,96 @@ class View
     /**
      * @var string
      */
-    private $templateFolder;
-
-    /**
-     * @var string
-     */
-    private $templateName;
-
-    /**
-     * @var string
-     */
-    private $templateExt;
-
-    /**
-     * @var string
-     */
-    private $logoPath;
-
-    /**
-     * @var bool
-     */
-    private $xhtml;
+    private $template;
 
     /**
      * @var array
      */
-    private $l10n;
+    private $data = array();
 
     /**
-     * @param string $templateName
+     * @param string $template
      */
-    public function __construct($templateName)
+    public function __construct($template)
     {
-        global $pth, $cf, $plugin_tx;
+        $this->template = $template;
+    }
 
-        $this->templateFolder = $pth['folder']['plugins'] . 'privacy/views/';
-        $this->templateName = $templateName;
-        $this->templateExt = '.php';
-        $this->logoPath = $pth['folder']['plugins'] . 'privacy/privacy.png';
-        $this->imagePath = $pth['folder']['plugins'] . 'privacy/images/';
-        $this->xhtml = (bool) $cf['xhtml']['endtags'];
-        $this->l10n = $plugin_tx['privacy'];
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function __set($name, $value)
+    {
+        $this->data[$name] = $value;
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public function __get($name)
+    {
+        return $this->data[$name];
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return isset($this->data[$name]);
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public function __call($name, array $args)
+    {
+        return $this->escape($this->data[$name]);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        ob_start();
+        $this->render();
+        return ob_get_clean();
+    }
+    
+    /**
+     * @param string $key
+     * @return string
+     */
+    protected function text($key)
+    {
+        global $plugin_tx;
+
+        $args = func_get_args();
+        array_shift($args);
+        return $this->escape(vsprintf($plugin_tx['privacy'][$key], $args));
+    }
+
+    /**
+     * @param string $key
+     * @param int $count
+     */
+    protected function plural($key, $count)
+    {
+        global $plugin_tx;
+
+        if ($count == 0) {
+            $key .= '_0';
+        } else {
+            $key .= XH_numberSuffix($count);
+        }
+        $args = func_get_args();
+        array_shift($args);
+        return $this->escape(vsprintf($plugin_tx['privacy'][$key], $args));
     }
 
     /**
@@ -74,29 +123,22 @@ class View
      */
     public function render()
     {
-        ob_start();
-        include $this->getTemplatePath();
-        $html = ob_get_clean();
-        if (!$this->xhtml) {
-            $html = str_replace(' />', '>', $html);
+        global $pth;
+
+        echo "<!-- {$this->template} -->", PHP_EOL;
+        include "{$pth['folder']['plugins']}privacy/views/{$this->template}.php";
+    }
+
+    /**
+     * @param mixed $value
+     * @return mixed
+     */
+    protected function escape($value)
+    {
+        if ($value instanceof HtmlString) {
+            return $value;
+        } else {
+            return XH_hsc($value);
         }
-        return $html;
-    }
-
-    /**
-     * @return string
-     */
-    private function getTemplatePath()
-    {
-        return $this->templateFolder . $this->templateName . $this->templateExt;
-    }
-
-    /**
-     * @param string $key
-     * @return string
-     */
-    private function localize($key)
-    {
-        return $this->l10n[$key];
     }
 }
