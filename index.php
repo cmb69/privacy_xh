@@ -19,8 +19,6 @@
  * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('PRIVACY_VERSION', '@PRIVACY_VERSION@');
-
 /**
  * @return ?string
  */
@@ -52,4 +50,4 @@ function Privacy_guard($func)
     return call_user_func_array($func, $args);
 }
 
-Privacy\Controller::dispatch();
+(new Privacy\Plugin)->run();

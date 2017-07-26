@@ -21,16 +21,18 @@
 
 namespace Privacy;
 
-class Controller
+class Plugin
 {
+    const VERSION = '@PRIVACY_VERSION@';
+
     /**
      * @return void
      */
-    public static function dispatch()
+    public function run()
     {
         if (XH_ADM) {
-            if (self::isAdministrationRequested()) {
-                self::handleAdministration();
+            if ($this->isAdministrationRequested()) {
+                $this->handleAdministration();
             }
         }
     }
@@ -38,7 +40,7 @@ class Controller
     /**
      * @return bool
      */
-    private static function isAdministrationRequested()
+    private function isAdministrationRequested()
     {
         global $privacy;
 
@@ -49,14 +51,14 @@ class Controller
     /**
      * @return void
      */
-    private static function handleAdministration()
+    private function handleAdministration()
     {
         global $admin, $action, $o;
 
         $o .= print_plugin_admin('off');
         switch ($admin) {
             case '':
-                $o .= self::renderInfoView();
+                $o .= $this->renderInfoView();
                 break;
             default:
                 $o .= plugin_admin_common($action, $admin, 'privacy');
@@ -64,9 +66,9 @@ class Controller
     }
 
     /**
-     * @return string
+     * @return View
      */
-    private static function renderInfoView()
+    private function renderInfoView()
     {
         global $pth;
 
@@ -74,6 +76,6 @@ class Controller
         $view->logo = "{$pth['folder']['plugins']}privacy/privacy.png";
         $view->version = PRIVACY_VERSION;
         $view->checks = (new SystemCheckService)->getChecks();
-        return (string) $view;
+        return $view;
     }
 }
