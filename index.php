@@ -47,7 +47,7 @@ function Privacy_autoload($class)
 {
     global $pth;
 
-    $parts = explode('_', $class, 2);
+    $parts = explode('\\', $class, 2);
     if ($parts[0] == 'Privacy') {
         include_once $pth['folder']['plugins'] . 'privacy/classes/'
             . $parts[1] . '.php';
@@ -61,7 +61,7 @@ function Privacy_autoload($class)
  */
 function privacy()
 {
-    return Privacy_Controller::main();
+    return Privacy\Controller::main();
 }
 
 /**
@@ -83,6 +83,6 @@ function Privacy_guard($func)
 }
 
 spl_autoload_register('Privacy_autoload');
-Privacy_Controller::dispatch();
+Privacy\Controller::dispatch();
 
 ?>

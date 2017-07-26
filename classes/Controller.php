@@ -13,6 +13,8 @@
  * @link      http://3-magi.net/?CMSimple_XH/Privacy_XH
  */
 
+namespace Privacy;
+
 /**
  * The plugin controller.
  *
@@ -22,7 +24,7 @@
  * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
  * @link     http://3-magi.net/?CMSimple_XH/Privacy_XH
  */
-class Privacy_Controller
+class Controller
 {
     const OKAY = 0;
 
@@ -89,7 +91,7 @@ class Privacy_Controller
      */
     protected static function renderAboutView()
     {
-        $view = new Privacy_View('about');
+        $view = new View('about');
         return $view->render();
     }
 
@@ -159,7 +161,7 @@ class Privacy_Controller
         global $tx, $plugin_tx;
 
         $ptx = $plugin_tx['privacy'];
-        $requiredPHPVersion = '5.1.2';
+        $requiredPHPVersion = '5.3.0';
         $res = array();
         $res[sprintf($ptx['syscheck_phpversion'], $requiredPHPVersion)]
             = version_compare(PHP_VERSION, $requiredPHPVersion) >= 0
@@ -259,7 +261,7 @@ class Privacy_Controller
      */
     protected static function renderPrivacyForm()
     {
-        $view = new Privacy_View('privacy');
+        $view = new View('privacy');
         return $view->render();
     }
 }
