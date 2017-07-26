@@ -38,21 +38,6 @@ EOT
 define('PRIVACY_VERSION', '@PRIVACY_VERSION@');
 
 /**
- * @param string $class
- * @return void
- */
-function Privacy_autoload($class)
-{
-    global $pth;
-
-    $parts = explode('\\', $class, 2);
-    if ($parts[0] == 'Privacy') {
-        include_once $pth['folder']['plugins'] . 'privacy/classes/'
-            . $parts[1] . '.php';
-    }
-}
-
-/**
  * @return mixed
  */
 function privacy()
@@ -77,5 +62,4 @@ function Privacy_guard($func)
     return call_user_func_array($func, $args);
 }
 
-spl_autoload_register('Privacy_autoload');
 Privacy\Controller::dispatch();
