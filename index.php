@@ -22,11 +22,17 @@
 define('PRIVACY_VERSION', '@PRIVACY_VERSION@');
 
 /**
- * @return mixed
+ * @return ?string
  */
 function privacy()
 {
-    return Privacy\Controller::main();
+    if (XH_ADM) {
+        return;
+    }
+    $action = isset($_POST['privacy_submit']) ? 'submitAction' : 'defaultAction';
+    ob_start();
+    (new Privacy\MainController)->$action();
+    return ob_get_clean();
 }
 
 /**

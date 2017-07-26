@@ -76,18 +76,4 @@ class Controller
         $view->checks = (new SystemCheckService)->getChecks();
         return (string) $view;
     }
-
-    /**
-     * @return mixed
-     */
-    public static function main()
-    {
-        if (XH_ADM) {
-            return;
-        }
-        $action = isset($_POST['privacy_submit']) ? 'submitAction' : 'defaultAction';
-        ob_start();
-        (new MainController)->$action();
-        return ob_get_clean();
-    }
 }
