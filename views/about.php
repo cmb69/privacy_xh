@@ -4,7 +4,7 @@
 <p>
     Version: <?php echo PRIVACY_VERSION?></p>
 <p>
-    Copyright &copy; 2012-2014 <a href="http://3-magi.net/">Christoph M.
+    Copyright &copy; 2012-2017 <a href="http://3-magi.net/">Christoph M.
     Becker</a></p>
 <p class="privacy_license">
     This program is free software: you can redistribute it and/or modify it
