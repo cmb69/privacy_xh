@@ -55,7 +55,8 @@ class Privacy_Controller
     {
         global $privacy;
 
-        return isset($privacy) && $privacy == 'true';
+        return function_exists('XH_wantsPluginAdministration') && XH_wantsPluginAdministration('privacy')
+            || isset($privacy) && $privacy == 'true';
     }
 
     /**
