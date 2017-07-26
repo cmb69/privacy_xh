@@ -1,29 +1,26 @@
 <?php
 
 /**
- * The plugin controller.
+ * Copyright 2011-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Privacy_XH.
  *
- * @category  CMSimple_XH
- * @package   Privacy
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2012-2017 Christoph M. Becker <http://3-magi.net/>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Privacy_XH
+ * Privacy_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Privacy_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace Privacy;
 
-/**
- * The plugin controller.
- *
- * @category CMSimple_XH
- * @package  Privacy
- * @author   Christoph M. Becker <cmbecker69@gmx.de>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link     http://3-magi.net/?CMSimple_XH/Privacy_XH
- */
 class Controller
 {
     const OKAY = 0;
@@ -33,8 +30,6 @@ class Controller
     const FAIL = 2;
 
     /**
-     * Dispatches on plugin related requests.
-     *
      * @return void
      */
     public static function dispatch()
@@ -47,13 +42,9 @@ class Controller
     }
 
     /**
-     * Returns whether the plugin administration is requested.
-     *
      * @return bool
-     *
-     * @global string Whether the plugin administration is requested.
      */
-    protected static function isAdministrationRequested()
+    private static function isAdministrationRequested()
     {
         global $privacy;
 
@@ -62,47 +53,35 @@ class Controller
     }
 
     /**
-     * Handles the plugin administration.
-     *
      * @return void
-     *
-     * @global string The value of the <var>admin</var> GP parameter.
-     * @global string The value of the <var>action</var> GP parameter.
-     * @global string The (X)HTML fragment of the contents area.
      */
-    protected static function handleAdministration()
+    private static function handleAdministration()
     {
         global $admin, $action, $o;
 
         $o .= print_plugin_admin('off');
         switch ($admin) {
-        case '':
-            $o .= self::renderAboutView() . self::renderSystemCheck();
-            break;
-        default:
-            $o .= plugin_admin_common($action, $admin, 'privacy');
+            case '':
+                $o .= self::renderAboutView() . self::renderSystemCheck();
+                break;
+            default:
+                $o .= plugin_admin_common($action, $admin, 'privacy');
         }
     }
 
     /**
-     * Returns the about information view.
-     *
-     * @return string (X)HTML.
+     * @return string
      */
-    protected static function renderAboutView()
+    private static function renderAboutView()
     {
         $view = new View('about');
         return $view->render();
     }
 
     /**
-     * Returns the requirements information view.
-     *
-     * @return string (X)HTML.
-     *
-     * @global array The localization of the plugins.
+     * @return string
      */
-    protected static function renderSystemCheck()
+    private static function renderSystemCheck()
     {
         global $plugin_tx;
 
@@ -116,31 +95,26 @@ class Controller
     }
 
     /**
-     * Renders a status icon.
-     *
-     * @param int $status A status.
-     *
-     * @return string (X)HTML.
-     *
-     * @global array The paths of system files and folders.
+     * @param int $status
+     * @return string
      */
-    protected static function renderStatusIcon($status)
+    private static function renderStatusIcon($status)
     {
         global $pth;
 
         switch ($status) {
-        case self::OKAY:
-            $filename = 'ok';
-            $alt = 'ok';
-            break;
-        case self::WARN:
-            $filename = 'warn';
-            $alt = 'warning';
-            break;
-        case self::FAIL:
-            $filename = 'fail';
-            $alt = 'failure';
-            break;
+            case self::OKAY:
+                $filename = 'ok';
+                $alt = 'ok';
+                break;
+            case self::WARN:
+                $filename = 'warn';
+                $alt = 'warning';
+                break;
+            case self::FAIL:
+                $filename = 'fail';
+                $alt = 'failure';
+                break;
         }
         return tag(
             'img src="' . $pth['folder']['plugins'] . 'privacy/images/'
@@ -149,14 +123,9 @@ class Controller
     }
 
     /**
-     * Returns the system checks.
-     *
      * @return array<string, int>
-     *
-     * @global array The localization of the core.
-     * @global array The localization of the plugins.
      */
-    protected static function systemChecks()
+    private static function systemChecks()
     {
         global $tx, $plugin_tx;
 
@@ -181,13 +150,9 @@ class Controller
     }
 
     /**
-     * Returns the folders which should be writable.
-     *
-     * @return array<string>
-     *
-     * @global array The paths of system files and folders.
+     * @return string[]
      */
-    protected static function getWritableFolders()
+    private static function getWritableFolders()
     {
         global $pth;
 
@@ -199,8 +164,6 @@ class Controller
     }
 
     /**
-     * Handles the privacy agreement.
-     *
      * @return mixed
      */
     public static function main()
@@ -210,10 +173,7 @@ class Controller
         }
         if (isset($_POST['privacy_submit'])) {
             if (isset($_POST['privacy_agree'])) {
-                setcookie(
-                    'privacy_agreed', 'yes',
-                    self::getExpirationTime(), CMSIMPLE_ROOT
-                );
+                setcookie('privacy_agreed', 'yes', self::getExpirationTime(), CMSIMPLE_ROOT);
             }
             header('Location: ' . self::getLocationURL(), true, 303);
             exit;
@@ -224,13 +184,9 @@ class Controller
     }
 
     /**
-     * Returns the expiration time of the cookie.
-     *
      * @return int
-     *
-     * @global array The configuration of the plugins.
      */
-    protected static function getExpirationTime()
+    private static function getExpirationTime()
     {
         global $plugin_cf;
 
@@ -240,11 +196,9 @@ class Controller
     }
 
     /**
-     * Returns the URL to relocate after submission of the privacy form.
-     *
      * @return string
      */
-    protected static function getLocationURL()
+    private static function getLocationURL()
     {
         $url = CMSIMPLE_URL;
         if ($_SERVER['QUERY_STRING'] != '') {
@@ -255,15 +209,11 @@ class Controller
     }
 
     /**
-     * Renders the privacy form.
-     *
-     * @return string (X)HTML.
+     * @return string
      */
-    protected static function renderPrivacyForm()
+    private static function renderPrivacyForm()
     {
         $view = new View('privacy');
         return $view->render();
     }
 }
-
-?>

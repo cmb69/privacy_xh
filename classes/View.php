@@ -1,80 +1,60 @@
 <?php
 
 /**
- * The view classes.
+ * Copyright 2011-2017 Christoph M. Becker
  *
- * PHP version 5
+ * This file is part of Privacy_XH.
  *
- * @category  CMSimple_XH
- * @package   Privacy
- * @author    Christoph M. Becker <cmbecker69@gmx.de>
- * @copyright 2012-2017 Christoph M. Becker <http://3-magi.net>
- * @license   http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link      http://3-magi.net/?CMSimple_XH/Privacy_XH
+ * Privacy_XH is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Privacy_XH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace Privacy;
 
-/**
- * The view classes.
- *
- * @category CMSimple_XH
- * @package  Privacy
- * @author   Christoph M. Becker <cmbecker69@gmx.de>
- * @license  http://www.gnu.org/licenses/gpl-3.0.en.html GNU GPLv3
- * @link     http://3-magi.net/?CMSimple_XH/Privacy_XH
- */
 class View
 {
     /**
-     * The path of the template folder.
-     *
      * @var string
      */
-    protected $templateFolder;
+    private $templateFolder;
 
     /**
-     * The name of the template.
-     *
      * @var string
      */
-    protected $templateName;
+    private $templateName;
 
     /**
-     * The extension of the template.
-     *
      * @var string
      */
-    protected $templateExt;
+    private $templateExt;
 
     /**
-     * The path of the logo.
-     *
      * @var string
      */
-    protected $logoPath;
+    private $logoPath;
 
     /**
-     * Whether to render XHTML (or HTML).
-     *
      * @var bool
      */
-    protected $xhtml;
+    private $xhtml;
 
     /**
-     * The localization of the plugin.
-     *
      * @var array
      */
-    protected $l10n;
+    private $l10n;
 
     /**
-     * Initializes a new instance.
-     *
-     * @param string $templateName A template name.
-     *
-     * @global array The paths of system files and folders.
-     * @global array The configuration of the core.
+     * @param string $templateName
      */
     public function __construct($templateName)
     {
@@ -90,9 +70,7 @@ class View
     }
 
     /**
-     * Renders the template.
-     *
-     * @return string (X)HTML.
+     * @return string
      */
     public function render()
     {
@@ -106,26 +84,19 @@ class View
     }
 
     /**
-     * Returns the template path.
-     *
      * @return string
      */
-    protected function getTemplatePath()
+    private function getTemplatePath()
     {
         return $this->templateFolder . $this->templateName . $this->templateExt;
     }
 
     /**
-     * Returns the localization of a key.
-     *
-     * @param string $key A key.
-     *
+     * @param string $key
      * @return string
      */
-    protected function localize($key)
+    private function localize($key)
     {
         return $this->l10n[$key];
     }
 }
-
-?>
