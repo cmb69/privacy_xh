@@ -85,52 +85,9 @@ class Controller
         if (XH_ADM) {
             return;
         }
-        if (isset($_POST['privacy_submit'])) {
-            if (isset($_POST['privacy_agree'])) {
-                setcookie('privacy_agreed', 'yes', self::getExpirationTime(), CMSIMPLE_ROOT);
-            }
-            header('Location: ' . self::getLocationURL(), true, 303);
-            exit;
-        }
-        if (!isset($_COOKIE['privacy_agreed'])) {
-            return self::renderPrivacyForm();
-        }
-    }
-
-    /**
-     * @return int
-     */
-    private static function getExpirationTime()
-    {
-        global $plugin_cf;
-
-        return !empty($plugin_cf['privacy']['duration'])
-            ? time() + 24 * 60 * 60 * $plugin_cf['privacy']['duration']
-            : 0;
-    }
-
-    /**
-     * @return string
-     */
-    private static function getLocationURL()
-    {
-        $url = CMSIMPLE_URL;
-        if ($_SERVER['QUERY_STRING'] != '') {
-            $url .= '?';
-        }
-        $url .= $_SERVER['QUERY_STRING'];
-        return $url;
-    }
-
-    /**
-     * @return string
-     */
-    private static function renderPrivacyForm()
-    {
-        global $plugin_tx;
-
-        $view = new View('privacy');
-        $view->message = new HtmlString($plugin_tx['privacy']['message']);
-        return (string) $view;
+        $action = isset($_POST['privacy_submit']) ? 'submitAction' : 'defaultAction';
+        ob_start();
+        (new MainController)->$action();
+        return ob_get_clean();
     }
 }
