@@ -23,12 +23,6 @@ namespace Privacy;
 
 class Controller
 {
-    const OKAY = 0;
-
-    const WARN = 1;
-
-    const FAIL = 2;
-
     /**
      * @return void
      */
@@ -62,7 +56,7 @@ class Controller
         $o .= print_plugin_admin('off');
         switch ($admin) {
             case '':
-                $o .= self::renderAboutView() . self::renderSystemCheck();
+                $o .= self::renderInfoView();
                 break;
             default:
                 $o .= plugin_admin_common($action, $admin, 'privacy');
@@ -72,99 +66,15 @@ class Controller
     /**
      * @return string
      */
-    private static function renderAboutView()
+    private static function renderInfoView()
     {
         global $pth;
 
-        $view = new View('about');
+        $view = new View('info');
         $view->logo = "{$pth['folder']['plugins']}privacy/privacy.png";
         $view->version = PRIVACY_VERSION;
+        $view->checks = (new SystemCheckService)->getChecks();
         return (string) $view;
-    }
-
-    /**
-     * @return string
-     */
-    private static function renderSystemCheck()
-    {
-        global $plugin_tx;
-
-        $checks = self::systemChecks();
-        $o = '<h4>' . $plugin_tx['privacy']['syscheck_title'] . '</h4>';
-        foreach ($checks as $label => $status) {
-            $o .= self::renderStatusIcon($status) . '&nbsp;&nbsp;' . $label
-                . tag('br');
-        }
-        return $o;
-    }
-
-    /**
-     * @param int $status
-     * @return string
-     */
-    private static function renderStatusIcon($status)
-    {
-        global $pth;
-
-        switch ($status) {
-            case self::OKAY:
-                $filename = 'ok';
-                $alt = 'ok';
-                break;
-            case self::WARN:
-                $filename = 'warn';
-                $alt = 'warning';
-                break;
-            case self::FAIL:
-                $filename = 'fail';
-                $alt = 'failure';
-                break;
-        }
-        return tag(
-            'img src="' . $pth['folder']['plugins'] . 'privacy/images/'
-            . $filename . '.png" alt="' . $alt . '"'
-        );
-    }
-
-    /**
-     * @return array<string, int>
-     */
-    private static function systemChecks()
-    {
-        global $tx, $plugin_tx;
-
-        $ptx = $plugin_tx['privacy'];
-        $requiredPHPVersion = '5.4.0';
-        $res = array();
-        $res[sprintf($ptx['syscheck_phpversion'], $requiredPHPVersion)]
-            = version_compare(PHP_VERSION, $requiredPHPVersion) >= 0
-                ? self::OKAY
-                : self::FAIL;
-        foreach (array('pcre') as $ext) {
-            $res[sprintf($ptx['syscheck_extension'], $ext)]
-                = extension_loaded($ext) ? self::OKAY : self::FAIL;
-        }
-        $res[$ptx['syscheck_magic_quotes']]
-            = !get_magic_quotes_runtime() ? self::OKAY : self::FAIL;
-        foreach (self::getWritableFolders() as $folder) {
-            $res[sprintf($ptx['syscheck_writable'], $folder)]
-                = is_writable($folder) ? self::OKAY : self::WARN;
-        }
-        return $res;
-    }
-
-    /**
-     * @return string[]
-     */
-    private static function getWritableFolders()
-    {
-        global $pth;
-
-        $folders = array();
-        foreach (array('config/', 'css/', 'languages/') as $folder) {
-            $folders[] = $pth['folder']['plugins'] . 'privacy/' . $folder;
-        }
-        return $folders;
     }
 
     /**
