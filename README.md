@@ -4,7 +4,7 @@ Privacy_XH – a CMSimple_XH plugin
 [![beta: 1.0beta2](https://img.shields.io/badge/beta-1.0beta2-red.svg)](https://github.com/cmb69/privacy_xh/releases/tag/1.0beta2)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
-Copyright (c) 2012-2017 Christoph M. Becker
+Copyright (C) Christoph M. Becker
 
 Privacy_XH is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

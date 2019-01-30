@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2012-2017 Christoph M. Becker
+ * Copyright (C) Christoph M. Becker
  *
  * This file is part of Privacy_XH.
  *

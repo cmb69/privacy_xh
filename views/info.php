@@ -4,7 +4,7 @@
     Version: <?=$this->version()?>
 </p>
 <p>
-    Copyright © 2012-2017 Christoph M. Becker
+    Copyright © Christoph M. Becker
 </p>
 <p class="privacy_license">
     Privacy_XH is free software: you can redistribute it and/or modify it under
