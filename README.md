@@ -67,7 +67,7 @@ prominent place:
 
 You should adapt the message in "Language" according to your
 needs. To make extensive information available you should prepare a
-hidden CMSimple page with the privacy notice, and link to it from the
+hidden CMSimple\_XH page with the privacy notice, and link to it from the
 message.
 
 To avoid cookies being sent from other plugins or extensions before the
@@ -89,8 +89,8 @@ just call:
 
     {{{privacy_guard('func', 1, 2, 3, 4, 5)}}}
 
-Note, that privacy\_guard() accepts any number of arguments in addition
-to the function name
+Note, that `privacy_guard()` accepts any number of arguments in addition
+to the function name.
 
 Which plugins and extensions have to be guarded depends on the
 jurisdiction of your country (or probably the country where the website
@@ -131,11 +131,11 @@ Dutch translation © Rob Zeijen
 Privacy\_XH is inspired by *oldnema*, who pointed me to the EU cookie law,
 and the usefulness of such a plugin. Thank you\!
 
-The plugin icon is designed by [Alexander
+The plugin logo is designed by [Alexander
 Moore](http://www.famfamfam.com/). Many thanks for publishing this icon
 under GPL.
 
 And last but not least many thanks to [Peter
 Harteg](http://www.harteg.dk), the "father" of CMSimple, and all
-developers of [CMSimple\_XH](http://www.cmsimple-xh.com) without whom
+developers of [CMSimple\_XH](http://www.cmsimple-xh.org) without whom
 this amazing CMS wouldn't exist.

@@ -62,7 +62,7 @@
 <h2 id="použití">Použití</h2>
 <p>Chcete-li aktivovat formulář ochrany osobních údajů, přidejte do šablony na nápadném místě:</p>
 <pre><code>&lt;?=privacy()?&gt;</code></pre>
-<p>Měli byste upravit text v “jazyk” podle vašich potřeb. Chcete-li rozsáhlé informace, měli byste připravit skrytou CMSimple stránku s informacemi o ochraně osobních údajů.</p>
+<p>Měli byste upravit text v “jazyk” podle vašich potřeb. Chcete-li rozsáhlé informace, měli byste připravit skrytou CMSimple_XH stránku s informacemi o ochraně osobních údajů.</p>
 <p>Aby se zabránilo ukládání cookie z jiných pluginů nebo rozšíření dříve, než uživatel povolil, budete muset udělat některé změny. Pokud je kód v šabloně, můžete hlídání provést následujícím způsobem:</p>
 <pre><code>&lt;?php if (isset($_COOKIE[&#39;privacy_agreed&#39;])):?&gt;
 &lt;!-- code that requires opt in --&gt;
@@ -71,7 +71,7 @@
 <pre><code>{{{func(1, 2, 3, 4, 5)}}}</code></pre>
 <p>stačí zavolat:</p>
 <pre><code>{{{privacy_guard(&#39;func&#39;, 1, 2, 3, 4, 5)}}}</code></pre>
-<p>Pamatujte, že privacy_guard() akceptuje libovolný počet argumentů kromě názvu funkce.</p>
+<p>Pamatujte, že <code>privacy_guard()</code> akceptuje libovolný počet argumentů kromě názvu funkce.</p>
 <p>Které pluginy a rozšíření musí být kontrolovány, závisí na omezení ve vaší zemi (nebo na zemi, kde jsou umístěny na internetové stránky), a samozřejmě to, které informace jsou tyto pluginy ukládají v cookies. To by mělo být dokumentováno v pluginech nebo rozšířeních v dokuentaci. Jinak požádejte dodavatele pluginu.</p>
 <p><strong>Vezměte prosím na vědomí, že “privacy form” není nikdy zobrazen, když jste přihlášeni jako adminstrator.</strong></p>
 <h2 id="troubleshooting">Troubleshooting</h2>
@@ -86,6 +86,6 @@ Dutch translation © Rob Zeijen</p>
 <h2 id="vývojáři">Vývojáři</h2>
 <p>Privacy_XH je inspirován <em>Oldnema</em>, který poukázal na práva cookie EU a užitečnosti takového pluginu. Děkuji!</p>
 <p>Ikona pluginu je od <a href="http://www.famfamfam.com/">Alexander Moore</a>. Velký dík za zveřejnění této ikony pod GPL.</p>
-<p>A v neposlední řadě děkuji <a href="http://www.harteg.dk">Peter Harteg</a>, “otci” CMSimple a všem vývojářům z <a href="http://www.cmsimple-xh.com">CMSimple_XH</a> bez kterých by tento úžasný CMS neexistoval.</p>
+<p>A v neposlední řadě děkuji <a href="http://www.harteg.dk">Peter Harteg</a>, “otci” CMSimple a všem vývojářům z <a href="http://www.cmsimple-xh.org">CMSimple_XH</a> bez kterých by tento úžasný CMS neexistoval.</p>
 </body>
 </html>

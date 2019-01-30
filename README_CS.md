@@ -62,7 +62,7 @@ na nápadném místě:
     <?=privacy()?>
 
 Měli byste upravit text v "jazyk" podle vašich potřeb. Chcete-li
-rozsáhlé informace, měli byste připravit skrytou CMSimple stránku s
+rozsáhlé informace, měli byste připravit skrytou CMSimple\_XH stránku s
 informacemi o ochraně osobních údajů.
 
 Aby se zabránilo ukládání cookie z jiných pluginů nebo rozšíření dříve,
@@ -81,7 +81,7 @@ stačí zavolat:
 
     {{{privacy_guard('func', 1, 2, 3, 4, 5)}}}
 
-Pamatujte, že privacy\_guard() akceptuje libovolný počet argumentů kromě
+Pamatujte, že `privacy_guard()` akceptuje libovolný počet argumentů kromě
 názvu funkce.
 
 Které pluginy a rozšíření musí být kontrolovány, závisí na omezení ve
@@ -127,5 +127,5 @@ Ikona pluginu je od [Alexander Moore](http://www.famfamfam.com/). Velký
 dík za zveřejnění této ikony pod GPL.
 
 A v neposlední řadě děkuji [Peter Harteg](http://www.harteg.dk), "otci"
-CMSimple a všem vývojářům z [CMSimple\_XH](http://www.cmsimple-xh.com)
+CMSimple a všem vývojářům z [CMSimple\_XH](http://www.cmsimple-xh.org)
 bez kterých by tento úžasný CMS neexistoval.
