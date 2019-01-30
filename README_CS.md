@@ -1,0 +1,110 @@
+# Privacy\_XH
+
+Privacy\_XH zajišťuje, aby webové stránky vyhovovaly požadavkům zákona
+[EU cookie law](http://www.cookielaw.org/) a dalším právním předpisům
+ohledně soukromí návštěvníků. Po odsouhlasení vypne formulář na každé
+stránce se základními a informace a dá návštěvníkovi možnost explicitně
+zvolit souhlas. Pokud návštěvník souhlasil, je nastaven příslušný cookie
+a zpráva nebude příště zobrazena. Privacy\_XH také usnadňuje kontrolu
+běhu jiného kódu, který ukládá cookies, které mohou být v rozporu se
+soukromím uživatelů.
+
+  - [Požadavky](#požadavky)
+  - [Instalace](#instalace)
+  - [Konfigurace](#konfigurace)
+  - [Použití](#použití)
+  - [Licence](#licence)
+  - [Vývojáři](#vývojáři)
+
+## Požadavky
+
+Privacy\_XH is a plugin for CMSimple\_XH ≥ 1.6.3. It requires PHP ≥
+5.4.0.
+
+## Instalace
+
+Instalace se provádí stejně jako u mnoha dalších CMSimple\_XH pluginů.
+Viz [CMSimple\_XH
+wiki](https://wiki.cmsimple-xh.org/doku.php/installation#plugins)
+pro více informací.
+
+1.  **Zálohujte data z vašeho serveru.**
+2.  Rozbalte distribuční balíček do vašeho PC.
+3.  Nahrajte celý adresář na server do adresáře pluginy CMSimple\_XH
+4.  Nastavte oprávnění k zápisu do podadresáře config/, css/ a
+    languages/.
+5.  **V aministračním rozhraní zkontrolujte, jestli jsou všechny
+    požadavky splněny.**
+
+## Konfigurace
+
+Konfigurace se provádí stejně jako u mnoha dalších CMSimple\_XH pluginů
+v administraci. Vyberte "Privacy" ve složce "Pluginy".
+
+Tipy pro volby se zobrazí při najetí myší nad nápovědu ikony.
+
+Lokalizace se provádí v "Language". Můžete přeložit řetězce znaků
+ve vašem vlastním jazyce, nebo je upravit podle vašich potřeb.
+
+Vzhled Privacy\_XH lze přizpůsobit v "Stylesheet".
+
+## Použití
+
+Chcete-li aktivovat formulář ochrany osobních údajů, přidejte do šablony
+na nápadném místě:
+
+    <?=privacy()?>
+
+Měli byste upravit text v "jazyk" podle vašich potřeb. Chcete-li
+rozsáhlé informace, měli byste připravit skrytou CMSimple stránku s
+informacemi o ochraně osobních údajů.
+
+Aby se zabránilo ukládání cookie z jiných pluginů nebo rozšíření dříve,
+než uživatel povolil, budete muset udělat některé změny. Pokud je kód v
+šabloně, můžete hlídání provést následujícím způsobem:
+
+    <?php if (isset($_COOKIE['privacy_agreed'])):?>
+    <!-- code that requires opt in -->
+    <?php endif?>
+
+Pokud kód, který má být kontrolován je v obsahu, vlejte ho např.:
+
+    {{{func(1, 2, 3, 4, 5)}}}
+
+stačí zavolat:
+
+    {{{privacy_guard('func', 1, 2, 3, 4, 5)}}}
+
+Pamatujte, že privacy\_guard() akceptuje libovolný počet argumentů kromě
+názvu funkce.
+
+Které pluginy a rozšíření musí být kontrolovány, závisí na omezení ve
+vaší zemi (nebo na zemi, kde jsou umístěny na internetové stránky), a
+samozřejmě to, které informace jsou tyto pluginy ukládají v cookies. To
+by mělo být dokumentováno v pluginech nebo rozšířeních v dokuentaci.
+Jinak požádejte dodavatele pluginu.
+
+**Vezměte prosím na vědomí, že "privacy form" není nikdy zobrazen, když
+jste přihlášeni jako adminstrator.**
+
+## Licence
+
+Privacy\_XH je licencován pod
+[GPLv3](http://www.gnu.org/licenses/gpl.html).
+
+Copyright © Christoph M. Becker
+
+České překlady © Josef Němec  
+Dutch translation © Rob Zeijen
+
+## Vývojáři
+
+Privacy\_XH je inspirován *Oldnema*, který poukázal na práva cookie EU a
+užitečnosti takového pluginu. Děkuji\!
+
+Ikona pluginu je od [Alexander Moore](http://www.famfamfam.com/). Velký
+dík za zveřejnění této ikony pod GPL.
+
+A v neposlední řadě děkuji [Peter Harteg](http://www.harteg.dk), "otci"
+CMSimple a všem vývojářům z [CMSimple\_XH](http://www.cmsimple-xh.com)
+bez kterých by tento úžasný CMS neexistoval.
