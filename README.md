@@ -77,7 +77,7 @@ extensions are integrated. If the code is in the template, you can guard
 it from being executed before the visitor has opted in by encapsulating
 it the following way:
 
-    <?php if (isset($_COOKIE['privacy_agreed'])):?>
+    <?php if (privacy_agreed()):?>
     <!-- code that requires opt in -->
     <?php endif?>
 

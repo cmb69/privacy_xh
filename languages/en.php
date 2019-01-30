@@ -1,8 +1,8 @@
 <?php
 
 $plugin_tx['privacy']['message']="<p>We would like to place cookies on your computer to help us make this website better. To find out more about the cookies, see our <a href=\"?Privacy_notice\">privacy notice</a>.</p>";
-$plugin_tx['privacy']['checkbox']="I accept cookies from this site.";
-$plugin_tx['privacy']['button']="Continue";
+$plugin_tx['privacy']['label_allow']="Allow cookies";
+$plugin_tx['privacy']['label_decline']="Decline";
 $plugin_tx['privacy']['info']="Info";
 
 $plugin_tx['privacy']['alt_logo']="Lock";

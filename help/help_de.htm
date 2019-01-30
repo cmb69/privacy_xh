@@ -65,7 +65,7 @@
 <pre><code>&lt;?=privacy()?&gt;</code></pre>
 <p>Die Meldung sollte unter “Sprache” den Bedürfnissen angepasst werden. Um umfangreiche Informationen zur Verfügung zu stellen, sollte eine versteckte CMSimple_XH-Seite mit den Privatsphäre-Hinweisen vorbereitet werden, und die Meldung sollte zu dieser verlinken.</p>
 <p>Um zu verhindern, dass Cookies von anderen Plugins oder Erweiterungen gesendet werden bevor der Nutzer eingewilligt hat, muss die Integration dieser Erweiterungen angepasst werden. Befindet sich der Code im Template, kann er solange der Besucher noch nicht eingewilligt hat, wie folgt vor der Ausführung geschützt werden:</p>
-<pre><code>&lt;?php if (isset($_COOKIE[&#39;privacy_agreed&#39;])):?&gt;
+<pre><code>&lt;?php if (privacy_agreed()):?&gt;
 &lt;!-- Code, der Einwilligung erfordert --&gt;
 &lt;?php endif?&gt;</code></pre>
 <p>Wenn der zu schützende Code aus dem Inhalt einer Seite heraus aufgerufen wird, wird statt dem Aufruf von:</p>

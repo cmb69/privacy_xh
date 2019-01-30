@@ -42,8 +42,10 @@ class MainController
      */
     public function submitAction()
     {
-        if (isset($_POST['privacy_agree'])) {
+        if ($_POST['privacy_agree'] === 'yes') {
             setcookie('privacy_agreed', 'yes', $this->getExpirationTime(), CMSIMPLE_ROOT);
+        } else {
+            setcookie('privacy_agreed', 'no', 0, CMSIMPLE_ROOT);
         }
         header('Location: ' . $this->getLocationURL(), true, 303);
         exit;

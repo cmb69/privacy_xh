@@ -27,7 +27,7 @@ function privacy()
     if (XH_ADM) {
         return;
     }
-    $action = isset($_POST['privacy_submit']) ? 'submitAction' : 'defaultAction';
+    $action = isset($_POST['privacy_agree']) ? 'submitAction' : 'defaultAction';
     ob_start();
     (new Privacy\MainController)->$action();
     return ob_get_clean();
@@ -42,12 +42,20 @@ function privacy()
  */
 function Privacy_guard($func)
 {
-    if (!isset($_COOKIE['privacy_agreed'])) {
+    if (!privacy_agreed()) {
         return '';
     }
     $args = func_get_args();
     $func = array_shift($args);
     return call_user_func_array($func, $args);
+}
+
+/**
+ * @return bool
+ */
+function privacy_agreed()
+{
+    return isset($_COOKIE['privacy_agreed']) && $_COOKIE['privacy_agreed'] === 'yes';
 }
 
 (new Privacy\Plugin)->run();

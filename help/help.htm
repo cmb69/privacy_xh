@@ -65,7 +65,7 @@
 <pre><code>&lt;?=privacy()?&gt;</code></pre>
 <p>You should adapt the message in “Language” according to your needs. To make extensive information available you should prepare a hidden CMSimple_XH page with the privacy notice, and link to it from the message.</p>
 <p>To avoid cookies being sent from other plugins or extensions before the user has opted in, you have to make some changes to the way these extensions are integrated. If the code is in the template, you can guard it from being executed before the visitor has opted in by encapsulating it the following way:</p>
-<pre><code>&lt;?php if (isset($_COOKIE[&#39;privacy_agreed&#39;])):?&gt;
+<pre><code>&lt;?php if (privacy_agreed()):?&gt;
 &lt;!-- code that requires opt in --&gt;
 &lt;?php endif?&gt;</code></pre>
 <p>If the code that has to be guarded is called from the content, instead of e.g. calling:</p>

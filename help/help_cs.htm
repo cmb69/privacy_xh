@@ -65,7 +65,7 @@
 <pre><code>&lt;?=privacy()?&gt;</code></pre>
 <p>Měli byste upravit text v “jazyk” podle vašich potřeb. Chcete-li rozsáhlé informace, měli byste připravit skrytou CMSimple_XH stránku s informacemi o ochraně osobních údajů.</p>
 <p>Aby se zabránilo ukládání cookie z jiných pluginů nebo rozšíření dříve, než uživatel povolil, budete muset udělat některé změny. Pokud je kód v šabloně, můžete hlídání provést následujícím způsobem:</p>
-<pre><code>&lt;?php if (isset($_COOKIE[&#39;privacy_agreed&#39;])):?&gt;
+<pre><code>&lt;?php if (privacy_agreed()):?&gt;
 &lt;!-- code that requires opt in --&gt;
 &lt;?php endif?&gt;</code></pre>
 <p>Pokud kód, který má být kontrolován je v obsahu, vlejte ho např.:</p>

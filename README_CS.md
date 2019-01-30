@@ -70,7 +70,7 @@ Aby se zabránilo ukládání cookie z jiných pluginů nebo rozšíření dří
 než uživatel povolil, budete muset udělat některé změny. Pokud je kód v
 šabloně, můžete hlídání provést následujícím způsobem:
 
-    <?php if (isset($_COOKIE['privacy_agreed'])):?>
+    <?php if (privacy_agreed()):?>
     <!-- code that requires opt in -->
     <?php endif?>
 

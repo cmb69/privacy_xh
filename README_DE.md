@@ -81,7 +81,7 @@ dieser Erweiterungen angepasst werden. Befindet sich der Code im
 Template, kann er solange der Besucher noch nicht eingewilligt hat, wie
 folgt vor der Ausführung geschützt werden:
 
-    <?php if (isset($_COOKIE['privacy_agreed'])):?>
+    <?php if (privacy_agreed()):?>
     <!-- Code, der Einwilligung erfordert -->
     <?php endif?>
 
