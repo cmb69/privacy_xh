@@ -10,9 +10,11 @@ guard the execution of other code that sets cookies which might violate
 the privacy of users.
 
   - [Requirements](#requirements)
+  - [Download](#download)
   - [Installation](#installation)
   - [Settings](#settings)
   - [Usage](#usage)
+  - [Troubleshooting](#troubleshooting)
   - [License](#license)
   - [Credits](#credits)
 
@@ -20,6 +22,10 @@ the privacy of users.
 
 Privacy\_XH is a plugin for CMSimple\_XH ≥ 1.6.3. It requires PHP ≥
 5.4.0.
+
+## Download
+
+The [lastest release](https://github.com/cmb69/privacy_xh/releases/latest) is available for download on Github.
 
 ## Installation
 
@@ -95,10 +101,25 @@ extension's manual; otherwise ask the vendor.
 **Please note that the privacy form is never shown when you're logged in
 as adminstrator.**
 
+## Troubleshooting
+
+Report bugs and ask for support either on [Github](https://github.com/cmb69/privacy_xh/issues)
+or in the [CMSimple_XH Forum](https://cmsimpleforum.com/).
+
 ## License
 
-Privacy\_XH is licensed under
-[GPLv3](http://www.gnu.org/licenses/gpl.html).
+Privacy\_XH is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Privacy\_XH is distributed in the hope that it will be useful,
+but *without any warranty*; without even the implied warranty of
+*merchantibility* or *fitness for a particular purpose*. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Privacy\_XH.  If not, see <http://www.gnu.org/licenses/>.
 
 Copyright © Christoph M. Becker
 
