@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Minicounter_XH – Benutzerhandbuch</title>
+  <style type="text/css">
+    body {
+        font-family: Georgia, serif;
+        line-height: 1.5;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        background: #ffffe1;
+        max-width: 40em;
+    }
+    p {
+        text-align: justify;
+    }
+    pre {
+        color: black;
+        background: #ffe;
+        overflow: auto;
+        padding: 0.2em 0.5em;
+        border: 1px solid silver;
+    }
+  </style>
+</head>
+<body>
+<h1 id="privacy_xh">Privacy_XH</h1>
+<p>Privacy_XH ist dabei behilflich eine Website konform zu den <a href="http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm">EU Cookie-Vorschriften</a> und anderen Vorschriften bezüglich der Privatsphäre von Besuchern zu machen. Dazu wird auf jeder Seite ein Formular mit entsprechenden Informationen angezeigt, welches dem Besucher die Möglichkeit bietet, ausdrücklich einzuwilligen. Nachdem der Besucher eingewilligt hat, wird ein entsprechendes Cookie gesetzt, und die Meldung wird nicht mehr angezeigt. Darüber hinaus ermöglicht es Privacy_XH, die Ausführung von anderem Code, der Cookies setzt, die die Privatsphäre von Nutzern verletzen könnte, zu bewachen.</p>
+<ul>
+<li><a href="#voraussetzungen">Voraussetzungen</a></li>
+<li><a href="#download">Download</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#einstellungen">Einstellungen</a></li>
+<li><a href="#verwendung">Verwendung</a></li>
+<li><a href="#fehlerbehebung">Fehlerbehebung</a></li>
+<li><a href="#lizenz">Lizenz</a></li>
+<li><a href="#danksagung">Danksagung</a></li>
+</ul>
+<h2 id="voraussetzungen">Voraussetzungen</h2>
+<p>Privacy_XH ist ein Plugin für CMSimple_XH ≥ 1.6.3. Es benötigt PHP ≥ 5.4.0.</p>
+<h2 id="download">Download</h2>
+<p>Das <a href="https://github.com/cmb69/privacy_xh/releases/latest">aktuelle Release</a> kann von Github herunter geladen werden.</p>
+<h2 id="installation">Installation</h2>
+<p>Die Installation erfolgt wie bei vielen anderen CMSimple_XH-Plugins auch. Im <a href="https://wiki.cmsimple-xh.org/doku.php/de:installation#plugins">CMSimple_XH-Wiki</a> finden Sie weitere Details.</p>
+<ol type="1">
+<li><strong>Sichern Sie die Daten auf Ihrem Server.</strong></li>
+<li>Entpacken Sie die ZIP-Datei auf Ihrem Rechner.</li>
+<li>Laden Sie das ganze Verzeichnis minicounter/ auf Ihren Server in das plugin/ Verzeichnis von CMSimple_XH hoch.</li>
+<li>Machen sie die Unterverzeichnisse config/, css/ und languages/ beschreibbar.</li>
+<li><strong>Navigieren sie zu “Privacy” im Administrationbereich, um zu prüfen, ob alle Voraussetzungen erfüllt sind.</strong></li>
+</ol>
+<h2 id="einstellungen">Einstellungen</h2>
+<p>Die Plugin-Konfiguration erfolgt wie bei vielen anderen CMSimple_XH-Plugins auch im Administrationsbereich der Website. Wählen sie “Plugins” → “Privacy”.</p>
+<p>Sie können die Voreinstellungen von Privacy_XH unter “Konfiguration” ändern. Hinweise zu den Optionen werden beim Überfahren der Hilfe-Icons mit der Maus angezeigt.</p>
+<p>Die Lokalisierung wird unter “Sprache” vorgenommen. Sie können die Sprachtexte in Ihre eigene Sprache übersetzen, oder diese Ihren Wünschen gemäß anpassen.</p>
+<p>Das Aussehen von Privacy_XH kann unter “Stylesheet” angepasst werden.</p>
+<h2 id="verwendung">Verwendung</h2>
+<p>Um das Privatsphäre-Formular zu aktiveren, ist Folgendes an prominenter Stelle im Template zu ergänzen:</p>
+<pre><code>&lt;?=privacy()?&gt;</code></pre>
+<p>Die Meldung sollte unter “Sprache” den Bedürfnissen angepasst werden. Um umfangreiche Informationen zur Verfügung zu stellen, sollte eine versteckte CMSimple_XH-Seite mit den Privatsphäre-Hinweisen vorbereitet werden, und die Meldung sollte zu dieser verlinken.</p>
+<p>Um zu verhindern, dass Cookies von anderen Plugins oder Erweiterungen gesendet werden bevor der Nutzer eingewilligt hat, muss die Integration dieser Erweiterungen angepasst werden. Befindet sich der Code im Template, kann er solange der Besucher noch nicht eingewilligt hat, wie folgt vor der Ausführung geschützt werden:</p>
+<pre><code>&lt;?php if (isset($_COOKIE[&#39;privacy_agreed&#39;])):?&gt;
+&lt;!-- Code, der Einwilligung erfordert --&gt;
+&lt;?php endif?&gt;</code></pre>
+<p>Wenn der zu schützende Code aus dem Inhalt einer Seite heraus aufgerufen wird, wird statt dem Aufruf von:</p>
+<pre><code>{{{func(1, 2, 3, 4, 5)}}}</code></pre>
+<p>einfach folgendes aufgerufen:</p>
+<pre><code>{{{privacy_guard(&#39;func&#39;, 1, 2, 3, 4, 5)}}}</code></pre>
+<p>Es ist zu beachten, dass <code>privacy_guard()</code> zusätzlich zum Funktionsnamen eine beliebige Anzahl von Argumenten akzeptiert.</p>
+<p>Welche Plugins und Erweiterung zu schützen sind, hängt von der Rechtsprechung des Heimatlandes (oder vermutlich des Landes, in dem die Website gehostet wird; ich bin kein Jurist) ab, und natürlich davon, welche Informationen diese Erweiterungen in den Cookies speichern. Dies sollte im Handbuch des Plugins oder der Erweiterung dokumentiert sein; andernfalls ist der Anbieter zu konsultieren.</p>
+<p><strong>Es ist zu beachten, dass das Privatsphäre-Formular dem Administrator niemals angezeigt wird.</strong></p>
+<h2 id="fehlerbehebung">Fehlerbehebung</h2>
+<p>Melden Sie Programmfehler und stellen Sie Supportanfragen entweder auf <a href="https://github.com/cmb69/privacy_xh/issues">Github</a> oder im <a href="https://cmsimpleforum.com/">CMSimple_XH Forum</a>.</p>
+<h2 id="lizenz">Lizenz</h2>
+<p>Privacy_XH ist freie Software. Sie können es unter den Bedingungen der GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version.</p>
+<p>Die Veröffentlichung von Privacy_XH erfolgt in der Hoffnung, daß es Ihnen von Nutzen sein wird, aber ohne irgendeine Garantie, sogar ohne die implizite Garantie der Marktreife oder der Verwendbarkeit für einen bestimmten Zweck. Details finden Sie in der GNU General Public License.</p>
+<p>Sie sollten ein Exemplar der GNU General Public License zusammen mit Privacy_XH erhalten haben. Falls nicht, siehe http://www.gnu.org/licenses/.</p>
+<p>Copyright © Christoph M. Becker</p>
+<p>Tschechische Übersetzung © Josef Němec<br />
+Niederländische Übersetzung © Rob Zeijen</p>
+<h2 id="danksagung">Danksagung</h2>
+<p>Privacy_XH wurde von <em>oldnema</em> angeregt, der mich auf die EU-Cookie-Richtlinie, und die Nützlichkeit eines solchen Plugins hinwies. Vielen Dank!</p>
+<p>Das Plugin-Logo wurde von <a href="http://www.famfamfam.com/">Alexander Moore</a> gestaltet. Vielen Dank für die Veröffentlichung dieses Icons unter GPL.</p>
+<p>Und zu guter letzt vielen Dank an <a href="http://www.harteg.dk">Peter Harteg</a>, den “Vater” von CMSimple, und allen Entwicklern von <a href="http://www.cmsimple-xh.org">CMSimple_XH</a> ohne die es dieses phantastische CMS nicht gäbe.</p>
+</body>
+</html>
