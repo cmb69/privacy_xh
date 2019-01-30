@@ -1,4 +1,4 @@
-<form id="privacy" name="privacy" action="" method="post">
+<form id="privacy" name="privacy" method="post">
     <?=$this->message()?>
     <input type="checkbox" id="privacy_agree" name="privacy_agree" />
     <label for="privacy_agree"><?=$this->text('checkbox')?></label>
