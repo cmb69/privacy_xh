@@ -1,7 +1,7 @@
 # Privacy\_XH
 
 Privacy\_XH helps to make a website conforming to the [EU cookie
-law](http://www.cookielaw.org/) and other regulations regarding the
+regulations](http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm) and other regulations regarding the
 privacy of visitors. It does so by emitting a form on every page with
 relevant information giving the visitor the possibility to explicitely
 opt in. After the visitor opted in, a respective cookie is set, and the

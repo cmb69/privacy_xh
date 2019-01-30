@@ -1,7 +1,7 @@
 # Privacy\_XH
 
 Privacy\_XH zajišťuje, aby webové stránky vyhovovaly požadavkům zákona
-[EU cookie law](http://www.cookielaw.org/) a dalším právním předpisům
+[EU cookie regulations](http://ec.europa.eu/ipg/basics/legal/cookies/index_cs.htm) a dalším právním předpisům
 ohledně soukromí návštěvníků. Po odsouhlasení vypne formulář na každé
 stránce se základními a informace a dá návštěvníkovi možnost explicitně
 zvolit souhlas. Pokud návštěvník souhlasil, je nastaven příslušný cookie
