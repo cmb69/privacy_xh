@@ -14,6 +14,7 @@ soukromím uživatelů.
   - [Instalace](#instalace)
   - [Konfigurace](#konfigurace)
   - [Použití](#použití)
+  - [Limitations](#limitations)
   - [Troubleshooting](#troubleshooting)
   - [Licence](#licence)
   - [Vývojáři](#vývojáři)
@@ -92,6 +93,11 @@ Jinak požádejte dodavatele pluginu.
 
 **Vezměte prosím na vědomí, že "privacy form" není nikdy zobrazen, když
 jste přihlášeni jako adminstrator.**
+
+## Limitations
+
+If other plugins send cookies without being called explicitly,
+Privacy\_XH does **not** prevent these cookies to be sent.
 
 ## Troubleshooting
 

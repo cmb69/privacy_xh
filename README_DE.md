@@ -16,6 +16,7 @@ verletzen könnte, zu bewachen.
   - [Installation](#installation)
   - [Einstellungen](#einstellungen)
   - [Verwendung](#verwendung)
+  - [Beschränkungen](#beschränkungen)
   - [Fehlerbehebung](#fehlerbehebung)
   - [Lizenz](#lizenz)
   - [Danksagung](#danksagung)
@@ -105,6 +106,11 @@ andernfalls ist der Anbieter zu konsultieren.
 
 **Es ist zu beachten, dass das Privatsphäre-Formular dem Administrator
 niemals angezeigt wird.**
+
+## Beschränkungen
+
+Senden andere Plugins Cookies ohne explizit aufgerufen zu werden,
+so verhindert Privacy\_XH das Senden dieser Cookies **nicht**.
 
 ## Fehlerbehebung
 

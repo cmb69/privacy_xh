@@ -14,6 +14,7 @@ the privacy of users.
   - [Installation](#installation)
   - [Settings](#settings)
   - [Usage](#usage)
+  - [Limitations](#limitations)
   - [Troubleshooting](#troubleshooting)
   - [License](#license)
   - [Credits](#credits)
@@ -100,6 +101,11 @@ extension's manual; otherwise ask the vendor.
 
 **Please note that the privacy form is never shown when you're logged in
 as adminstrator.**
+
+## Limitations
+
+If other plugins send cookies without being called explicitly,
+Privacy\_XH does **not** prevent these cookies to be sent.
 
 ## Troubleshooting
 
