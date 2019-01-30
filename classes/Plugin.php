@@ -64,7 +64,7 @@ class Plugin
 
         $view = new View('info');
         $view->logo = "{$pth['folder']['plugins']}privacy/privacy.png";
-        $view->version = PRIVACY_VERSION;
+        $view->version = self::VERSION;
         $view->checks = (new SystemCheckService)->getChecks();
         return $view;
     }
