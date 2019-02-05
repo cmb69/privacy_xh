@@ -5,6 +5,9 @@
     border: 3px solid red;
     padding: 0.5em;
 }
+.privacy_buttons {
+    text-align: right;
+}
 
 /*
  * Backend.
