@@ -81,6 +81,7 @@
                 <exclude name="help/template.htm"/>
                 <exclude name="phpcompatinfo.*"/>
                 <exclude name="README*.md"/>
+                <exclude name="teplad.xml"/>
                 <exclude name="tests/**"/>
             </fileset>
         </move>
