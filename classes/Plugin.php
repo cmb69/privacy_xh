@@ -23,7 +23,7 @@ namespace Privacy;
 
 class Plugin
 {
-    const VERSION = '1.0beta2';
+    const VERSION = '1.0beta3';
 
     /**
      * @return void
