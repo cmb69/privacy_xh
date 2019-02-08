@@ -4,8 +4,7 @@ Privacy\_XH helps to make a website conforming to the [EU cookie
 regulations](http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm) and other regulations regarding the
 privacy of visitors. It does so by emitting a form on every page with
 relevant information giving the visitor the possibility to explicitely
-opt in. After the visitor opted in, a respective cookie is set, and the
-message won't be shown again. In addition Privacy\_XH facilitates to
+opt in to or refuse the usage of cookies. In addition Privacy\_XH facilitates to
 guard the execution of other code that sets cookies which might violate
 the privacy of users.
 

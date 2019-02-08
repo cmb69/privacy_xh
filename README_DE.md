@@ -5,9 +5,8 @@ Cookie-Vorschriften](http://ec.europa.eu/ipg/basics/legal/cookies/index_en.htm)
 und anderen Vorschriften bezüglich der Privatsphäre von Besuchern zu
 machen. Dazu wird auf jeder Seite ein Formular mit entsprechenden
 Informationen angezeigt, welches dem Besucher die Möglichkeit bietet,
-ausdrücklich einzuwilligen. Nachdem der Besucher eingewilligt hat, wird
-ein entsprechendes Cookie gesetzt, und die Meldung wird nicht mehr
-angezeigt. Darüber hinaus ermöglicht es Privacy\_XH, die Ausführung von
+der Verwendung von Cookies ausdrücklich einzuwilligen, oder zu widersprechen.
+Darüber hinaus ermöglicht es Privacy\_XH, die Ausführung von
 anderem Code, der Cookies setzt, die die Privatsphäre von Nutzern
 verletzen könnte, zu bewachen.
 
