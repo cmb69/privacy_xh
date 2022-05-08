@@ -23,11 +23,15 @@ namespace Privacy;
 
 class MainController
 {
+    /** @var int */
+    private $duration;
+
     /** @var View */
     private $view;
 
-    public function __construct(View $view)
+    public function __construct(int $duration, View $view)
     {
+        $this->duration = $duration;
         $this->view = $view;
     }
 
@@ -53,10 +57,8 @@ class MainController
 
     private function getExpirationTime(): int
     {
-        global $plugin_cf;
-
-        return !empty($plugin_cf['privacy']['duration'])
-            ? time() + 24 * 60 * 60 * $plugin_cf['privacy']['duration']
+        return $this->duration > 0
+            ? time() + 24 * 60 * 60 * $this->duration
             : 0;
     }
 

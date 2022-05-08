@@ -23,7 +23,7 @@ use Privacy\View;
 
 function privacy(): string
 {
-    global $pth, $plugin_tx;
+    global $pth, $plugin_cf, $plugin_tx;
 
     if (XH_ADM) { // @phpstan-ignore-line
         return "";
@@ -31,6 +31,7 @@ function privacy(): string
     $action = isset($_POST['privacy_agree']) ? 'submitAction' : 'defaultAction';
     ob_start();
     $controller = new Privacy\MainController(
+        $plugin_cf['privacy']['duration'],
         new View("{$pth['folder']['plugins']}privacy/views", $plugin_tx['privacy'])
     );
     $controller->$action();
