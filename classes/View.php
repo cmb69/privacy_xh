@@ -29,52 +29,11 @@ class View
     private $template;
 
     /**
-     * @var array
-     */
-    private $data = array();
-
-    /**
      * @param string $template
      */
     public function __construct($template)
     {
         $this->template = $template;
-    }
-
-    /**
-     * @param string $name
-     * @param mixed $value
-     */
-    public function __set($name, $value)
-    {
-        $this->data[$name] = $value;
-    }
-
-    /**
-     * @param string $name
-     * @return string
-     */
-    public function __get($name)
-    {
-        return $this->data[$name];
-    }
-
-    /**
-     * @param string $name
-     * @return bool
-     */
-    public function __isset($name)
-    {
-        return isset($this->data[$name]);
-    }
-
-    /**
-     * @param string $name
-     * @return string
-     */
-    public function __call($name, array $args)
-    {
-        return $this->escape($this->data[$name]);
     }
 
     /**
@@ -111,10 +70,11 @@ class View
     /**
      * @return void
      */
-    public function render()
+    public function render(array $data)
     {
         global $pth;
 
+        extract($data);
         echo "<!-- {$this->template} -->", PHP_EOL;
         include "{$pth['folder']['plugins']}privacy/views/{$this->template}.php";
     }

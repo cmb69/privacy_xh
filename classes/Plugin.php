@@ -63,11 +63,12 @@ class Plugin
         global $pth;
 
         $view = new View('info');
-        $view->logo = "{$pth['folder']['plugins']}privacy/privacy.png";
-        $view->version = self::VERSION;
-        $view->checks = (new SystemCheckService)->getChecks();
         ob_start();
-        $view->render();
+        $view->render([
+            "logo" => "{$pth['folder']['plugins']}privacy/privacy.png",
+            "version" => self::VERSION,
+            "checks" => (new SystemCheckService)->getChecks(),
+        ]);
         return ob_get_clean();
     }
 }

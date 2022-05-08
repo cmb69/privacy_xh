@@ -1,7 +1,7 @@
 <h1>Privacy – <?=$this->text('info')?></h1>
-<img class="privacy_logo" src="<?=$this->logo()?>" alt="<?=$this->text('alt_logo')?>" />
+<img class="privacy_logo" src="<?=$this->escape($logo)?>" alt="<?=$this->text('alt_logo')?>" />
 <p>
-    Version: <?=$this->version()?>
+    Version: <?=$this->escape($version)?>
 </p>
 <p>
     Copyright © Christoph M. Becker
@@ -25,7 +25,7 @@
 </p>
 <div class="privacy_syscheck">
     <h2><?=$this->text('syscheck_title')?></h2>
-<?php foreach ($this->checks as $check):?>
+<?php foreach ($checks as $check):?>
     <p class="xh_<?=$this->escape($check->state)?>"><?=$this->text('syscheck_message', $check->label, $check->stateLabel)?></p>
 <?php endforeach?>
 </div>
