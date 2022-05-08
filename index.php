@@ -20,12 +20,12 @@
  */
 
 /**
- * @return ?string
+ * @return string
  */
 function privacy()
 {
     if (XH_ADM) { // @phpstan-ignore-line
-        return;
+        return "";
     }
     $action = isset($_POST['privacy_agree']) ? 'submitAction' : 'defaultAction';
     ob_start();
