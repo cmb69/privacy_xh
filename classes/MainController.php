@@ -25,10 +25,10 @@ class MainController
 {
     public function defaultAction(): void
     {
-        global $plugin_tx;
+        global $pth, $plugin_tx;
 
         if (!isset($_COOKIE['privacy_agreed'])) {
-            $view = new View();
+            $view = new View("{$pth['folder']['plugins']}privacy/views", $plugin_tx['privacy']);
             $view->render("privacy", ["message" => new HtmlString($plugin_tx['privacy']['message'])]);
         }
     }

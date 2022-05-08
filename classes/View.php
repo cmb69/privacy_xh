@@ -23,13 +23,26 @@ namespace Privacy;
 
 class View
 {
+    /** @var string */
+    private $templateFolder;
+
+    /** @var array<string,string> */
+    private $lang;
+
+    /**
+     * @param array<string,string> $lang
+     */
+    public function __construct(string $templateFolder, array $lang)
+    {
+        $this->templateFolder = $templateFolder;
+        $this->lang = $lang;
+    }
+
     public function text(string $key): string
     {
-        global $plugin_tx;
-
         $args = func_get_args();
         array_shift($args);
-        return $this->escape(vsprintf($plugin_tx['privacy'][$key], $args));
+        return $this->escape(vsprintf($this->lang[$key], $args));
     }
 
     /**
@@ -37,11 +50,9 @@ class View
      */
     public function render(string $template, array $data): void
     {
-        global $pth;
-
         extract($data);
         echo "<!-- {$template} -->", PHP_EOL;
-        include "{$pth['folder']['plugins']}privacy/views/{$template}.php";
+        include "{$this->templateFolder}/{$template}.php";
     }
 
     /**

@@ -51,9 +51,9 @@ class Plugin
 
     private function renderInfoView(): string
     {
-        global $pth;
+        global $pth, $plugin_tx;
 
-        $view = new View();
+        $view = new View("{$pth['folder']['plugins']}privacy/views", $plugin_tx["privacy"]);
         ob_start();
         $view->render("info", [
             "logo" => "{$pth['folder']['plugins']}privacy/privacy.png",
