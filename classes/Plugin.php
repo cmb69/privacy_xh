@@ -53,9 +53,9 @@ class Plugin
     {
         global $pth;
 
-        $view = new View('info');
+        $view = new View();
         ob_start();
-        $view->render([
+        $view->render("info", [
             "logo" => "{$pth['folder']['plugins']}privacy/privacy.png",
             "version" => self::VERSION,
             "checks" => (new SystemCheckService)->getChecks(),

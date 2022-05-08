@@ -23,19 +23,6 @@ namespace Privacy;
 
 class View
 {
-    /**
-     * @var string
-     */
-    private $template;
-
-    /**
-     * @param string $template
-     */
-    public function __construct($template)
-    {
-        $this->template = $template;
-    }
-
     public function text(string $key): string
     {
         global $plugin_tx;
@@ -48,13 +35,13 @@ class View
     /**
      * @param array<string,mixed> $data
      */
-    public function render(array $data): void
+    public function render(string $template, array $data): void
     {
         global $pth;
 
         extract($data);
-        echo "<!-- {$this->template} -->", PHP_EOL;
-        include "{$pth['folder']['plugins']}privacy/views/{$this->template}.php";
+        echo "<!-- {$template} -->", PHP_EOL;
+        include "{$pth['folder']['plugins']}privacy/views/{$template}.php";
     }
 
     /**

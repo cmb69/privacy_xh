@@ -28,8 +28,8 @@ class MainController
         global $plugin_tx;
 
         if (!isset($_COOKIE['privacy_agreed'])) {
-            $view = new View('privacy');
-            $view->render(["message" => new HtmlString($plugin_tx['privacy']['message'])]);
+            $view = new View();
+            $view->render("privacy", ["message" => new HtmlString($plugin_tx['privacy']['message'])]);
         }
     }
 
