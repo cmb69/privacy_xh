@@ -41,7 +41,7 @@ class View
     /**
      * @param mixed $args
      */
-    public function text(string $key, ...$args): string
+    public function text(string $key, ...$args): HtmlString
     {
         return $this->escape(vsprintf($this->lang[$key], $args));
     }
@@ -57,15 +57,14 @@ class View
     }
 
     /**
-     * @param mixed $value
-     * @return mixed
+     * @param HtmlString|scalar $value
      */
-    public function escape($value)
+    public function escape($value): HtmlString
     {
         if ($value instanceof HtmlString) {
             return $value;
         } else {
-            return XH_hsc($value);
+            return new HtmlString(XH_hsc((string) $value));
         }
     }
 }
