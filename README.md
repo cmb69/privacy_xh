@@ -20,7 +20,7 @@ the privacy of users.
 
 ## Requirements
 
-Privacy\_XH is a plugin for CMSimple\_XH ≥ 1.6.3. It requires PHP ≥
+Privacy\_XH is a plugin for CMSimple\_XH ≥ 1.7.0. It requires PHP ≥
 5.4.0.
 
 ## Download

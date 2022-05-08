@@ -22,7 +22,7 @@ verletzen könnte, zu bewachen.
 
 ## Voraussetzungen
 
-Privacy\_XH ist ein Plugin für CMSimple\_XH ≥ 1.6.3. Es benötigt PHP ≥
+Privacy\_XH ist ein Plugin für CMSimple\_XH ≥ 1.7.0. Es benötigt PHP ≥
 5.4.0.
 
 ## Download
