@@ -23,10 +23,7 @@ namespace Privacy;
 
 class MainController
 {
-    /**
-     * @return void
-     */
-    public function defaultAction()
+    public function defaultAction(): void
     {
         global $plugin_tx;
 
@@ -36,10 +33,7 @@ class MainController
         }
     }
 
-    /**
-     * @return void
-     */
-    public function submitAction()
+    public function submitAction(): void
     {
         if ($_POST['privacy_agree'] === 'yes') {
             setcookie('privacy_agreed', 'yes', $this->getExpirationTime(), CMSIMPLE_ROOT);
@@ -50,10 +44,7 @@ class MainController
         exit;
     }
 
-    /**
-     * @return int
-     */
-    private function getExpirationTime()
+    private function getExpirationTime(): int
     {
         global $plugin_cf;
 
@@ -62,10 +53,7 @@ class MainController
             : 0;
     }
 
-    /**
-     * @return string
-     */
-    private function getLocationURL()
+    private function getLocationURL(): string
     {
         $url = CMSIMPLE_URL;
         if ($_SERVER['QUERY_STRING'] != '') {

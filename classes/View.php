@@ -36,11 +36,7 @@ class View
         $this->template = $template;
     }
 
-    /**
-     * @param string $key
-     * @return string
-     */
-    protected function text($key)
+    protected function text(string $key): string
     {
         global $plugin_tx;
 
@@ -49,10 +45,7 @@ class View
         return $this->escape(vsprintf($plugin_tx['privacy'][$key], $args));
     }
 
-    /**
-     * @return void
-     */
-    public function render(array $data)
+    public function render(array $data): void
     {
         global $pth;
 

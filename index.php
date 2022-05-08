@@ -19,10 +19,7 @@
  * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * @return string
- */
-function privacy()
+function privacy(): string
 {
     if (XH_ADM) { // @phpstan-ignore-line
         return "";
@@ -37,10 +34,9 @@ function privacy()
  * Returns the result of calling $func with the variable arguments,
  * if the user already opted in. Otherwise doesn't call $func and returns ''.
  *
- * @param string $func
  * @return mixed
  */
-function Privacy_guard($func)
+function Privacy_guard(string $func)
 {
     if (!privacy_agreed()) {
         return '';
@@ -50,10 +46,7 @@ function Privacy_guard($func)
     return call_user_func_array($func, $args);
 }
 
-/**
- * @return bool
- */
-function privacy_agreed()
+function privacy_agreed(): bool
 {
     return isset($_COOKIE['privacy_agreed']) && $_COOKIE['privacy_agreed'] === 'yes';
 }

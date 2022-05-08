@@ -25,10 +25,7 @@ class Plugin
 {
     const VERSION = '1.0beta3';
 
-    /**
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         if (XH_ADM) { // @phpstan-ignore-line
             XH_registerStandardPluginMenuItems(false);
@@ -38,10 +35,7 @@ class Plugin
         }
     }
 
-    /**
-     * @return void
-     */
-    private function handleAdministration()
+    private function handleAdministration(): void
     {
         global $admin, $o;
 
@@ -55,10 +49,7 @@ class Plugin
         }
     }
 
-    /**
-     * @return string
-     */
-    private function renderInfoView()
+    private function renderInfoView(): string
     {
         global $pth;
 
