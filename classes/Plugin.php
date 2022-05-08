@@ -56,7 +56,7 @@ class Plugin
     }
 
     /**
-     * @return View
+     * @return string
      */
     private function renderInfoView()
     {
@@ -66,6 +66,8 @@ class Plugin
         $view->logo = "{$pth['folder']['plugins']}privacy/privacy.png";
         $view->version = self::VERSION;
         $view->checks = (new SystemCheckService)->getChecks();
-        return $view;
+        ob_start();
+        $view->render();
+        return ob_get_clean();
     }
 }
