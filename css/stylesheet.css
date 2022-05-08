@@ -8,13 +8,3 @@
 .privacy_buttons {
     text-align: right;
 }
-
-/*
- * Backend.
- */
-.privacy_logo {
-    float: left;
-}
-.privacy_license {
-    text-align: justify;
-}
