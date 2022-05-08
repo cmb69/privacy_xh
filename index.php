@@ -24,7 +24,7 @@
  */
 function privacy()
 {
-    if (XH_ADM) {
+    if (XH_ADM) { // @phpstan-ignore-line
         return;
     }
     $action = isset($_POST['privacy_agree']) ? 'submitAction' : 'defaultAction';
