@@ -21,7 +21,7 @@ soukromím uživatelů.
 ## Požadavky
 
 Privacy\_XH is a plugin for CMSimple\_XH ≥ 1.7.0. It requires PHP ≥
-5.4.0.
+7.1.0.
 
 ## Download
 
