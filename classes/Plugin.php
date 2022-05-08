@@ -60,6 +60,6 @@ class Plugin
             "version" => self::VERSION,
             "checks" => (new SystemCheckService)->getChecks(),
         ]);
-        return ob_get_clean();
+        return (string) ob_get_clean();
     }
 }

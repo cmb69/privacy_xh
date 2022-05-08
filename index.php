@@ -27,7 +27,7 @@ function privacy(): string
     $action = isset($_POST['privacy_agree']) ? 'submitAction' : 'defaultAction';
     ob_start();
     (new Privacy\MainController)->$action();
-    return ob_get_clean();
+    return (string) ob_get_clean();
 }
 
 /**

@@ -45,6 +45,9 @@ class View
         return $this->escape(vsprintf($plugin_tx['privacy'][$key], $args));
     }
 
+    /**
+     * @param array<string,mixed> $data
+     */
     public function render(array $data): void
     {
         global $pth;
