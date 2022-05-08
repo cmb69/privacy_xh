@@ -23,13 +23,20 @@ namespace Privacy;
 
 class MainController
 {
+    /** @var View */
+    private $view;
+
+    public function __construct(View $view)
+    {
+        $this->view = $view;
+    }
+
     public function defaultAction(): void
     {
-        global $pth, $plugin_tx;
+        global $plugin_tx;
 
         if (!isset($_COOKIE['privacy_agreed'])) {
-            $view = new View("{$pth['folder']['plugins']}privacy/views", $plugin_tx['privacy']);
-            $view->render("privacy", ["message" => new HtmlString($plugin_tx['privacy']['message'])]);
+            $this->view->render("privacy", ["message" => new HtmlString($plugin_tx['privacy']['message'])]);
         }
     }
 

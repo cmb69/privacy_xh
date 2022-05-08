@@ -19,14 +19,21 @@
  * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+use Privacy\View;
+
 function privacy(): string
 {
+    global $pth, $plugin_tx;
+
     if (XH_ADM) { // @phpstan-ignore-line
         return "";
     }
     $action = isset($_POST['privacy_agree']) ? 'submitAction' : 'defaultAction';
     ob_start();
-    (new Privacy\MainController)->$action();
+    $controller = new Privacy\MainController(
+        new View("{$pth['folder']['plugins']}privacy/views", $plugin_tx['privacy'])
+    );
+    $controller->$action();
     return (string) ob_get_clean();
 }
 
