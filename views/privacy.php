@@ -1,3 +1,14 @@
+<?php
+
+namespace Privacy;
+
+/**
+ * @var View $this
+ * @var string $message
+ */
+
+?>
+
 <form id="privacy" name="privacy" method="post">
     <?=$this->escape($message)?>
     <p class="privacy_buttons">

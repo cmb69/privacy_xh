@@ -36,7 +36,7 @@ class View
         $this->template = $template;
     }
 
-    protected function text(string $key): string
+    public function text(string $key): string
     {
         global $plugin_tx;
 
@@ -61,7 +61,7 @@ class View
      * @param mixed $value
      * @return mixed
      */
-    protected function escape($value)
+    public function escape($value)
     {
         if ($value instanceof HtmlString) {
             return $value;

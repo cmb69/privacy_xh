@@ -1,3 +1,18 @@
+<?php
+
+namespace Privacy;
+
+use stdClass;
+
+/**
+ * @var View $this
+ * @var string $logo
+ * @var string $version
+ * @var array<stdClass> $checks
+ */
+
+?>
+
 <h1>Privacy – <?=$this->text('info')?></h1>
 <img class="privacy_logo" src="<?=$this->escape($logo)?>" alt="<?=$this->text('alt_logo')?>" />
 <p>
