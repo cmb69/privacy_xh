@@ -34,16 +34,15 @@ function privacy(): string
  * Returns the result of calling $func with the variable arguments,
  * if the user already opted in. Otherwise doesn't call $func and returns ''.
  *
+ * @param mixed $args
  * @return mixed
  */
-function Privacy_guard(string $func)
+function Privacy_guard(callable $func, ...$args)
 {
     if (!privacy_agreed()) {
         return '';
     }
-    $args = func_get_args();
-    $func = array_shift($args);
-    return call_user_func_array($func, $args);
+    return $func(...$args);
 }
 
 function privacy_agreed(): bool
