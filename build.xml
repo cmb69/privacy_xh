@@ -34,9 +34,8 @@
         </exec>
     </target>
 
-    <target name="compat"
-            description="checks compatibility with PHP CompatInfo">
-        <exec command="phpcompatinfo analyser:run  --alias current" logoutput="true"/>
+    <target name="compat" description="checks compatibility with PHP_CompatInfo">
+        <exec command="phpcompatinfo analyser:run --ansi classes" passthru="true" checkreturn="true"/>
     </target>
 
     <target name="gen-help" description="builds help.htm from README.md">
@@ -54,7 +53,6 @@
                 <exclude name="build.xml"/>
                 <exclude name="composer.*"/>
                 <exclude name="help/template.htm"/>
-                <exclude name="phpcompatinfo.*"/>
                 <exclude name="README*.md"/>
                 <exclude name="teplad.xml"/>
             </fileset>
