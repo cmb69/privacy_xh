@@ -28,23 +28,18 @@ class SystemCheckService
     /**
      * @var string
      */
-    private $pluginsFolder;
-
-    /**
-     * @var string
-     */
     private $pluginFolder;
 
     /** @var array<string,string> */
     private $lang;
 
-    public function __construct()
+    /**
+     * @param array<string,string> $lang
+     */
+    public function __construct(string $pluginFolder, array $lang)
     {
-        global $pth, $plugin_tx;
-
-        $this->pluginsFolder = $pth['folder']['plugins'];
-        $this->pluginFolder = "{$this->pluginsFolder}privacy";
-        $this->lang = $plugin_tx['privacy'];
+        $this->pluginFolder = $pluginFolder;
+        $this->lang = $lang;
     }
 
     /**
