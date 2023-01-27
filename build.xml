@@ -18,6 +18,7 @@
       <arg line="--runtime-set ignore_warnings_on_exit true"/>
       <arg file="index.php"/>
       <arg file="classes"/>
+      <arg file="tests"/>
     </exec>
   </target>
 
@@ -30,7 +31,18 @@
 
   <target name="mess" description="detects code flaws">
     <exec executable="phpmd" passthru="true" checkreturn="true">
-      <arg line="index.php,classes ansi unusedcode,codesize"/>
+      <arg line="index.php,classes,tests ansi unusedcode,codesize"/>
+    </exec>
+  </target>
+
+  <target name="test" description="run developer tests">
+    <exec executable="phpunit" passthru="true" checkreturn="true"/>
+  </target>
+
+  <target name="coverage" description="generates test coverage report">
+    <exec executable="phpunit" passthru="true" checkreturn="true">
+      <arg value="--coverage-html"/>
+      <arg file="tests/coverage"/>
     </exec>
   </target>
 
