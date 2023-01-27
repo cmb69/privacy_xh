@@ -49,11 +49,13 @@ class View
     /**
      * @param array<string,mixed> $data
      */
-    public function render(string $template, array $data): void
+    public function render(string $template, array $data): string
     {
         extract($data);
+        ob_start();
         echo "<!-- {$template} -->", PHP_EOL;
         include "{$this->templateFolder}/{$template}.php";
+        return (string) ob_get_clean();
     }
 
     /**

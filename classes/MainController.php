@@ -40,7 +40,7 @@ class MainController
         global $plugin_tx;
 
         if (!isset($_COOKIE['privacy_agreed'])) {
-            $this->view->render("privacy", ["message" => new HtmlString($plugin_tx['privacy']['message'])]);
+            echo $this->view->render("privacy", ["message" => new HtmlString($plugin_tx['privacy']['message'])]);
         }
     }
 
