@@ -1,7 +1,6 @@
 <?php
 
-use Privacy\ShowInfo;
-use Privacy\SystemChecker;
+use Privacy\Dic;
 
 /**
  * @var array<array<string>> $pth
@@ -16,12 +15,7 @@ if (XH_wantsPluginAdministration('privacy')) {
     $o .= print_plugin_admin('off');
     switch ($admin) {
         case '':
-            $controller = new ShowInfo(
-                "{$pth['folder']['plugins']}privacy/",
-                $plugin_tx['privacy'],
-                new SystemChecker()
-            );
-            $o .= $controller();
+            $o .= Dic::makeShowInfo()();
             break;
         default:
             $o .= plugin_admin_common();
