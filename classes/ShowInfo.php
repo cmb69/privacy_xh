@@ -29,19 +29,23 @@ class ShowInfo
     /** @var array<string> */
     private $lang;
 
+    /** @var SystemChecker */
+    private $systemChecker;
+
     /**
      * @param array<string> $lang
      */
-    public function __construct(string $pluginFolder, array $lang)
+    public function __construct(string $pluginFolder, array $lang, SystemChecker $systemChecker)
     {
         $this->pluginFolder = $pluginFolder;
         $this->lang = $lang;
+        $this->systemChecker = $systemChecker;
     }
 
     public function __invoke(): string
     {
         $view = new View("{$this->pluginFolder}views", $this->lang);
-        $systemCheckService = new SystemCheckService($this->pluginFolder, $this->lang);
+        $systemCheckService = new SystemCheckService($this->pluginFolder, $this->lang, $this->systemChecker);
         return $view->render("info", [
             "version" => Plugin::VERSION,
             "checks" => $systemCheckService->getChecks(),

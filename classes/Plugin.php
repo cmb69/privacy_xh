@@ -53,6 +53,6 @@ class Plugin
     {
         global $pth, $plugin_tx;
 
-        return (new ShowInfo("{$pth['folder']['plugins']}privacy/", $plugin_tx['privacy']))();
+        return (new ShowInfo("{$pth['folder']['plugins']}privacy/", $plugin_tx['privacy'], new SystemChecker()))();
     }
 }
