@@ -27,3 +27,5 @@ jobs:
         run: cd cmsimplexh/plugins/privacy && PATH=vendor/bin:$PATH phing mess
       - name: phing stan
         run: cd cmsimplexh/plugins/privacy && PATH=vendor/bin:$PATH phing stan
+      - name: phing test
+        run: cd cmsimplexh/plugins/privacy && PATH=vendor/bin:$PATH phing test
