@@ -20,39 +20,3 @@
  */
 
 namespace Privacy;
-
-class Plugin
-{
-    const VERSION = '1.0beta3';
-
-    public function run(): void
-    {
-        if (XH_ADM) { // @phpstan-ignore-line
-            XH_registerStandardPluginMenuItems(false);
-            if (XH_wantsPluginAdministration('privacy')) {
-                $this->handleAdministration();
-            }
-        }
-    }
-
-    private function handleAdministration(): void
-    {
-        global $admin, $o;
-
-        $o .= print_plugin_admin('off');
-        switch ($admin) {
-            case '':
-                $o .= $this->renderInfoView();
-                break;
-            default:
-                $o .= plugin_admin_common();
-        }
-    }
-
-    private function renderInfoView(): string
-    {
-        global $pth, $plugin_tx;
-
-        return (new ShowInfo("{$pth['folder']['plugins']}privacy/", $plugin_tx['privacy'], new SystemChecker()))();
-    }
-}

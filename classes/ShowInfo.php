@@ -48,7 +48,7 @@ class ShowInfo
     {
         $view = new View("{$this->pluginFolder}views", $this->lang);
         return $view->render("info", [
-            "version" => Plugin::VERSION,
+            "version" => PRIVACY_VERSION,
             "checks" => $this->getChecks(),
         ]);
     }

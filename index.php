@@ -21,6 +21,8 @@
 
 use Privacy\View;
 
+const PRIVACY_VERSION = '1.0beta3';
+
 function privacy(): string
 {
     global $pth, $plugin_cf, $plugin_tx;
@@ -57,5 +59,3 @@ function privacy_agreed(): bool
 {
     return isset($_COOKIE['privacy_agreed']) && $_COOKIE['privacy_agreed'] === 'yes';
 }
-
-(new Privacy\Plugin)->run();
