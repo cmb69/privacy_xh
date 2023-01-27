@@ -21,6 +21,8 @@
 
 namespace Privacy;
 
+use stdClass;
+
 class ShowInfo
 {
     /** @var string */
@@ -45,10 +47,46 @@ class ShowInfo
     public function __invoke(): string
     {
         $view = new View("{$this->pluginFolder}views", $this->lang);
-        $systemCheckService = new SystemCheckService($this->pluginFolder, $this->lang, $this->systemChecker);
         return $view->render("info", [
             "version" => Plugin::VERSION,
-            "checks" => $systemCheckService->getChecks(),
+            "checks" => $this->getChecks(),
         ]);
+    }
+    /**
+     * @return object[]
+     */
+    public function getChecks(): array
+    {
+        return array(
+            $this->checkPhpVersion('7.1.0'),
+            $this->checkXhVersion('1.7.0'),
+            $this->checkWritability("{$this->pluginFolder}css/"),
+            $this->checkWritability("{$this->pluginFolder}config/"),
+            $this->checkWritability("{$this->pluginFolder}languages/")
+        );
+    }
+
+    private function checkPhpVersion(string $version): stdClass
+    {
+        $state = $this->systemChecker->checkVersion(PHP_VERSION, $version) ? 'success' : 'fail';
+        $label = sprintf($this->lang['syscheck_phpversion'], $version);
+        $stateLabel = $this->lang["syscheck_$state"];
+        return (object) compact('state', 'label', 'stateLabel');
+    }
+
+    private function checkXhVersion(string $version): stdClass
+    {
+        $state = $this->systemChecker->checkVersion(CMSIMPLE_XH_VERSION, "CMSimple_XH $version") ? 'success' : 'fail';
+        $label = sprintf($this->lang['syscheck_xhversion'], $version);
+        $stateLabel = $this->lang["syscheck_$state"];
+        return (object) compact('state', 'label', 'stateLabel');
+    }
+
+    private function checkWritability(string $folder): stdClass
+    {
+        $state = $this->systemChecker->checkWritability($folder) ? 'success' : 'warning';
+        $label = sprintf($this->lang['syscheck_writable'], $folder);
+        $stateLabel = $this->lang["syscheck_$state"];
+        return (object) compact('state', 'label', 'stateLabel');
     }
 }
