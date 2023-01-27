@@ -53,11 +53,6 @@ class Plugin
     {
         global $pth, $plugin_tx;
 
-        $view = new View("{$pth['folder']['plugins']}privacy/views", $plugin_tx["privacy"]);
-        $systemCheckService = new SystemCheckService("{$pth['folder']['plugins']}privacy", $plugin_tx['privacy']);
-        return $view->render("info", [
-            "version" => self::VERSION,
-            "checks" => $systemCheckService->getChecks(),
-        ]);
+        return (new ShowInfo("{$pth['folder']['plugins']}privacy/", $plugin_tx['privacy']))();
     }
 }
