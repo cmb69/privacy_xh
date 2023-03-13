@@ -25,6 +25,7 @@ use function XH_includeVar;
 
 use ApprovalTests\Approvals;
 use PHPUnit\Framework\TestCase;
+use Privacy\Infra\Request;
 use Privacy\Infra\SystemChecker;
 use Privacy\Infra\View;
 
@@ -33,8 +34,13 @@ class ShowInfoTest extends TestCase
     public function testRendersPluginInfo(): void
     {
         $sut = new ShowInfo("./", $this->systemChecker(), $this->view());
-        $response = $sut();
-        Approvals::verifyString($response);
+        $response = $sut($this->request());
+        Approvals::verifyString($response->output());
+    }
+
+    private function request(): Request
+    {
+        return $this->createMock(Request::class);
     }
 
     private function systemChecker(): SystemChecker

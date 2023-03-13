@@ -1,6 +1,7 @@
 <?php
 
 use Privacy\Dic;
+use Privacy\Infra\Request;
 
 if (!defined("CMSIMPLE_XH_VERSION")) {
     header("HTTP/1.1 403 Forbidden");
@@ -18,7 +19,7 @@ if (XH_wantsPluginAdministration("privacy")) {
     $o .= print_plugin_admin("off");
     switch ($admin) {
         case "":
-            $o .= Dic::makeShowInfo()();
+            $o .= Dic::makeShowInfo()(Request::current())->respond();
             break;
         default:
             $o .= plugin_admin_common();

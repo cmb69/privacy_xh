@@ -21,6 +21,8 @@
 
 namespace Privacy;
 
+use Privacy\Infra\Request;
+use Privacy\Infra\Response;
 use Privacy\Infra\SystemChecker;
 use Privacy\Infra\View;
 
@@ -42,12 +44,12 @@ class ShowInfo
         $this->view = $view;
     }
 
-    public function __invoke(): string
+    public function __invoke(Request $request): Response
     {
-        return $this->view->render("info", [
+        return Response::create($this->view->render("info", [
             "version" => PRIVACY_VERSION,
             "checks" => $this->getChecks(),
-        ]);
+        ]));
     }
     /** @return list<array{class:string,key:string,arg:string,state:string}> */
     public function getChecks(): array
