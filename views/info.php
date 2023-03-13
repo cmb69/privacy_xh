@@ -13,6 +13,6 @@ if (!defined("CMSIMPLE_XH_VERSION")) {header("HTTP/1.1 403 Forbidden"); exit;}
 <!-- privacy plugin info -->
 <h1>Privacy <?=$version?></h1>
 <h2><?=$this->text('syscheck_title')?></h2>
-<?php foreach ($checks as $check):?>
+<?foreach ($checks as $check):?>
 <p class="<?=$check['class']?>"><?=$this->text($check['key'], $check['arg'])?><?=$this->text($check['state'])?></p>
-<?php endforeach?>
+<?endforeach?>
