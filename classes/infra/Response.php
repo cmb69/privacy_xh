@@ -41,10 +41,20 @@ class Response
     private $output = "";
 
     /** @var string|null */
-    private $location;
+    private $location = null;
+
+    /** @var string|null */
+    private $title = null;
 
     /** @var array{string,string,int}|null */
-    private $cookie;
+    private $cookie = null;
+
+    public function withTitle(string $title): self
+    {
+        $that = clone $this;
+        $that->title = $title;
+        return $that;
+    }
 
     public function withCookie(string $name, string $value, int $expires): self
     {
@@ -63,6 +73,11 @@ class Response
         return $this->location;
     }
 
+    public function title(): ?string
+    {
+        return $this->title;
+    }
+
     /** @return array{string,string,int}|null */
     public function cookie(): ?array
     {
@@ -72,6 +87,8 @@ class Response
     /** @return string|never */
     public function respond()
     {
+        global $title;
+
         if ($this->cookie !== null) {
             [$name, $value, $expires] = $this->cookie;
             setcookie($name, $value, $expires, CMSIMPLE_ROOT);
@@ -79,6 +96,9 @@ class Response
         if ($this->location !== null) {
             header("Location: " . $this->location, true, 303);
             exit;
+        }
+        if ($this->title !== null) {
+            $title = $this->title;
         }
         return $this->output;
     }

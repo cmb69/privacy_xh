@@ -49,8 +49,9 @@ class ShowInfo
         return Response::create($this->view->render("info", [
             "version" => PRIVACY_VERSION,
             "checks" => $this->getChecks(),
-        ]));
+        ]))->withTitle($this->view->esc("Privacy " . PRIVACY_VERSION));
     }
+
     /** @return list<array{class:string,key:string,arg:string,state:string}> */
     public function getChecks(): array
     {
