@@ -4,7 +4,6 @@ $plugin_tx['privacy']['message']="We would like to place cookies on your compute
 $plugin_tx['privacy']['label_allow']="Allow cookies";
 $plugin_tx['privacy']['label_decline']="Decline";
 $plugin_tx['privacy']['label_link']="Cookie settings";
-$plugin_tx['privacy']['info']="Info";
 
 $plugin_tx['privacy']['syscheck_fail']="failure";
 $plugin_tx['privacy']['syscheck_phpversion']="PHP version ≥ %s: ";
