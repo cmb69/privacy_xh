@@ -32,8 +32,7 @@
 
   <target name="coverage" description="generates test coverage report">
     <exec executable="phpunit" passthru="true" checkreturn="true">
-      <arg value="--coverage-html"/>
-      <arg file="coverage"/>
+      <arg line="--coverage-html coverage"/>
     </exec>
   </target>
 
@@ -69,11 +68,9 @@
       </fileset>
     </move>
     <delete dir="export"/>
-    <copy file="dist/config/config.php"
-        tofile="dist/config/defaultconfig.php"/>
+    <copy file="dist/config/config.php" tofile="dist/config/defaultconfig.php"/>
     <copy file="dist/languages/en.php" tofile="dist/languages/default.php"/>
-    <zip destfile="Privacy_XH-1.0beta3.zip" basedir="dist"
-       prefix="privacy/"/>
+    <zip destfile="Privacy_XH-1.0beta3.zip" basedir="dist" prefix="privacy/"/>
     <delete dir="dist"/>
   </target>
 
