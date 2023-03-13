@@ -21,22 +21,28 @@
 
 namespace Privacy;
 
+use Privacy\Infra\Newsbox;
 use Privacy\Infra\Request;
 use Privacy\Infra\Response;
 use Privacy\Infra\View;
+use Privacy\Value\Html;
 
 class MainController
 {
     /** @var array<string,string> */
     private $conf;
 
+    /** @var Newsbox */
+    private $newsbox;
+
     /** @var View */
     private $view;
 
     /** @param array<string,string> $conf */
-    public function __construct(array $conf, View $view)
+    public function __construct(array $conf, Newsbox $newsbox, View $view)
     {
         $this->conf = $conf;
+        $this->newsbox = $newsbox;
         $this->view = $view;
     }
 
@@ -60,7 +66,12 @@ class MainController
         if ($request->isCookieSet()) {
             return Response::create();
         }
-        return Response::create($this->view->render("privacy", []));
+        if ($this->conf["newsbox"] !== "") {
+            $message = $this->newsbox->content($this->conf["newsbox"]);
+        }
+        return Response::create($this->view->render("privacy", [
+            "message" => !empty($message) ? Html::from($message) : null,
+        ]));
     }
 
     private function consent(Request $request): Response

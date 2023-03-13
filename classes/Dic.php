@@ -21,6 +21,7 @@
 
 namespace Privacy;
 
+use Privacy\Infra\Newsbox;
 use Privacy\Infra\SystemChecker;
 use Privacy\Infra\View;
 
@@ -28,9 +29,10 @@ class Dic
 {
     public static function makeMainController(): MainController
     {
-        global $plugin_cf, $plugin_tx;
+        global $plugin_cf;
         return  new MainController(
             $plugin_cf["privacy"],
+            new Newsbox,
             self::makeView()
         );
     }

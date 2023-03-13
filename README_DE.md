@@ -69,10 +69,11 @@ Stelle im Template zu ergänzen:
 
     <?=privacy()?>
 
-Die Meldung sollte unter "Sprache" den Bedürfnissen angepasst werden. Um
-umfangreiche Informationen zur Verfügung zu stellen, sollte eine
-versteckte CMSimple\_XH-Seite mit den Privatsphäre-Hinweisen vorbereitet
-werden, und die Meldung sollte zu dieser verlinken.
+Die Meldung sollte unter `Sprache` den Bedürfnissen angepasst werden.
+Allerdings akzeptieren Sprachtexte kein HTML, aber Sie möchten vermutlich
+Links zum Impressum und der Datenschutzerklärung anzeigen; um dies tun zu
+können, müssen Sie eine versteckte Seite anlegen, und ihren Seiten-Titel
+unter `Konfiguration` → `Newsbox` eintragen.
 
 Um zu verhindern, dass Cookies von anderen Plugins oder Erweiterungen
 gesendet werden bevor der Nutzer eingewilligt hat, muss die Integration

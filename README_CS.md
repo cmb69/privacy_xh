@@ -61,9 +61,11 @@ na nápadném místě:
 
     <?=privacy()?>
 
-Měli byste upravit text v "jazyk" podle vašich potřeb. Chcete-li
-rozsáhlé informace, měli byste připravit skrytou CMSimple\_XH stránku s
-informacemi o ochraně osobních údajů.
+Měli byste upravit text v "jazyk" podle vašich potřeb.
+However, language texts do not accept any HTML markup, but you likely
+want to add links to the imprint and privacy policy pages; to be able to do
+that, you need to prepare a hidden page, and enter its page heading in
+`Config` → `Newsbox`.
 
 Aby se zabránilo ukládání cookie z jiných pluginů nebo rozšíření dříve,
 než uživatel povolil, budete muset udělat některé změny. Pokud je kód v

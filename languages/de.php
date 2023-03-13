@@ -13,6 +13,7 @@ $plugin_tx['privacy']['syscheck_warning']="Warnung";
 $plugin_tx['privacy']['syscheck_writable']="'%s' ist schreibbar: ";
 $plugin_tx['privacy']['syscheck_xhversion']="CMSimple_XH-Version ≥ %s: ";
 
+$plugin_tx['privacy']['cf_newsbox']="Der Titel der Newsbox-Seite, deren Inhalt oberhalb des Cookie-Zustimmungsformulars angezeigt wird. Leer lassen, um statt dessen die einfache Meldung aus den Spracheinstellungen anzuzeigen.";
 $plugin_tx['privacy']['cf_duration']="Die Anzahl von Tagen, die die Zustimmung gültig ist. \"0\" bedeutet nur für die Sitzung, d.h. bis der Browser geschlossen wird.";
 
 ?>

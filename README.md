@@ -65,10 +65,11 @@ prominent place:
 
     <?=privacy()?>
 
-You should adapt the message in "Language" according to your
-needs. To make extensive information available you should prepare a
-hidden CMSimple\_XH page with the privacy notice, and link to it from the
-message.
+You should adapt the message in `Language` according to your
+needs. However, language texts do not accept any HTML markup, but you likely
+want to add links to the imprint and privacy policy pages; to be able to do
+that, you need to prepare a hidden page, and enter its page heading in
+`Config` → `Newsbox`.
 
 To avoid cookies being sent from other plugins or extensions before the
 user has opted in, you have to make some changes to the way these
