@@ -3,7 +3,6 @@ parameters:
   paths:
     - classes
     - views
-    - tests
     - admin.php
     - index.php
   bootstrapFiles:
