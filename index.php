@@ -22,7 +22,12 @@
 use Privacy\Dic;
 use Privacy\Infra\Request;
 
-const PRIVACY_VERSION = '1.0beta3';
+if (!defined("CMSIMPLE_XH_VERSION")) {
+    header("HTTP/1.1 403 Forbidden");
+    exit;
+}
+
+const PRIVACY_VERSION = "1.0beta3";
 
 function privacy(): string
 {
@@ -30,21 +35,18 @@ function privacy(): string
 }
 
 /**
- * Returns the result of calling $func with the variable arguments,
- * if the user already opted in. Otherwise doesn't call $func and returns ''.
- *
  * @param mixed $args
  * @return mixed
  */
-function Privacy_guard(callable $func, ...$args)
+function privacy_guard(callable $func, ...$args)
 {
     if (!privacy_agreed()) {
-        return '';
+        return "";
     }
     return $func(...$args);
 }
 
 function privacy_agreed(): bool
 {
-    return isset($_COOKIE['privacy_agreed']) && $_COOKIE['privacy_agreed'] === 'yes';
+    return isset($_COOKIE["privacy_agreed"]) && $_COOKIE["privacy_agreed"] === "yes";
 }
