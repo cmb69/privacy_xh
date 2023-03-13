@@ -21,21 +21,56 @@
 
 namespace Privacy\Infra;
 
-/** @codeCoverageIgnore */
 class Request
 {
+    /** @codeCoverageIgnore */
     public static function current(): self
     {
         return new self;
     }
 
+    public function privacyAction(): string
+    {
+        $post = $this->post();
+        if (!isset($post["privacy_agree"]) || !is_string($post["privacy_agree"])) {
+            return "";
+        }
+        if ($post["privacy_agree"] === "yes") {
+            return "consent";
+        }
+        return "decline";
+    }
+
+    /** @codeCoverageIgnore */
+    public function isCookieSet(): bool
+    {
+        return isset($_COOKIE['privacy_agreed']);
+    }
+
+    /** @codeCoverageIgnore */
     public function queryString(): string
     {
         return $_SERVER["QUERY_STRING"];
     }
 
+    /** @codeCoverageIgnore */
     public function time(): int
     {
         return (int) $_SERVER["REQUEST_TIME"];
+    }
+
+    /**
+     * @return array<string,string|array<string>>
+     * @codeCoverageIgnore
+     */
+    protected function post(): array
+    {
+        return $_POST;
+    }
+
+    /** @codeCoverageIgnore */
+    public function adm(): bool
+    {
+        return defined("XH_ADM") && XH_ADM;
     }
 }

@@ -26,9 +26,6 @@ const PRIVACY_VERSION = '1.0beta3';
 
 function privacy(): string
 {
-    if (XH_ADM) { // @phpstan-ignore-line
-        return "";
-    }
     return Dic::makeMainController()(Request::current())->respond();
 }
 

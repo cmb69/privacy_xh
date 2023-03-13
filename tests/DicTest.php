@@ -30,7 +30,7 @@ class DicTest extends TestCase
         global $pth, $plugin_cf, $plugin_tx;
 
         $pth = ["folder" => ["plugins" => ""]];
-        $plugin_cf = ["privacy" => ["duration" => ""]];
+        $plugin_cf = ["privacy" => []];
         $plugin_tx = ["privacy" => ["message" => ""]];
     }
 

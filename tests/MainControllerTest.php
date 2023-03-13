@@ -30,25 +30,24 @@ class MainControllerTest extends TestCase
 {
     public function testRendersPrivacyForm(): void
     {
-        $_POST = [];
-        $sut = new MainController(0, $this->message(), $this->view());
+        $sut = new MainController($this->conf(), $this->message(), $this->view());
         $response = $sut($this->request());
         Approvals::verifyHtml($response->output());
     }
 
     public function testDoesNothingIfAlreadyAgreed(): void
     {
-        $_COOKIE = ["privacy_agreed" => "yes"];
-        $sut = new MainController(0, $this->message(), $this->view());
-        $response = $sut($this->request());
+        $sut = new MainController($this->conf(), $this->message(), $this->view());
+        $request = $this->request();
+        $request->method("isCookieSet")->willReturn(true);
+        $response = $sut($request);
         $this->assertEquals("", $response->output());
     }
 
     public function testUserAgrees(): void
     {
-        $_POST = ["privacy_agree" => "yes"];
-        $sut = new MainController(1, $this->message(), $this->view());
-        $request = $this->request();
+        $sut = new MainController($this->conf(1), $this->message(), $this->view());
+        $request = $this->request("consent");
         $request->method("queryString")->willReturn("some+query+string");
         $response = $sut($request);
         $this->assertEquals(["privacy_agreed", "yes", 86400], $response->cookie());
@@ -57,16 +56,26 @@ class MainControllerTest extends TestCase
 
     public function testUserDisagrees(): void
     {
-        $_POST = ["privacy_agree" => "no"];
-        $sut = new MainController(0, $this->message(), $this->view());
-        $response = $sut($this->request());
+        $sut = new MainController($this->conf(), $this->message(), $this->view());
+        $response = $sut($this->request("decline"));
         $this->assertEquals(["privacy_agreed", "no", 0], $response->cookie());
         $this->assertEquals("http://example.com", $response->location());
     }
 
-    private function request(): Request
+    public function testDoesNothingIfAdmin(): void
     {
-        return $this->createMock(Request::class);
+        $sut = new MainController($this->conf(), $this->message(), $this->view());
+        $request = $this->request();
+        $request->method("adm")->willReturn(true);
+        $response = $sut($request);
+        $this->assertEquals("", $response->output());
+    }
+
+    private function request(string $action = ""): Request
+    {
+        $request = $this->createMock(Request::class);
+        $request->method("privacyAction")->willReturn($action);
+        return $request;
     }
 
     private function message(): string
@@ -77,5 +86,10 @@ class MainControllerTest extends TestCase
     private function view(): View
     {
         return new View("./views/", XH_includeVar("./languages/en.php", "plugin_tx")["privacy"]);
+    }
+
+    private function conf(int $duration = 0): array
+    {
+        return ["duration" => (string) $duration] + XH_includeVar("./config/config.php", "plugin_cf")["privacy"];
     }
 }

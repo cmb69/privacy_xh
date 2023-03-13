@@ -28,8 +28,8 @@ use Privacy\Value\Html;
 
 class MainController
 {
-    /** @var int */
-    private $duration;
+    /** @var array<string,string> */
+    private $conf;
 
     /** @var string */
     private $message;
@@ -37,45 +37,55 @@ class MainController
     /** @var View */
     private $view;
 
-    public function __construct(int $duration, string $message, View $view)
+    /** @param array<string,string> $conf */
+    public function __construct(array $conf, string $message, View $view)
     {
-        $this->duration = $duration;
+        $this->conf = $conf;
         $this->message = $message;
         $this->view = $view;
     }
 
     public function __invoke(Request $request): Response
     {
-        if (isset($_POST["privacy_agree"])) {
-            return $this->submitAction($request);
-        } else {
-            return $this->defaultAction($request);
+        if ($request->adm()) {
+            return Response::create();
+        }
+        switch ($request->privacyAction()) {
+            default:
+                return $this->show($request);
+            case "consent":
+                return $this->consent($request);
+            case "decline":
+                return $this->decline($request);
         }
     }
 
-    private function defaultAction(Request $request): Response
+    private function show(Request $request): Response
     {
-        if (!isset($_COOKIE['privacy_agreed'])) {
-            return Response::create($this->view->render("privacy", ["message" => Html::from($this->message)]));
+        if ($request->isCookieSet()) {
+            return Response::create();
         }
-        return Response::create();
+        return Response::create($this->view->render("privacy", ["message" => Html::from($this->message)]));
     }
 
-    private function submitAction(Request $request): Response
+    private function consent(Request $request): Response
     {
         $response = Response::redirect($this->getLocationURL($request->queryString()));
-        if ($_POST['privacy_agree'] === 'yes') {
-            $response = $response->withCookie("privacy_agreed", "yes", $this->getExpirationTime($request->time()));
-        } else {
-            $response = $response->withCookie("privacy_agreed", "no", 0);
-        }
+        $response = $response->withCookie("privacy_agreed", "yes", $this->getExpirationTime($request->time()));
+        return $response;
+    }
+
+    private function decline(Request $request): Response
+    {
+        $response = Response::redirect($this->getLocationURL($request->queryString()));
+        $response = $response->withCookie("privacy_agreed", "no", 0);
         return $response;
     }
 
     private function getExpirationTime(int $now): int
     {
-        return $this->duration > 0
-            ? $now + 24 * 60 * 60 * $this->duration
+        return (int) $this->conf["duration"] > 0
+            ? $now + 24 * 60 * 60 * (int) $this->conf["duration"]
             : 0;
     }
 
