@@ -27,11 +27,11 @@ use Privacy\Infra\Newsbox;
 use Privacy\Infra\Request;
 use Privacy\Infra\View;
 
-class MainControllerTest extends TestCase
+class PrivacyTest extends TestCase
 {
     public function testRendersPrivacyForm(): void
     {
-        $sut = new MainController($this->conf(), $this->newsbox(), $this->view());
+        $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
         $response = $sut($this->request());
         Approvals::verifyHtml($response->output());
     }
@@ -43,14 +43,14 @@ class MainControllerTest extends TestCase
         $newsbox = $this->newsbox();
         $newsbox->expects($this->once())->method("content")->with("Privacy_Message")
             ->willReturn("<p>some more <b>or</b> less fancy HTML</p>");
-        $sut = new MainController($conf, $newsbox, $this->view());
+        $sut = new Privacy($conf, $newsbox, $this->view());
         $response = $sut($this->request());
         Approvals::verifyHtml($response->output());
     }
 
     public function testRendersLinkIfAlreadyAgreed(): void
     {
-        $sut = new MainController($this->conf(), $this->newsbox(), $this->view());
+        $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
         $request = $this->request();
         $request->method("isCookieSet")->willReturn(true);
         $response = $sut($request);
@@ -59,19 +59,19 @@ class MainControllerTest extends TestCase
 
     public function testRendersPrivacyFormIfAlreadyAgreedButExplicitlyRequested(): void
     {
-        $sut = new MainController($this->conf(), $this->newsbox(), $this->view());
+        $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
         $request = $this->request("", true);
         $request->method("isCookieSet")->willReturn(true);
         $response = $sut($request);
         $this->assertStringEqualsFile(
-            __DIR__ . "/approvals/MainControllerTest.testRendersPrivacyForm.approved.html",
+            __DIR__ . "/approvals/PrivacyTest.testRendersPrivacyForm.approved.html",
             $response->output()
         );
     }
 
     public function testUserAgrees(): void
     {
-        $sut = new MainController($this->conf(1), $this->newsbox(), $this->view());
+        $sut = new Privacy($this->conf(1), $this->newsbox(), $this->view());
         $request = $this->request("consent");
         $response = $sut($request);
         $this->assertEquals(["privacy_agreed", "yes", 86400], $response->cookie());
@@ -80,7 +80,7 @@ class MainControllerTest extends TestCase
 
     public function testUserDisagrees(): void
     {
-        $sut = new MainController($this->conf(), $this->newsbox(), $this->view());
+        $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
         $response = $sut($this->request("decline"));
         $this->assertEquals(["privacy_agreed", "no", 0], $response->cookie());
         $this->assertEquals("http://example.com/?some+query+string", $response->location());
@@ -88,7 +88,7 @@ class MainControllerTest extends TestCase
 
     public function testDoesNothingIfAdmin(): void
     {
-        $sut = new MainController($this->conf(), $this->newsbox(), $this->view());
+        $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
         $request = $this->request();
         $request->method("adm")->willReturn(true);
         $response = $sut($request);

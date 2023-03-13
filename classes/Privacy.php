@@ -27,7 +27,7 @@ use Privacy\Infra\View;
 use Privacy\Value\Html;
 use Privacy\Value\Response;
 
-class MainController
+class Privacy
 {
     /** @var array<string,string> */
     private $conf;

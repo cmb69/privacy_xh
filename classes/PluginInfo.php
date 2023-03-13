@@ -26,7 +26,7 @@ use Privacy\Infra\SystemChecker;
 use Privacy\Infra\View;
 use Privacy\Value\Response;
 
-class ShowInfo
+class PluginInfo
 {
     /** @var string */
     private $pluginFolder;

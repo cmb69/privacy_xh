@@ -20,7 +20,7 @@ if (XH_wantsPluginAdministration("privacy")) {
     $o .= print_plugin_admin("off");
     switch ($admin) {
         case "":
-            $o .= Responder::respond(Dic::makeShowInfo()(Request::current()));
+            $o .= Responder::respond(Dic::makePluginInfo()(Request::current()));
             break;
         default:
             $o .= plugin_admin_common();

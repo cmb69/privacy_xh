@@ -34,13 +34,13 @@ class DicTest extends TestCase
         $plugin_tx = ["privacy" => []];
     }
 
-    public function testMakesMainController(): void
+    public function testMakesPrivacy(): void
     {
-        $this->assertInstanceOf(MainController::class, Dic::makeMainController());
+        $this->assertInstanceOf(Privacy::class, Dic::makePrivacy());
     }
 
-    public function testMakesShowInfo(): void
+    public function testMakesPluginInfo(): void
     {
-        $this->assertInstanceOf(ShowInfo::class, Dic::makeShowInfo());
+        $this->assertInstanceOf(PluginInfo::class, Dic::makePluginInfo());
     }
 }

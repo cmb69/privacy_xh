@@ -32,7 +32,7 @@ const PRIVACY_VERSION = "1.0beta3";
 
 function privacy(): string
 {
-    return Responder::respond(Dic::makeMainController()(Request::current()));
+    return Responder::respond(Dic::makePrivacy()(Request::current()));
 }
 
 /**

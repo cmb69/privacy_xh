@@ -29,11 +29,11 @@ use Privacy\Infra\Request;
 use Privacy\Infra\SystemChecker;
 use Privacy\Infra\View;
 
-class ShowInfoTest extends TestCase
+class PluginInfoTest extends TestCase
 {
     public function testRendersPluginInfo(): void
     {
-        $sut = new ShowInfo("./", $this->systemChecker(), $this->view());
+        $sut = new PluginInfo("./", $this->systemChecker(), $this->view());
         $response = $sut($this->request());
         $this->assertEquals("Privacy 1.0beta3", $response->title());
         Approvals::verifyString($response->output());

@@ -27,21 +27,21 @@ use Privacy\Infra\View;
 
 class Dic
 {
-    public static function makeMainController(): MainController
+    public static function makePrivacy(): Privacy
     {
         global $plugin_cf;
-        return  new MainController(
+        return  new Privacy(
             $plugin_cf["privacy"],
             new Newsbox,
             self::makeView()
         );
     }
 
-    public static function makeShowInfo(): ShowInfo
+    public static function makePluginInfo(): PluginInfo
     {
         global $pth;
 
-        return new ShowInfo(
+        return new PluginInfo(
             "{$pth['folder']['plugins']}privacy/",
             new SystemChecker,
             self::makeView()
