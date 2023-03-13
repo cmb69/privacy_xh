@@ -64,30 +64,37 @@ class MainController
     private function show(Request $request): Response
     {
         if ($request->isCookieSet() && !$request->showPrivacy()) {
-            return Response::create($this->view->render("link", [
-                "url" => $request->privacyformUrl(),
-            ]));
+            return Response::create($this->renderLink($request->privacyformUrl()));
         }
-        if ($this->conf["newsbox"] !== "") {
-            $message = $this->newsbox->content($this->conf["newsbox"]);
-        }
-        return Response::create($this->view->render("privacy", [
-            "message" => !empty($message) ? Html::from($message) : null,
-        ]));
+        return Response::create($this->renderForm());
     }
 
     private function consent(Request $request): Response
     {
-        $response = Response::redirect($request->privacyRedirectUrl());
-        $response = $response->withCookie("privacy_agreed", "yes", $this->getExpirationTime($request->time()));
-        return $response;
+        return Response::redirect($request->privacyRedirectUrl())
+            ->withCookie("privacy_agreed", "yes", $this->getExpirationTime($request->time()));
     }
 
     private function decline(Request $request): Response
     {
-        $response = Response::redirect($request->privacyRedirectUrl());
-        $response = $response->withCookie("privacy_agreed", "no", 0);
-        return $response;
+        return Response::redirect($request->privacyRedirectUrl())
+            ->withCookie("privacy_agreed", "no", 0);
+    }
+
+    private function renderForm(): string
+    {
+        return $this->view->render("privacy", [
+            "message" => $this->conf["newsbox"] !== ""
+                ? Html::from($this->newsbox->content($this->conf["newsbox"]))
+                : null,
+        ]);
+    }
+
+    private function renderLink(string $url): string
+    {
+        return $this->view->render("link", [
+            "url" => $url,
+        ]);
     }
 
     private function getExpirationTime(int $now): int
