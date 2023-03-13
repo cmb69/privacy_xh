@@ -1,11 +1,13 @@
 <!-- privacy form -->
-<form id="privacy" name="privacy" method="post">
-  <div><p>some more <b>or</b> less fancy HTML</p></div>
-  <p class="privacy_buttons">
-    <button type="submit" class="submit" name="privacy_agree" value="no">Decline</button>
-    <button type="submit" class="submit" name="privacy_agree" value="yes">Allow cookies</button>
-  </p>
-</form>
+<div id="privacy">
+  <form name="privacy" method="post">
+    <div><p>some more <b>or</b> less fancy HTML</p></div>
+    <p class="privacy_buttons">
+      <button type="submit" class="submit" name="privacy_agree" value="no">Decline</button>
+      <button type="submit" class="submit" name="privacy_agree" value="yes">Allow cookies</button>
+    </p>
+  </form>
+</div>
 <script>
 if (typeof navigator.cookieEnabled != "undefined" && !navigator.cookieEnabled) {
     document.forms.privacy.style.display = "none";
