@@ -25,6 +25,8 @@ use function XH_includeVar;
 
 use ApprovalTests\Approvals;
 use PHPUnit\Framework\TestCase;
+use Privacy\Infra\SystemChecker;
+use Privacy\Infra\View;
 
 class ShowInfoTest extends TestCase
 {
@@ -35,10 +37,15 @@ class ShowInfoTest extends TestCase
         $systemChecker->method('checkWritability')->willReturn(true);
         $plugin_tx = XH_includeVar("./languages/en.php", "plugin_tx");
         assert(is_array($plugin_tx));
-        $subject = new ShowInfo("./", $plugin_tx['privacy'], $systemChecker);
+        $subject = new ShowInfo("./", $plugin_tx['privacy'], $systemChecker, $this->view());
 
         $response = $subject();
 
         Approvals::verifyString($response);
+    }
+
+    private function view(): View
+    {
+        return new View("./views/", XH_includeVar("./languages/en.php", "plugin_tx")["privacy"]);
     }
 }

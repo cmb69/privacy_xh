@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (C) Christoph M. Becker
+ * Copyright 2023 Christoph M. Becker
  *
  * This file is part of Privacy_XH.
  *
@@ -21,20 +21,26 @@
 
 namespace Privacy;
 
-class HtmlString
-{
-    /**
-     * @var string
-     */
-    private $value;
+use PHPUnit\Framework\TestCase;
 
-    public function __construct(string $string)
+class DicTest extends TestCase
+{
+    public function setUp(): void
     {
-        $this->value = (string) $string;
+        global $pth, $plugin_cf, $plugin_tx;
+
+        $pth = ["folder" => ["plugins" => ""]];
+        $plugin_cf = ["privacy" => ["duration" => ""]];
+        $plugin_tx = ["privacy" => ["message" => ""]];
     }
 
-    public function __toString(): string
+    public function testMakesMainController(): void
     {
-        return $this->value;
+        $this->assertInstanceOf(MainController::class, Dic::makeMainController());
+    }
+
+    public function testMakesShowInfo(): void
+    {
+        $this->assertInstanceOf(ShowInfo::class, Dic::makeShowInfo());
     }
 }

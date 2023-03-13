@@ -19,7 +19,9 @@
  * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Privacy;
+namespace Privacy\Infra;
+
+use Privacy\Value\Html;
 
 class View
 {
@@ -41,7 +43,7 @@ class View
     /**
      * @param mixed $args
      */
-    public function text(string $key, ...$args): HtmlString
+    public function text(string $key, ...$args): Html
     {
         return $this->escape(vsprintf($this->lang[$key], $args));
     }
@@ -59,14 +61,14 @@ class View
     }
 
     /**
-     * @param HtmlString|scalar $value
+     * @param Html|scalar $value
      */
-    public function escape($value): HtmlString
+    public function escape($value): Html
     {
-        if ($value instanceof HtmlString) {
+        if ($value instanceof Html) {
             return $value;
         } else {
-            return new HtmlString(XH_hsc((string) $value));
+            return Html::from(XH_hsc((string) $value));
         }
     }
 }

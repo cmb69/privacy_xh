@@ -1,6 +1,6 @@
 <?php
 
-namespace Privacy;
+use Privacy\Infra\View;
 
 /**
  * @var View $this

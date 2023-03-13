@@ -19,35 +19,22 @@
  * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-use Privacy\Dic;
-use Privacy\Infra\Request;
+namespace Privacy\Value;
 
-const PRIVACY_VERSION = '1.0beta3';
-
-function privacy(): string
+class Html
 {
-    if (XH_ADM) { // @phpstan-ignore-line
-        return "";
+    public static function from(string $string): self
+    {
+        $that = new self;
+        $that->string = $string;
+        return $that;
     }
-    return Dic::makeMainController()(Request::current())->respond();
-}
 
-/**
- * Returns the result of calling $func with the variable arguments,
- * if the user already opted in. Otherwise doesn't call $func and returns ''.
- *
- * @param mixed $args
- * @return mixed
- */
-function Privacy_guard(callable $func, ...$args)
-{
-    if (!privacy_agreed()) {
-        return '';
+    /** @var string */
+    private $string;
+
+    public function __toString(): string
+    {
+        return $this->string;
     }
-    return $func(...$args);
-}
-
-function privacy_agreed(): bool
-{
-    return isset($_COOKIE['privacy_agreed']) && $_COOKIE['privacy_agreed'] === 'yes';
 }

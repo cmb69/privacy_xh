@@ -21,52 +21,69 @@
 
 namespace Privacy;
 
+use Privacy\Infra\Request;
+use Privacy\Infra\Response;
+use Privacy\Infra\View;
+use Privacy\Value\Html;
+
 class MainController
 {
     /** @var int */
     private $duration;
 
+    /** @var string */
+    private $message;
+
     /** @var View */
     private $view;
 
-    public function __construct(int $duration, View $view)
+    public function __construct(int $duration, string $message, View $view)
     {
         $this->duration = $duration;
+        $this->message = $message;
         $this->view = $view;
     }
 
-    public function defaultAction(): void
+    public function __invoke(Request $request): Response
     {
-        global $plugin_tx;
-
-        if (!isset($_COOKIE['privacy_agreed'])) {
-            echo $this->view->render("privacy", ["message" => new HtmlString($plugin_tx['privacy']['message'])]);
-        }
-    }
-
-    public function submitAction(): void
-    {
-        if ($_POST['privacy_agree'] === 'yes') {
-            setcookie('privacy_agreed', 'yes', $this->getExpirationTime(), CMSIMPLE_ROOT);
+        if (isset($_POST["privacy_agree"])) {
+            return $this->submitAction($request);
         } else {
-            setcookie('privacy_agreed', 'no', 0, CMSIMPLE_ROOT);
+            return $this->defaultAction($request);
         }
-        header('Location: ' . $this->getLocationURL(), true, 303);
-        exit;
     }
 
-    private function getExpirationTime(): int
+    private function defaultAction(Request $request): Response
+    {
+        if (!isset($_COOKIE['privacy_agreed'])) {
+            return Response::create($this->view->render("privacy", ["message" => Html::from($this->message)]));
+        }
+        return Response::create();
+    }
+
+    private function submitAction(Request $request): Response
+    {
+        $response = Response::redirect($this->getLocationURL($request->queryString()));
+        if ($_POST['privacy_agree'] === 'yes') {
+            $response = $response->withCookie("privacy_agreed", "yes", $this->getExpirationTime($request->time()));
+        } else {
+            $response = $response->withCookie("privacy_agreed", "no", 0);
+        }
+        return $response;
+    }
+
+    private function getExpirationTime(int $now): int
     {
         return $this->duration > 0
-            ? time() + 24 * 60 * 60 * $this->duration
+            ? $now + 24 * 60 * 60 * $this->duration
             : 0;
     }
 
-    private function getLocationURL(): string
+    private function getLocationURL(string $queryString): string
     {
         $url = CMSIMPLE_URL;
-        if ($_SERVER['QUERY_STRING'] != '') {
-            $url .= "?{$_SERVER['QUERY_STRING']}";
+        if ($queryString !== "") {
+            $url .= "?" . $queryString;
         }
         return $url;
     }

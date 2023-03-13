@@ -21,6 +21,8 @@
 
 namespace Privacy;
 
+use Privacy\Infra\SystemChecker;
+use Privacy\Infra\View;
 use stdClass;
 
 class ShowInfo
@@ -34,20 +36,23 @@ class ShowInfo
     /** @var SystemChecker */
     private $systemChecker;
 
+    /** @var View */
+    private $view;
+
     /**
      * @param array<string> $lang
      */
-    public function __construct(string $pluginFolder, array $lang, SystemChecker $systemChecker)
+    public function __construct(string $pluginFolder, array $lang, SystemChecker $systemChecker, View $view)
     {
         $this->pluginFolder = $pluginFolder;
         $this->lang = $lang;
         $this->systemChecker = $systemChecker;
+        $this->view = $view;
     }
 
     public function __invoke(): string
     {
-        $view = new View("{$this->pluginFolder}views", $this->lang);
-        return $view->render("info", [
+        return $this->view->render("info", [
             "version" => PRIVACY_VERSION,
             "checks" => $this->getChecks(),
         ]);

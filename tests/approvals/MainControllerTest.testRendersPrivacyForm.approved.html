@@ -1,0 +1,13 @@
+<!-- privacy -->
+
+<form id="privacy" name="privacy" method="post">
+  <p>We would like to place cookies on your computer to help us make this website better. To find out more about the cookies, see our <a href="?Privacy_notice">privacy notice</a>.</p>  <p class="privacy_buttons">
+    <button type="submit" class="submit" name="privacy_agree" value="no">Decline</button>
+    <button type="submit" class="submit" name="privacy_agree" value="yes">Allow cookies</button>
+  </p>
+</form>
+<script>
+  if (typeof navigator.cookieEnabled != "undefined" && !navigator.cookieEnabled) {
+    document.forms.privacy.style.display = "none";
+  }
+</script>

@@ -19,7 +19,7 @@
  * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Privacy;
+namespace Privacy\Infra;
 
 class SystemChecker
 {

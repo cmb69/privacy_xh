@@ -21,8 +21,21 @@
 
 namespace Privacy;
 
+use Privacy\Infra\SystemChecker;
+use Privacy\Infra\View;
+
 class Dic
 {
+    public static function makeMainController(): MainController
+    {
+        global $plugin_cf, $plugin_tx;
+        return  new MainController(
+            (int) $plugin_cf["privacy"]["duration"],
+            $plugin_tx["privacy"]["message"],
+            self::makeView()
+        );
+    }
+
     public static function makeShowInfo(): ShowInfo
     {
         global $pth, $plugin_tx;
@@ -30,7 +43,18 @@ class Dic
         return new ShowInfo(
             "{$pth['folder']['plugins']}privacy/",
             $plugin_tx['privacy'],
-            new SystemChecker()
+            new SystemChecker,
+            self::makeView()
+        );
+    }
+
+    private static function makeView(): View
+    {
+        global $pth, $plugin_tx;
+
+        return new View(
+            $pth["folder"]["plugins"] . "privacy/views/",
+            $plugin_tx['privacy']
         );
     }
 }
