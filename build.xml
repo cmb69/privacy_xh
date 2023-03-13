@@ -25,12 +25,6 @@
     </exec>
   </target>
 
-  <target name="mess" description="detects code flaws">
-    <exec executable="phpmd" passthru="true" checkreturn="true">
-      <arg line="admin.php,index.php,classes,tests ansi unusedcode,codesize"/>
-    </exec>
-  </target>
-
   <target name="test" description="run developer tests">
     <exec executable="phpunit" passthru="true" checkreturn="true"/>
   </target>
