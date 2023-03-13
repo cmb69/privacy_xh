@@ -1,7 +1,7 @@
 <?php
 
 const CMSIMPLE_XH_VERSION = "CMSimple_XH 1.7.5";
-const CMSIMPLE_URL = "http://example.com";
+const CMSIMPLE_URL = "http://example.com/";
 const PRIVACY_VERSION = '1.0beta3';
 
 require_once "../../cmsimple/functions.php";

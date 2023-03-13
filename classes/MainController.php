@@ -63,8 +63,10 @@ class MainController
 
     private function show(Request $request): Response
     {
-        if ($request->isCookieSet()) {
-            return Response::create();
+        if ($request->isCookieSet() && !$request->showPrivacy()) {
+            return Response::create($this->view->render("link", [
+                "url" => $request->privacyformUrl(),
+            ]));
         }
         if ($this->conf["newsbox"] !== "") {
             $message = $this->newsbox->content($this->conf["newsbox"]);
@@ -76,14 +78,14 @@ class MainController
 
     private function consent(Request $request): Response
     {
-        $response = Response::redirect($this->getLocationURL($request->queryString()));
+        $response = Response::redirect($request->privacyRedirectUrl());
         $response = $response->withCookie("privacy_agreed", "yes", $this->getExpirationTime($request->time()));
         return $response;
     }
 
     private function decline(Request $request): Response
     {
-        $response = Response::redirect($this->getLocationURL($request->queryString()));
+        $response = Response::redirect($request->privacyRedirectUrl());
         $response = $response->withCookie("privacy_agreed", "no", 0);
         return $response;
     }
@@ -93,14 +95,5 @@ class MainController
         return (int) $this->conf["duration"] > 0
             ? $now + 24 * 60 * 60 * (int) $this->conf["duration"]
             : 0;
-    }
-
-    private function getLocationURL(string $queryString): string
-    {
-        $url = CMSIMPLE_URL;
-        if ($queryString !== "") {
-            $url .= "?" . $queryString;
-        }
-        return $url;
     }
 }

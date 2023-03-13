@@ -3,6 +3,7 @@
 $plugin_tx['privacy']['message']="Wir würden gerne Cookies auf Ihrem Rechner platzieren, um uns zu helfen diese Website zu verbessern.";
 $plugin_tx['privacy']['label_allow']="Cookies erlauben";
 $plugin_tx['privacy']['label_decline']="Ablehnen";
+$plugin_tx['privacy']['label_link']="Cookie-Einstellungen";
 $plugin_tx['privacy']['info']="Info";
 
 $plugin_tx['privacy']['syscheck_fail']="Fehler";

@@ -48,23 +48,34 @@ class MainControllerTest extends TestCase
         Approvals::verifyHtml($response->output());
     }
 
-    public function testDoesNothingIfAlreadyAgreed(): void
+    public function testRendersLinkIfAlreadyAgreed(): void
     {
         $sut = new MainController($this->conf(), $this->newsbox(), $this->view());
         $request = $this->request();
         $request->method("isCookieSet")->willReturn(true);
         $response = $sut($request);
-        $this->assertEquals("", $response->output());
+        Approvals::verifyHtml($response->output());
+    }
+
+    public function testRendersPrivacyFormIfAlreadyAgreedButExplicitlyRequested(): void
+    {
+        $sut = new MainController($this->conf(), $this->newsbox(), $this->view());
+        $request = $this->request("", true);
+        $request->method("isCookieSet")->willReturn(true);
+        $response = $sut($request);
+        $this->assertStringEqualsFile(
+            __DIR__ . "/approvals/MainControllerTest.testRendersPrivacyForm.approved.html",
+            $response->output()
+        );
     }
 
     public function testUserAgrees(): void
     {
         $sut = new MainController($this->conf(1), $this->newsbox(), $this->view());
         $request = $this->request("consent");
-        $request->method("queryString")->willReturn("some+query+string");
         $response = $sut($request);
         $this->assertEquals(["privacy_agreed", "yes", 86400], $response->cookie());
-        $this->assertEquals("http://example.com?some+query+string", $response->location());
+        $this->assertEquals("http://example.com/?some+query+string", $response->location());
     }
 
     public function testUserDisagrees(): void
@@ -72,7 +83,7 @@ class MainControllerTest extends TestCase
         $sut = new MainController($this->conf(), $this->newsbox(), $this->view());
         $response = $sut($this->request("decline"));
         $this->assertEquals(["privacy_agreed", "no", 0], $response->cookie());
-        $this->assertEquals("http://example.com", $response->location());
+        $this->assertEquals("http://example.com/?some+query+string", $response->location());
     }
 
     public function testDoesNothingIfAdmin(): void
@@ -84,10 +95,13 @@ class MainControllerTest extends TestCase
         $this->assertEquals("", $response->output());
     }
 
-    private function request(string $action = ""): Request
+    private function request(string $action = "", $show = false): Request
     {
         $request = $this->createMock(Request::class);
         $request->method("privacyAction")->willReturn($action);
+        $request->method("showPrivacy")->willReturn($show);
+        $request->method("privacyRedirectUrl")->willReturn("http://example.com/?some+query+string");
+        $request->method("privacyFormUrl")->willReturn("/?&privacy_show");
         return $request;
     }
 

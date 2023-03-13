@@ -41,6 +41,27 @@ class Request
         return "decline";
     }
 
+    public function privacyRedirectUrl(): string
+    {
+        $url = CMSIMPLE_URL;
+        $queryString = preg_replace('/&privacy_show(=[^&]*)?/', "", $this->queryString());
+        if ($queryString !== "") {
+            $url .= "?" . $queryString;
+        }
+        return $url;
+    }
+
+    public function privacyFormUrl(): string
+    {
+        return $this->sn() . "?" . $this->queryString() . "&privacy_show";
+    }
+
+    /** @codeCoverageIgnore */
+    public function showPrivacy(): bool
+    {
+        return isset($_GET["privacy_show"]);
+    }
+
     /** @codeCoverageIgnore */
     public function isCookieSet(): bool
     {
@@ -48,7 +69,14 @@ class Request
     }
 
     /** @codeCoverageIgnore */
-    public function queryString(): string
+    protected function sn(): string
+    {
+        global $sn;
+        return $sn;
+    }
+
+    /** @codeCoverageIgnore */
+    protected function queryString(): string
     {
         return $_SERVER["QUERY_STRING"];
     }
