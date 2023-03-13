@@ -38,11 +38,10 @@ class Dic
 
     public static function makeShowInfo(): ShowInfo
     {
-        global $pth, $plugin_tx;
+        global $pth;
 
         return new ShowInfo(
             "{$pth['folder']['plugins']}privacy/",
-            $plugin_tx['privacy'],
             new SystemChecker,
             self::makeView()
         );

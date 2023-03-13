@@ -23,15 +23,11 @@ namespace Privacy;
 
 use Privacy\Infra\SystemChecker;
 use Privacy\Infra\View;
-use stdClass;
 
 class ShowInfo
 {
     /** @var string */
     private $pluginFolder;
-
-    /** @var array<string> */
-    private $lang;
 
     /** @var SystemChecker */
     private $systemChecker;
@@ -39,13 +35,9 @@ class ShowInfo
     /** @var View */
     private $view;
 
-    /**
-     * @param array<string> $lang
-     */
-    public function __construct(string $pluginFolder, array $lang, SystemChecker $systemChecker, View $view)
+    public function __construct(string $pluginFolder, SystemChecker $systemChecker, View $view)
     {
         $this->pluginFolder = $pluginFolder;
-        $this->lang = $lang;
         $this->systemChecker = $systemChecker;
         $this->view = $view;
     }
@@ -57,41 +49,51 @@ class ShowInfo
             "checks" => $this->getChecks(),
         ]);
     }
-    /**
-     * @return object[]
-     */
+    /** @return list<array{class:string,key:string,arg:string,state:string}> */
     public function getChecks(): array
     {
-        return array(
-            $this->checkPhpVersion('7.1.0'),
-            $this->checkXhVersion('1.7.0'),
-            $this->checkWritability("{$this->pluginFolder}css/"),
-            $this->checkWritability("{$this->pluginFolder}config/"),
-            $this->checkWritability("{$this->pluginFolder}languages/")
-        );
+        return [
+            $this->checkPhpVersion("7.1.0"),
+            $this->checkXhVersion("1.7.0"),
+            $this->checkWritability($this->pluginFolder . "css/"),
+            $this->checkWritability($this->pluginFolder . "config/"),
+            $this->checkWritability($this->pluginFolder . "languages/")
+        ];
     }
 
-    private function checkPhpVersion(string $version): stdClass
+    /** @return array{class:string,key:string,arg:string,state:string} */
+    private function checkPhpVersion(string $version): array
     {
-        $state = $this->systemChecker->checkVersion(PHP_VERSION, $version) ? 'success' : 'fail';
-        $label = sprintf($this->lang['syscheck_phpversion'], $version);
-        $stateLabel = $this->lang["syscheck_$state"];
-        return (object) compact('state', 'label', 'stateLabel');
+        $state = $this->systemChecker->checkVersion(PHP_VERSION, $version) ? "success" : "fail";
+        return [
+            "class" => "xh_$state",
+            "key" => "syscheck_phpversion",
+            "arg" => $version,
+            "state" => "syscheck_$state",
+        ];
     }
 
-    private function checkXhVersion(string $version): stdClass
+    /** @return array{class:string,key:string,arg:string,state:string} */
+    private function checkXhVersion(string $version): array
     {
-        $state = $this->systemChecker->checkVersion(CMSIMPLE_XH_VERSION, "CMSimple_XH $version") ? 'success' : 'fail';
-        $label = sprintf($this->lang['syscheck_xhversion'], $version);
-        $stateLabel = $this->lang["syscheck_$state"];
-        return (object) compact('state', 'label', 'stateLabel');
+        $state = $this->systemChecker->checkVersion(CMSIMPLE_XH_VERSION, "CMSimple_XH $version") ? "success" : "fail";
+        return [
+            "class" => "xh_$state",
+            "key" => "syscheck_xhversion",
+            "arg" => $version,
+            "state" => "syscheck_$state",
+        ];
     }
 
-    private function checkWritability(string $folder): stdClass
+    /** @return array{class:string,key:string,arg:string,state:string} */
+    private function checkWritability(string $folder): array
     {
-        $state = $this->systemChecker->checkWritability($folder) ? 'success' : 'warning';
-        $label = sprintf($this->lang['syscheck_writable'], $folder);
-        $stateLabel = $this->lang["syscheck_$state"];
-        return (object) compact('state', 'label', 'stateLabel');
+        $state = $this->systemChecker->checkWritability($folder) ? "success" : "warning";
+        return [
+            "class" => "xh_$state",
+            "key" => "syscheck_writable",
+            "arg" => $folder,
+            "state" => "syscheck_$state",
+        ];
     }
 }

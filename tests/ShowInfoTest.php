@@ -32,16 +32,17 @@ class ShowInfoTest extends TestCase
 {
     public function testRendersPluginInfo(): void
     {
-        $systemChecker = $this->createStub(SystemChecker::class);
-        $systemChecker->method('checkVersion')->willReturn(true);
-        $systemChecker->method('checkWritability')->willReturn(true);
-        $plugin_tx = XH_includeVar("./languages/en.php", "plugin_tx");
-        assert(is_array($plugin_tx));
-        $subject = new ShowInfo("./", $plugin_tx['privacy'], $systemChecker, $this->view());
-
-        $response = $subject();
-
+        $sut = new ShowInfo("./", $this->systemChecker(), $this->view());
+        $response = $sut();
         Approvals::verifyString($response);
+    }
+
+    private function systemChecker(): SystemChecker
+    {
+        $systemChecker = $this->createStub(SystemChecker::class);
+        $systemChecker->method("checkVersion")->willReturn(true);
+        $systemChecker->method("checkWritability")->willReturn(true);
+        return $systemChecker;
     }
 
     private function view(): View
