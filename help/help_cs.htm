@@ -63,7 +63,7 @@
 <h2 id="použití">Použití</h2>
 <p>Chcete-li aktivovat formulář ochrany osobních údajů, přidejte do šablony na nápadném místě:</p>
 <pre><code>&lt;?=privacy()?&gt;</code></pre>
-<p>Měli byste upravit text v “jazyk” podle vašich potřeb. Chcete-li rozsáhlé informace, měli byste připravit skrytou CMSimple_XH stránku s informacemi o ochraně osobních údajů.</p>
+<p>Měli byste upravit text v “jazyk” podle vašich potřeb. However, language texts do not accept any HTML markup, but you likely want to add links to the imprint and privacy policy pages; to be able to do that, you need to prepare a hidden page, and enter its page heading in <code>Config</code> → <code>Newsbox</code>.</p>
 <p>Aby se zabránilo ukládání cookie z jiných pluginů nebo rozšíření dříve, než uživatel povolil, budete muset udělat některé změny. Pokud je kód v šabloně, můžete hlídání provést následujícím způsobem:</p>
 <pre><code>&lt;?php if (privacy_agreed()):?&gt;
 &lt;!-- code that requires opt in --&gt;

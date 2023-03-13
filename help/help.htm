@@ -63,7 +63,7 @@
 <h2 id="usage">Usage</h2>
 <p>To activate the privacy form, add the following to your template in a prominent place:</p>
 <pre><code>&lt;?=privacy()?&gt;</code></pre>
-<p>You should adapt the message in “Language” according to your needs. To make extensive information available you should prepare a hidden CMSimple_XH page with the privacy notice, and link to it from the message.</p>
+<p>You should adapt the message in <code>Language</code> according to your needs. However, language texts do not accept any HTML markup, but you likely want to add links to the imprint and privacy policy pages; to be able to do that, you need to prepare a hidden page, and enter its page heading in <code>Config</code> → <code>Newsbox</code>.</p>
 <p>To avoid cookies being sent from other plugins or extensions before the user has opted in, you have to make some changes to the way these extensions are integrated. If the code is in the template, you can guard it from being executed before the visitor has opted in by encapsulating it the following way:</p>
 <pre><code>&lt;?php if (privacy_agreed()):?&gt;
 &lt;!-- code that requires opt in --&gt;

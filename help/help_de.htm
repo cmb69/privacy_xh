@@ -63,7 +63,7 @@
 <h2 id="verwendung">Verwendung</h2>
 <p>Um das Privatsphäre-Formular zu aktiveren, ist Folgendes an prominenter Stelle im Template zu ergänzen:</p>
 <pre><code>&lt;?=privacy()?&gt;</code></pre>
-<p>Die Meldung sollte unter “Sprache” den Bedürfnissen angepasst werden. Um umfangreiche Informationen zur Verfügung zu stellen, sollte eine versteckte CMSimple_XH-Seite mit den Privatsphäre-Hinweisen vorbereitet werden, und die Meldung sollte zu dieser verlinken.</p>
+<p>Die Meldung sollte unter <code>Sprache</code> den Bedürfnissen angepasst werden. Allerdings akzeptieren Sprachtexte kein HTML, aber Sie möchten vermutlich Links zum Impressum und der Datenschutzerklärung anzeigen; um dies tun zu können, müssen Sie eine versteckte Seite anlegen, und ihren Seiten-Titel unter <code>Konfiguration</code> → <code>Newsbox</code> eintragen.</p>
 <p>Um zu verhindern, dass Cookies von anderen Plugins oder Erweiterungen gesendet werden bevor der Nutzer eingewilligt hat, muss die Integration dieser Erweiterungen angepasst werden. Befindet sich der Code im Template, kann er solange der Besucher noch nicht eingewilligt hat, wie folgt vor der Ausführung geschützt werden:</p>
 <pre><code>&lt;?php if (privacy_agreed()):?&gt;
 &lt;!-- Code, der Einwilligung erfordert --&gt;
