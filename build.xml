@@ -42,10 +42,6 @@
     </exec>
   </target>
 
-  <target name="compat" description="checks compatibility with PHP_CompatInfo">
-    <exec command="phpcompatinfo analyser:run --ansi classes" passthru="true" checkreturn="true"/>
-  </target>
-
   <target name="gen-help" description="builds help.htm from README.md">
     <exec command="pandoc -s --eol=lf --template=help/template.htm -Vlang=en -Vpagetitle=&quot;User Manual&quot; -o help/help.htm README.md -t html" logoutput="true"/>
     <exec command="pandoc -s --eol=lf --template=help/template.htm -Vlang=cs -Vpagetitle=&quot;Uživatelský manuál&quot; -o help/help_cs.htm README_CS.md -t html" logoutput="true"/>
