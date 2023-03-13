@@ -48,10 +48,14 @@
     <delete file="export.zip"/>
     <move todir="dist">
       <fileset dir="export">
+        <exclude name=".github/**"/>
+        <exclude name=".phive/**"/>
+        <exclude name="help/template.htm"/>
+        <exclude name="tests/**"/>
         <exclude name="build.xml"/>
         <exclude name="composer.*"/>
-        <exclude name="help/template.htm"/>
-        <exclude name="README*.md"/>
+        <exclude name="phpstan.*"/>
+        <exclude name="phpunit.xml"/>
         <exclude name="teplad.xml"/>
       </fileset>
     </move>
