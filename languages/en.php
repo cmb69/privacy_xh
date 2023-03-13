@@ -1,6 +1,6 @@
 <?php
 
-$plugin_tx['privacy']['message']="<p>We would like to place cookies on your computer to help us make this website better. To find out more about the cookies, see our <a href=\"?Privacy_notice\">privacy notice</a>.</p>";
+$plugin_tx['privacy']['message']="We would like to place cookies on your computer to help us make this website better.";
 $plugin_tx['privacy']['label_allow']="Allow cookies";
 $plugin_tx['privacy']['label_decline']="Decline";
 $plugin_tx['privacy']['info']="Info";

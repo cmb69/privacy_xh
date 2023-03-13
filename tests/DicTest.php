@@ -31,7 +31,7 @@ class DicTest extends TestCase
 
         $pth = ["folder" => ["plugins" => ""]];
         $plugin_cf = ["privacy" => []];
-        $plugin_tx = ["privacy" => ["message" => ""]];
+        $plugin_tx = ["privacy" => []];
     }
 
     public function testMakesMainController(): void

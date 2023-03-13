@@ -31,7 +31,6 @@ class Dic
         global $plugin_cf, $plugin_tx;
         return  new MainController(
             $plugin_cf["privacy"],
-            $plugin_tx["privacy"]["message"],
             self::makeView()
         );
     }

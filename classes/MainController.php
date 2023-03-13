@@ -24,24 +24,19 @@ namespace Privacy;
 use Privacy\Infra\Request;
 use Privacy\Infra\Response;
 use Privacy\Infra\View;
-use Privacy\Value\Html;
 
 class MainController
 {
     /** @var array<string,string> */
     private $conf;
 
-    /** @var string */
-    private $message;
-
     /** @var View */
     private $view;
 
     /** @param array<string,string> $conf */
-    public function __construct(array $conf, string $message, View $view)
+    public function __construct(array $conf, View $view)
     {
         $this->conf = $conf;
-        $this->message = $message;
         $this->view = $view;
     }
 
@@ -65,7 +60,7 @@ class MainController
         if ($request->isCookieSet()) {
             return Response::create();
         }
-        return Response::create($this->view->render("privacy", ["message" => Html::from($this->message)]));
+        return Response::create($this->view->render("privacy", []));
     }
 
     private function consent(Request $request): Response

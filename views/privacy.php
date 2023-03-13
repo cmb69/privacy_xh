@@ -6,12 +6,11 @@ if (!defined("CMSIMPLE_XH_VERSION")) {header("HTTP/1.1 403 Forbidden"); exit;}
 
 /**
  * @var View $this
- * @var string $message
  */
 ?>
 <!-- privacy form -->
 <form id="privacy" name="privacy" method="post">
-  <?=$message?>
+  <p><?=$this->text('message')?></p>
   <p class="privacy_buttons">
     <button type="submit" class="submit" name="privacy_agree" value="no"><?=$this->text('label_decline')?></button>
     <button type="submit" class="submit" name="privacy_agree" value="yes"><?=$this->text('label_allow')?></button>

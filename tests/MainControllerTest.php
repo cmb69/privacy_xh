@@ -30,14 +30,14 @@ class MainControllerTest extends TestCase
 {
     public function testRendersPrivacyForm(): void
     {
-        $sut = new MainController($this->conf(), $this->message(), $this->view());
+        $sut = new MainController($this->conf(), $this->view());
         $response = $sut($this->request());
         Approvals::verifyHtml($response->output());
     }
 
     public function testDoesNothingIfAlreadyAgreed(): void
     {
-        $sut = new MainController($this->conf(), $this->message(), $this->view());
+        $sut = new MainController($this->conf(), $this->view());
         $request = $this->request();
         $request->method("isCookieSet")->willReturn(true);
         $response = $sut($request);
@@ -46,7 +46,7 @@ class MainControllerTest extends TestCase
 
     public function testUserAgrees(): void
     {
-        $sut = new MainController($this->conf(1), $this->message(), $this->view());
+        $sut = new MainController($this->conf(1), $this->view());
         $request = $this->request("consent");
         $request->method("queryString")->willReturn("some+query+string");
         $response = $sut($request);
@@ -56,7 +56,7 @@ class MainControllerTest extends TestCase
 
     public function testUserDisagrees(): void
     {
-        $sut = new MainController($this->conf(), $this->message(), $this->view());
+        $sut = new MainController($this->conf(), $this->view());
         $response = $sut($this->request("decline"));
         $this->assertEquals(["privacy_agreed", "no", 0], $response->cookie());
         $this->assertEquals("http://example.com", $response->location());
@@ -64,7 +64,7 @@ class MainControllerTest extends TestCase
 
     public function testDoesNothingIfAdmin(): void
     {
-        $sut = new MainController($this->conf(), $this->message(), $this->view());
+        $sut = new MainController($this->conf(), $this->view());
         $request = $this->request();
         $request->method("adm")->willReturn(true);
         $response = $sut($request);

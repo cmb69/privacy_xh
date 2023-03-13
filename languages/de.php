@@ -1,6 +1,6 @@
 <?php
 
-$plugin_tx['privacy']['message']="<p>Wir würden gerne Cookies auf Ihrem Rechner platzieren, um uns zu helfen diese Website zu verbessern. Erfahren sie mehr über diese Cookies in der <a href=\"?Datenschutzerklaerung\">Datenschutzerklärung</a>.</p>";
+$plugin_tx['privacy']['message']="Wir würden gerne Cookies auf Ihrem Rechner platzieren, um uns zu helfen diese Website zu verbessern.";
 $plugin_tx['privacy']['label_allow']="Cookies erlauben";
 $plugin_tx['privacy']['label_decline']="Ablehnen";
 $plugin_tx['privacy']['info']="Info";
