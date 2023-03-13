@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (C) Christoph M. Becker
+ * Copyright 2023 Christoph M. Becker
  *
  * This file is part of Privacy_XH.
  *
@@ -19,35 +19,29 @@
  * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-use Privacy\Dic;
-use Privacy\Infra\Request;
-use Privacy\Infra\Responder;
+namespace Privacy\Infra;
 
-if (!defined("CMSIMPLE_XH_VERSION")) {
-    header("HTTP/1.1 403 Forbidden");
-    exit;
-}
+use Privacy\Value\Response;
 
-const PRIVACY_VERSION = "1.0beta3";
-
-function privacy(): string
+/** @codeCoverageIgnore */
+class Responder
 {
-    return Responder::respond(Dic::makeMainController()(Request::current()));
-}
+    /** @return string|never */
+    public static function respond(Response $response)
+    {
+        global $title;
 
-/**
- * @param mixed $args
- * @return mixed
- */
-function privacy_guard(callable $func, ...$args)
-{
-    if (!privacy_agreed()) {
-        return "";
+        if ($response->cookie() !== null) {
+            [$name, $value, $expires] = $response->cookie();
+            setcookie($name, $value, $expires, CMSIMPLE_ROOT);
+        }
+        if ($response->location() !== null) {
+            header("Location: " . $response->location(), true, 303);
+            exit;
+        }
+        if ($response->title() !== null) {
+            $title = $response->title();
+        }
+        return $response->output();
     }
-    return $func(...$args);
-}
-
-function privacy_agreed(): bool
-{
-    return isset($_COOKIE["privacy_agreed"]) && $_COOKIE["privacy_agreed"] === "yes";
 }

@@ -22,9 +22,9 @@
 namespace Privacy;
 
 use Privacy\Infra\Request;
-use Privacy\Infra\Response;
 use Privacy\Infra\SystemChecker;
 use Privacy\Infra\View;
+use Privacy\Value\Response;
 
 class ShowInfo
 {

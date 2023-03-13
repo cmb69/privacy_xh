@@ -19,7 +19,7 @@
  * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Privacy\Infra;
+namespace Privacy\Value;
 
 class Response
 {
@@ -82,24 +82,5 @@ class Response
     public function cookie(): ?array
     {
         return $this->cookie;
-    }
-
-    /** @return string|never */
-    public function respond()
-    {
-        global $title;
-
-        if ($this->cookie !== null) {
-            [$name, $value, $expires] = $this->cookie;
-            setcookie($name, $value, $expires, CMSIMPLE_ROOT);
-        }
-        if ($this->location !== null) {
-            header("Location: " . $this->location, true, 303);
-            exit;
-        }
-        if ($this->title !== null) {
-            $title = $this->title;
-        }
-        return $this->output;
     }
 }

@@ -23,9 +23,9 @@ namespace Privacy;
 
 use Privacy\Infra\Newsbox;
 use Privacy\Infra\Request;
-use Privacy\Infra\Response;
 use Privacy\Infra\View;
 use Privacy\Value\Html;
+use Privacy\Value\Response;
 
 class MainController
 {
