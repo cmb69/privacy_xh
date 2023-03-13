@@ -21,54 +21,44 @@
 
 namespace Privacy\Infra;
 
-use Privacy\Value\Html;
-
 class View
 {
     /** @var string */
     private $templateFolder;
 
     /** @var array<string,string> */
-    private $lang;
+    private $text;
 
-    /**
-     * @param array<string,string> $lang
-     */
-    public function __construct(string $templateFolder, array $lang)
+    /** @param array<string,string> $text */
+    public function __construct(string $templateFolder, array $text)
     {
         $this->templateFolder = $templateFolder;
-        $this->lang = $lang;
+        $this->text = $text;
     }
 
-    /**
-     * @param mixed $args
-     */
-    public function text(string $key, ...$args): Html
+    /** @param scalar $args */
+    public function text(string $key, ...$args): string
     {
-        return $this->escape(vsprintf($this->lang[$key], $args));
+        return sprintf($this->esc($this->text[$key]), ...$args);
     }
 
-    /**
-     * @param array<string,mixed> $data
-     */
-    public function render(string $template, array $data): string
+    /** @param array<string,mixed> $_data */
+    public function render(string $_template, array $_data): string
     {
-        extract($data);
+        array_walk($_data, function (&$value) {
+            if (is_string($value)) {
+                $value = $this->esc($value);
+            }
+        });
+        extract($_data);
         ob_start();
-        echo "<!-- {$template} -->", PHP_EOL;
-        include "{$this->templateFolder}/{$template}.php";
+        include $this->templateFolder . $_template . ".php";
         return (string) ob_get_clean();
     }
 
-    /**
-     * @param Html|scalar $value
-     */
-    public function escape($value): Html
+    /** @param scalar $value */
+    public function esc($value): string
     {
-        if ($value instanceof Html) {
-            return $value;
-        } else {
-            return Html::from(XH_hsc((string) $value));
-        }
+        return XH_hsc((string) $value);
     }
 }
