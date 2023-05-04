@@ -19,21 +19,21 @@
  * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Privacy\Value;
+namespace Privacy\Infra;
 
 class Html
 {
-    public static function from(string $string): self
+    /** @var string */
+    private $string;
+
+    public static function of(string $string): self
     {
-        $that = new self;
+        $that = new self();
         $that->string = $string;
         return $that;
     }
 
-    /** @var string */
-    private $string;
-
-    public function __toString(): string
+    public function string(): string
     {
         return $this->string;
     }

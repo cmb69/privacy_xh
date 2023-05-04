@@ -45,9 +45,12 @@ class View
     /** @param array<string,mixed> $_data */
     public function render(string $_template, array $_data): string
     {
-        array_walk($_data, function (&$value) {
+        array_walk_recursive($_data, function (&$value) {
+            assert(is_null($value) || is_scalar($value) || $value instanceof Html);
             if (is_string($value)) {
                 $value = $this->esc($value);
+            } elseif ($value instanceof Html) {
+                $value = $value->string();
             }
         });
         extract($_data);
@@ -56,9 +59,8 @@ class View
         return (string) ob_get_clean();
     }
 
-    /** @param scalar $value */
-    public function esc($value): string
+    public function esc(string  $value): string
     {
-        return XH_hsc((string) $value);
+        return XH_hsc($value);
     }
 }
