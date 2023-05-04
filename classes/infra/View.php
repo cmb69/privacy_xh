@@ -59,7 +59,7 @@ class View
         return (string) ob_get_clean();
     }
 
-    public function esc(string  $value): string
+    public function esc(string $value): string
     {
         return XH_hsc($value);
     }

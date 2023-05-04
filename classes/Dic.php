@@ -32,7 +32,7 @@ class Dic
         global $plugin_cf;
         return  new Privacy(
             $plugin_cf["privacy"],
-            new Newsbox,
+            new Newsbox(),
             self::makeView()
         );
     }
@@ -43,7 +43,7 @@ class Dic
 
         return new PluginInfo(
             "{$pth['folder']['plugins']}privacy/",
-            new SystemChecker,
+            new SystemChecker(),
             self::makeView()
         );
     }

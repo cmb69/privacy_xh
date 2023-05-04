@@ -9,20 +9,15 @@
     <echo>${help}</echo>
   </target>
 
-  <target name="sniff" description="checks adherence to PSR-2">
+  <target name="sniff" description="checks adherence to the coding standard">
     <exec executable="phpcs" passthru="true" checkreturn="true">
-      <arg value="--standard=PSR2"/>
-      <arg line="--runtime-set ignore_warnings_on_exit true"/>
-      <arg file="admin.php"/>
-      <arg file="index.php"/>
-      <arg file="classes"/>
+      <arg line="--standard=PSR12 admin.php index.php classes"/>
     </exec>
   </target>
 
   <target name="stan" description="run static analysis">
     <exec executable="phpstan" passthru="true" checkreturn="true">
-      <arg value="--ansi"/>
-      <arg value="analyze"/>
+      <arg line="--ansi analyze"/>
     </exec>
   </target>
 

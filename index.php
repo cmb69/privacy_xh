@@ -23,11 +23,6 @@ use Privacy\Dic;
 use Privacy\Infra\Request;
 use Privacy\Infra\Responder;
 
-if (!defined("CMSIMPLE_XH_VERSION")) {
-    header("HTTP/1.1 403 Forbidden");
-    exit;
-}
-
 const PRIVACY_VERSION = "1.0beta3";
 
 function privacy(): string
