@@ -21,8 +21,6 @@
 
 namespace Privacy\Infra;
 
-use Privacy\Value\Response;
-
 /** @codeCoverageIgnore */
 class Responder
 {
@@ -36,6 +34,9 @@ class Responder
             setcookie($name, $value, $expires, CMSIMPLE_ROOT);
         }
         if ($response->location() !== null) {
+            while (ob_get_level()) {
+                ob_end_clean();
+            }
             header("Location: " . $response->location(), true, 303);
             exit;
         }

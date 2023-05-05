@@ -19,10 +19,22 @@
  * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Privacy\Value;
+namespace Privacy\Infra;
 
 class Response
 {
+    /** @var string */
+    private $output = "";
+
+    /** @var string|null */
+    private $location = null;
+
+    /** @var string|null */
+    private $title = null;
+
+    /** @var array{string,string,int}|null */
+    private $cookie = null;
+
     public static function create(string $output = ""): self
     {
         $that = new self();
@@ -36,18 +48,6 @@ class Response
         $that->location = $location;
         return $that;
     }
-
-    /** @var string */
-    private $output = "";
-
-    /** @var string|null */
-    private $location = null;
-
-    /** @var string|null */
-    private $title = null;
-
-    /** @var array{string,string,int}|null */
-    private $cookie = null;
 
     public function withTitle(string $title): self
     {

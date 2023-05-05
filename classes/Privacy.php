@@ -24,8 +24,8 @@ namespace Privacy;
 use Privacy\Infra\Html;
 use Privacy\Infra\Newsbox;
 use Privacy\Infra\Request;
+use Privacy\Infra\Response;
 use Privacy\Infra\View;
-use Privacy\Value\Response;
 
 class Privacy
 {
