@@ -48,7 +48,7 @@ class Privacy
 
     public function __invoke(Request $request): Response
     {
-        if ($request->adm()) {
+        if ($request->admin()) {
             return Response::create();
         }
         if ($request->post("privacy_agree") === null) {

@@ -28,7 +28,6 @@ class Request
     /** @var Url */
     private $url;
 
-    /** @codeCoverageIgnore */
     public static function current(): self
     {
         $that = new self();
@@ -57,25 +56,6 @@ class Request
         return $_COOKIE[$key];
     }
 
-    /** @codeCoverageIgnore */
-    protected function sn(): string
-    {
-        global $sn;
-        return $sn;
-    }
-
-    /** @codeCoverageIgnore */
-    protected function queryString(): string
-    {
-        return $_SERVER["QUERY_STRING"];
-    }
-
-    /** @codeCoverageIgnore */
-    public function time(): int
-    {
-        return (int) $_SERVER["REQUEST_TIME"];
-    }
-
     public function post(string $key): ?string
     {
         if (!isset($_POST[$key]) || !is_string($_POST[$key])) {
@@ -84,8 +64,12 @@ class Request
         return $_POST[$key];
     }
 
-    /** @codeCoverageIgnore */
-    public function adm(): bool
+    public function time(): int
+    {
+        return (int) $_SERVER["REQUEST_TIME"];
+    }
+
+    public function admin(): bool
     {
         return defined("XH_ADM") && XH_ADM;
     }

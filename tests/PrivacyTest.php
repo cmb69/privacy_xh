@@ -92,7 +92,7 @@ class PrivacyTest extends TestCase
     {
         $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
         $request = $this->request();
-        $request->method("adm")->willReturn(true);
+        $request->method("admin")->willReturn(true);
         $response = $sut($request);
         $this->assertEquals("", $response->output());
     }

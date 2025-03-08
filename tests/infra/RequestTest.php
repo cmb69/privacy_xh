@@ -83,7 +83,7 @@ class RequestTest extends TestCase
         ->disableOriginalClone()
         ->disableArgumentCloning()
         ->disallowMockingUnknownTypes()
-        ->onlyMethods(["queryString", "sn"])
+        ->onlyMethods([])
         ->getMock();
     }
 }
