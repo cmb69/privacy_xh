@@ -25,33 +25,6 @@ use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase
 {
-    /** @dataProvider privacyRedirectUrls */
-    public function testPrivacyRedirectUrl(string $queryString, string $expected): void
-    {
-        $sut = $this->sut();
-        $sut->method("queryString")->willReturn($queryString);
-        $url = $sut->privacyRedirectUrl();
-        $this->assertEquals($expected, $url);
-    }
-
-    public function privacyRedirectUrls(): array
-    {
-        return [
-            ["", "http://example.com/"],
-            ["Page", "http://example.com/?Page"],
-            ["Page&privacy_show", "http://example.com/?Page"],
-        ];
-    }
-
-    public function testPrivacyFormUrl(): void
-    {
-        $sut = $this->sut();
-        $sut->method("sn")->willReturn("/");
-        $sut->method("queryString")->willReturn("Page&foo=bar");
-        $url = $sut->privacyFormUrl();
-        $this->assertEquals("/?Page&foo=bar&privacy_show", $url);
-    }
-
     /** @dataProvider getData */
     public function testGet(string $name, $value, ?string $expected): void
     {

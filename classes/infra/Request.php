@@ -21,27 +21,24 @@
 
 namespace Privacy\Infra;
 
+use Plib\Url;
+
 class Request
 {
+    /** @var Url */
+    private $url;
+
     /** @codeCoverageIgnore */
     public static function current(): self
     {
-        return new self();
+        $that = new self();
+        $that->url = new Url(CMSIMPLE_URL, "", []);
+        return $that;
     }
 
-    public function privacyRedirectUrl(): string
+    public function url(): Url
     {
-        $url = CMSIMPLE_URL;
-        $queryString = preg_replace('/&privacy_show(=[^&]*)?/', "", $this->queryString());
-        if ($queryString !== "") {
-            $url .= "?" . $queryString;
-        }
-        return $url;
-    }
-
-    public function privacyFormUrl(): string
-    {
-        return $this->sn() . "?" . $this->queryString() . "&privacy_show";
+        return $this->url;
     }
 
     public function get(string $key): ?string

@@ -21,6 +21,7 @@
 
 namespace Privacy;
 
+use Plib\Url;
 use Plib\View;
 use Privacy\Infra\Newsbox;
 use Privacy\Infra\Request;
@@ -62,20 +63,20 @@ class Privacy
     private function show(Request $request): Response
     {
         if ($request->cookie("privacy_agreed") !== null && $request->get("privacy_show") === null) {
-            return Response::create($this->renderLink($request->privacyformUrl()));
+            return Response::create($this->renderLink($request->url()->with("privacy_show")));
         }
         return Response::create($this->renderForm());
     }
 
     private function consent(Request $request): Response
     {
-        return Response::redirect($request->privacyRedirectUrl())
+        return Response::redirect($request->url()->without("privacy_show")->absolute())
             ->withCookie("privacy_agreed", "yes", $this->getExpirationTime($request->time()));
     }
 
     private function decline(Request $request): Response
     {
-        return Response::redirect($request->privacyRedirectUrl())
+        return Response::redirect($request->url()->without("privacy_show")->absolute())
             ->withCookie("privacy_agreed", "no", 0);
     }
 
@@ -88,10 +89,10 @@ class Privacy
         ]);
     }
 
-    private function renderLink(string $url): string
+    private function renderLink(Url $url): string
     {
         return $this->view->render("link", [
-            "url" => $url,
+            "url" => $url->relative(),
         ]);
     }
 

@@ -22,7 +22,9 @@
 namespace Privacy;
 
 use ApprovalTests\Approvals;
+use PHPUnit\Framework\MockObject;
 use PHPUnit\Framework\TestCase;
+use Plib\Url;
 use Plib\View;
 use Privacy\Infra\Newsbox;
 use Privacy\Infra\Request;
@@ -95,13 +97,13 @@ class PrivacyTest extends TestCase
         $this->assertEquals("", $response->output());
     }
 
-    private function request(?string $privacyAgreed = null, $show = false): Request
+    /** @return Request&MockObject */
+    private function request(?string $privacyAgreed = null, $show = false)
     {
         $request = $this->createMock(Request::class);
+        $request->method("url")->willReturn(new Url("http://example.com/", "some+query+string", []));
         $request->method("post")->willReturn($privacyAgreed);
         $request->method("get")->willReturn($show ? "" : null);
-        $request->method("privacyRedirectUrl")->willReturn("http://example.com/?some+query+string");
-        $request->method("privacyFormUrl")->willReturn("/?&privacy_show");
         return $request;
     }
 
