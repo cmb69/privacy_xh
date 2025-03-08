@@ -99,7 +99,7 @@ class PrivacyTest extends TestCase
     {
         $request = $this->createMock(Request::class);
         $request->method("post")->willReturn($privacyAgreed);
-        $request->method("showPrivacy")->willReturn($show);
+        $request->method("get")->willReturn($show ? "" : null);
         $request->method("privacyRedirectUrl")->willReturn("http://example.com/?some+query+string");
         $request->method("privacyFormUrl")->willReturn("/?&privacy_show");
         return $request;

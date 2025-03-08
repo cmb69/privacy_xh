@@ -61,7 +61,7 @@ class Privacy
 
     private function show(Request $request): Response
     {
-        if ($request->isCookieSet() && !$request->showPrivacy()) {
+        if ($request->isCookieSet() && $request->get("privacy_show") === null) {
             return Response::create($this->renderLink($request->privacyformUrl()));
         }
         return Response::create($this->renderForm());

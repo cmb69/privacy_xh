@@ -44,12 +44,6 @@ class Request
         return $this->sn() . "?" . $this->queryString() . "&privacy_show";
     }
 
-    /** @codeCoverageIgnore */
-    public function showPrivacy(): bool
-    {
-        return isset($_GET["privacy_show"]);
-    }
-
     public function get(string $key): ?string
     {
         if (!isset($_GET[$key]) || !is_string($_GET[$key])) {
