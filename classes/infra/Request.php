@@ -61,13 +61,6 @@ class Request
     }
 
     /** @codeCoverageIgnore */
-    public function isCookieSet(): bool
-    {
-        return isset($_COOKIE['privacy_agreed']);
-    }
-
-
-    /** @codeCoverageIgnore */
     protected function sn(): string
     {
         global $sn;

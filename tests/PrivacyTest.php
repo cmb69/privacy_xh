@@ -52,7 +52,7 @@ class PrivacyTest extends TestCase
     {
         $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
         $request = $this->request();
-        $request->method("isCookieSet")->willReturn(true);
+        $request->method("cookie")->willReturn("yes");
         $response = $sut($request);
         Approvals::verifyHtml($response->output());
     }
@@ -61,7 +61,7 @@ class PrivacyTest extends TestCase
     {
         $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
         $request = $this->request(null, true);
-        $request->method("isCookieSet")->willReturn(true);
+        $request->method("cookie")->willReturn(null);
         $response = $sut($request);
         $this->assertStringEqualsFile(
             __DIR__ . "/approvals/PrivacyTest.testRendersPrivacyForm.approved.html",
