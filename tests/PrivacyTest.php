@@ -24,10 +24,10 @@ namespace Privacy;
 use ApprovalTests\Approvals;
 use PHPUnit\Framework\MockObject;
 use PHPUnit\Framework\TestCase;
+use Plib\Request;
 use Plib\Url;
 use Plib\View;
 use Privacy\Infra\Newsbox;
-use Privacy\Infra\Request;
 
 class PrivacyTest extends TestCase
 {

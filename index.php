@@ -19,8 +19,8 @@
  * along with Privacy_XH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-use Privacy\Dic;
-use Privacy\Infra\Request;
+ use Plib\Request;
+ use Privacy\Dic;
 
 const PRIVACY_VERSION = "1.0beta3";
 

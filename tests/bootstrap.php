@@ -5,6 +5,7 @@ const CMSIMPLE_URL = "http://example.com/";
 const PRIVACY_VERSION = '1.0beta3';
 
 require_once "../../cmsimple/functions.php";
+require_once "../plib/classes/Request.php";
 require_once "../plib/classes/Url.php";
 require_once "../plib/classes/SystemChecker.php";
 require_once "../plib/classes/View.php";

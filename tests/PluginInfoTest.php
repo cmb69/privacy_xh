@@ -25,9 +25,9 @@ use function XH_includeVar;
 
 use ApprovalTests\Approvals;
 use PHPUnit\Framework\TestCase;
+use Plib\Request;
 use Plib\SystemChecker;
 use Plib\View;
-use Privacy\Infra\Request;
 
 class PluginInfoTest extends TestCase
 {
