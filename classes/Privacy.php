@@ -21,7 +21,6 @@
 
 namespace Privacy;
 
-use Privacy\Infra\Html;
 use Privacy\Infra\Newsbox;
 use Privacy\Infra\Request;
 use Privacy\Infra\Response;
@@ -85,7 +84,7 @@ class Privacy
     {
         return $this->view->render("privacy", [
             "message" => $this->conf["newsbox"] !== ""
-                ? Html::of($this->newsbox->content($this->conf["newsbox"]))
+                ? $this->newsbox->content($this->conf["newsbox"])
                 : null,
         ]);
     }

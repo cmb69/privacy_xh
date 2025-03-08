@@ -39,28 +39,25 @@ class View
     /** @param scalar $args */
     public function text(string $key, ...$args): string
     {
-        return sprintf($this->esc($this->text[$key]), ...$args);
+        return $this->esc(sprintf($this->text[$key], ...$args));
     }
 
     /** @param array<string,mixed> $_data */
     public function render(string $_template, array $_data): string
     {
-        array_walk_recursive($_data, function (&$value) {
-            assert(is_null($value) || is_scalar($value) || $value instanceof Html);
-            if (is_string($value)) {
-                $value = $this->esc($value);
-            } elseif ($value instanceof Html) {
-                $value = $value->string();
-            }
-        });
         extract($_data);
         ob_start();
         include $this->templateFolder . $_template . ".php";
         return (string) ob_get_clean();
     }
 
-    public function esc(string $value): string
+    public function esc(string $string): string
     {
-        return XH_hsc($value);
+        return XH_hsc($string);
+    }
+
+    public function raw(string $string): string
+    {
+        return $string;
     }
 }

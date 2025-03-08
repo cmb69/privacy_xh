@@ -13,7 +13,7 @@ if (!defined("CMSIMPLE_XH_VERSION")) {header("HTTP/1.1 403 Forbidden"); exit;}
 <div id="privacy">
   <form name="privacy" method="post">
 <?if (isset($message)):?>
-    <div><?=$message?></div>
+    <div><?=$this->raw($message)?></div>
 <?else:?>
     <p><?=$this->text('message')?></p>
 <?endif?>

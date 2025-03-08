@@ -10,4 +10,4 @@ if (!defined("CMSIMPLE_XH_VERSION")) {header("HTTP/1.1 403 Forbidden"); exit;}
  */
 ?>
 <!-- privacy link -->
-<p><a href="<?=$url?>"><?=$this->text('label_link')?></a></p>
+<p><a href="<?=$this->esc($url)?>"><?=$this->text('label_link')?></a></p>
