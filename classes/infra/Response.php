@@ -49,6 +49,28 @@ class Response
         return $that;
     }
 
+    /** @return string|never */
+    public function __invoke()
+    {
+        global $title;
+
+        if ($this->cookie() !== null) {
+            [$name, $value, $expires] = $this->cookie();
+            setcookie($name, $value, $expires, CMSIMPLE_ROOT);
+        }
+        if ($this->location() !== null) {
+            while (ob_get_level()) {
+                ob_end_clean();
+            }
+            header("Location: " . $this->location(), true, 303);
+            exit;
+        }
+        if ($this->title() !== null) {
+            $title = $this->title();
+        }
+        return $this->output();
+    }
+
     public function withTitle(string $title): self
     {
         $that = clone $this;

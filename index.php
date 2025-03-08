@@ -21,13 +21,12 @@
 
 use Privacy\Dic;
 use Privacy\Infra\Request;
-use Privacy\Infra\Responder;
 
 const PRIVACY_VERSION = "1.0beta3";
 
 function privacy(): string
 {
-    return Responder::respond(Dic::makePrivacy()(Request::current()));
+    return Dic::makePrivacy()(Request::current())();
 }
 
 /**
