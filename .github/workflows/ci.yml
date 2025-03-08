@@ -20,6 +20,7 @@ jobs:
       - name: Checkout Plib_XH
         uses: actions/checkout@v4
         with:
+          repository: cmb69/plib_xh
           path: cmsimplexh/plugins/plib
       - name: Checkout Privacy_XH
         uses: actions/checkout@v4
