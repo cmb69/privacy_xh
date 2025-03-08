@@ -29,7 +29,7 @@ class RequestTest extends TestCase
     public function testPrivacyAction(array $post, string $expected): void
     {
         $sut = $this->sut();
-        $sut->method("post")->willReturn($post);
+        $_POST = $post;
         $action = $sut->privacyAction();
         $this->assertEquals($expected, $action);
     }
@@ -78,7 +78,7 @@ class RequestTest extends TestCase
         ->disableOriginalClone()
         ->disableArgumentCloning()
         ->disallowMockingUnknownTypes()
-        ->onlyMethods(["queryString", "post", "sn"])
+        ->onlyMethods(["queryString", "sn"])
         ->getMock();
     }
 }

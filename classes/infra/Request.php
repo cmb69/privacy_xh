@@ -31,11 +31,10 @@ class Request
 
     public function privacyAction(): string
     {
-        $post = $this->post();
-        if (!isset($post["privacy_agree"]) || !is_string($post["privacy_agree"])) {
+        if ($this->post("privacy_agree") === null) {
             return "";
         }
-        if ($post["privacy_agree"] === "yes") {
+        if ($this->post("privacy_agree") === "yes") {
             return "consent";
         }
         return "decline";
@@ -68,6 +67,7 @@ class Request
         return isset($_COOKIE['privacy_agreed']);
     }
 
+
     /** @codeCoverageIgnore */
     protected function sn(): string
     {
@@ -87,13 +87,12 @@ class Request
         return (int) $_SERVER["REQUEST_TIME"];
     }
 
-    /**
-     * @return array<string,string|array<string>>
-     * @codeCoverageIgnore
-     */
-    protected function post(): array
+    protected function post(string $key): ?string
     {
-        return $_POST;
+        if (!isset($_POST[$key]) || !is_string($_POST[$key])) {
+            return null;
+        }
+        return $_POST[$key];
     }
 
     /** @codeCoverageIgnore */
