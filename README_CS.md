@@ -22,6 +22,10 @@ soukromím uživatelů.
 
 Privacy\_XH is a plugin for CMSimple\_XH ≥ 1.7.0. It requires PHP ≥
 7.1.0.
+Privacy_XH also requires the [Plib_XH](https://github.com/cmb69/Plib_XH) plugin;
+if that is not already installed (see *Settings*→*Info*),
+get the [lastest release](https://github.com/cmb69/plib_xh/releases/latest),
+and install it.
 
 ## Download
 

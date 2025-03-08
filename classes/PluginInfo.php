@@ -21,9 +21,9 @@
 
 namespace Privacy;
 
+use Plib\SystemChecker;
 use Privacy\Infra\Request;
 use Privacy\Infra\Response;
-use Privacy\Infra\SystemChecker;
 use Privacy\Infra\View;
 
 class PluginInfo

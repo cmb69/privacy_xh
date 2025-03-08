@@ -21,8 +21,8 @@
 
 namespace Privacy;
 
+use Plib\SystemChecker;
 use Privacy\Infra\Newsbox;
-use Privacy\Infra\SystemChecker;
 use Privacy\Infra\View;
 
 class Dic
