@@ -50,6 +50,14 @@ class Request
         return isset($_GET["privacy_show"]);
     }
 
+    public function get(string $key): ?string
+    {
+        if (!isset($_GET[$key]) || !is_string($_GET[$key])) {
+            return null;
+        }
+        return $_GET[$key];
+    }
+
     /** @codeCoverageIgnore */
     public function isCookieSet(): bool
     {

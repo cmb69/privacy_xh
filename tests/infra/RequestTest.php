@@ -52,6 +52,23 @@ class RequestTest extends TestCase
         $this->assertEquals("/?Page&foo=bar&privacy_show", $url);
     }
 
+    /** @dataProvider getData */
+    public function testGet(string $name, $value, ?string $expected): void
+    {
+        $_GET = [$name => $value];
+        $sut = $this->sut();
+        $this->assertEquals($expected, $sut->get($name));
+    }
+
+    public function getData(): array
+    {
+        return [
+            ["foo", "bar", "bar"],
+            ["foo", null, null],
+            ["foo", [], null],
+        ];
+    }
+
     /** @dataProvider postData */
     public function testPost(string $name, $value, ?string $expected): void
     {
