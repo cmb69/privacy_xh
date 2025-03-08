@@ -24,10 +24,10 @@ namespace Privacy;
 use function XH_includeVar;
 
 use ApprovalTests\Approvals;
-use Plib\SystemChecker;
 use PHPUnit\Framework\TestCase;
+use Plib\SystemChecker;
+use Plib\View;
 use Privacy\Infra\Request;
-use Privacy\Infra\View;
 
 class PluginInfoTest extends TestCase
 {

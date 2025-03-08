@@ -21,10 +21,10 @@
 
 namespace Privacy;
 
+use Plib\View;
 use Privacy\Infra\Newsbox;
 use Privacy\Infra\Request;
 use Privacy\Infra\Response;
-use Privacy\Infra\View;
 
 class Privacy
 {

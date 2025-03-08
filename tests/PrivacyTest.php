@@ -23,9 +23,9 @@ namespace Privacy;
 
 use ApprovalTests\Approvals;
 use PHPUnit\Framework\TestCase;
+use Plib\View;
 use Privacy\Infra\Newsbox;
 use Privacy\Infra\Request;
-use Privacy\Infra\View;
 
 class PrivacyTest extends TestCase
 {
