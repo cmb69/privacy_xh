@@ -69,6 +69,23 @@ class RequestTest extends TestCase
         ];
     }
 
+    /** @dataProvider cookieData */
+    public function testCookie(string $name, $value, ?string $expected): void
+    {
+        $_COOKIE = [$name => $value];
+        $sut = $this->sut();
+        $this->assertEquals($expected, $sut->cookie($name));
+    }
+
+    public function cookieData(): array
+    {
+        return [
+            ["foo", "bar", "bar"],
+            ["foo", null, null],
+            ["foo", [], null],
+        ];
+    }
+
     /** @dataProvider postData */
     public function testPost(string $name, $value, ?string $expected): void
     {

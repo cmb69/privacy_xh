@@ -52,6 +52,14 @@ class Request
         return $_GET[$key];
     }
 
+    public function cookie(string $key): ?string
+    {
+        if (!isset($_COOKIE[$key]) || !is_string($_COOKIE[$key])) {
+            return null;
+        }
+        return $_COOKIE[$key];
+    }
+
     /** @codeCoverageIgnore */
     public function isCookieSet(): bool
     {
