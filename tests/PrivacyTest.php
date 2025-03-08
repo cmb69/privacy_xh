@@ -27,13 +27,12 @@ use PHPUnit\Framework\TestCase;
 use Plib\Request;
 use Plib\Url;
 use Plib\View;
-use Privacy\Infra\Newsbox;
 
 class PrivacyTest extends TestCase
 {
     public function testRendersPrivacyForm(): void
     {
-        $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
+        $sut = $this->sut($this->conf(), $this->view());
         $response = $sut($this->request());
         Approvals::verifyHtml($response->output());
     }
@@ -42,17 +41,16 @@ class PrivacyTest extends TestCase
     {
         $conf = $this->conf();
         $conf["newsbox"] = "Privacy_Message";
-        $newsbox = $this->newsbox();
-        $newsbox->expects($this->once())->method("content")->with("Privacy_Message")
+        $sut = $this->sut($conf, $this->view());
+        $sut->expects($this->once())->method("newsbox")->with("Privacy_Message")
             ->willReturn("<p>some more <b>or</b> less fancy HTML</p>");
-        $sut = new Privacy($conf, $newsbox, $this->view());
         $response = $sut($this->request());
         Approvals::verifyHtml($response->output());
     }
 
     public function testRendersLinkIfAlreadyAgreed(): void
     {
-        $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
+        $sut = $this->sut($this->conf(), $this->view());
         $request = $this->request();
         $request->method("cookie")->willReturn("yes");
         $response = $sut($request);
@@ -61,7 +59,7 @@ class PrivacyTest extends TestCase
 
     public function testRendersPrivacyFormIfAlreadyAgreedButExplicitlyRequested(): void
     {
-        $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
+        $sut = $this->sut($this->conf(), $this->view());
         $request = $this->request(null, true);
         $request->method("cookie")->willReturn(null);
         $response = $sut($request);
@@ -73,7 +71,7 @@ class PrivacyTest extends TestCase
 
     public function testUserAgrees(): void
     {
-        $sut = new Privacy($this->conf(1), $this->newsbox(), $this->view());
+        $sut = $this->sut($this->conf(1), $this->view());
         $request = $this->request("yes");
         $response = $sut($request);
         $this->assertEquals(["privacy_agreed", "yes", 86400], $response->cookie());
@@ -82,7 +80,7 @@ class PrivacyTest extends TestCase
 
     public function testUserDisagrees(): void
     {
-        $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
+        $sut = $this->sut($this->conf(), $this->view());
         $response = $sut($this->request("decline"));
         $this->assertEquals(["privacy_agreed", "no", 0], $response->cookie());
         $this->assertEquals("http://example.com/?some+query+string", $response->location());
@@ -90,7 +88,7 @@ class PrivacyTest extends TestCase
 
     public function testDoesNothingIfAdmin(): void
     {
-        $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
+        $sut = $this->sut($this->conf(), $this->view());
         $request = $this->request();
         $request->method("admin")->willReturn(true);
         $response = $sut($request);
@@ -107,9 +105,12 @@ class PrivacyTest extends TestCase
         return $request;
     }
 
-    private function newsbox(): Newsbox
+    private function sut(array $conf, View $view)
     {
-        return $this->createMock(Newsbox::class);
+        return $this->getMockBuilder(Privacy::class)
+            ->setConstructorArgs([$conf, $view])
+            ->onlyMethods(["newsbox"])
+            ->getMock();
     }
 
     private function view(): View

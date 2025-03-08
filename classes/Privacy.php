@@ -25,24 +25,19 @@ use Plib\Request;
 use Plib\Response;
 use Plib\Url;
 use Plib\View;
-use Privacy\Infra\Newsbox;
 
 class Privacy
 {
     /** @var array<string,string> */
     private $conf;
 
-    /** @var Newsbox */
-    private $newsbox;
-
     /** @var View */
     private $view;
 
     /** @param array<string,string> $conf */
-    public function __construct(array $conf, Newsbox $newsbox, View $view)
+    public function __construct(array $conf, View $view)
     {
         $this->conf = $conf;
-        $this->newsbox = $newsbox;
         $this->view = $view;
     }
 
@@ -84,7 +79,7 @@ class Privacy
     {
         return $this->view->render("privacy", [
             "message" => $this->conf["newsbox"] !== ""
-                ? $this->newsbox->content($this->conf["newsbox"])
+                ? $this->newsbox($this->conf["newsbox"])
                 : null,
         ]);
     }
@@ -101,5 +96,10 @@ class Privacy
         return (int) $this->conf["duration"] > 0
             ? $now + 24 * 60 * 60 * (int) $this->conf["duration"]
             : 0;
+    }
+
+    protected function newsbox(string $page): string
+    {
+        return (string) newsbox($page);
     }
 }

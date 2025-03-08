@@ -23,7 +23,6 @@ namespace Privacy;
 
 use Plib\SystemChecker;
 use Plib\View;
-use Privacy\Infra\Newsbox;
 
 class Dic
 {
@@ -32,7 +31,6 @@ class Dic
         global $plugin_cf;
         return  new Privacy(
             $plugin_cf["privacy"],
-            new Newsbox(),
             self::makeView()
         );
     }
