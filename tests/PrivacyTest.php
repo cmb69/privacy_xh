@@ -60,7 +60,7 @@ class PrivacyTest extends TestCase
     public function testRendersPrivacyFormIfAlreadyAgreedButExplicitlyRequested(): void
     {
         $sut = new Privacy($this->conf(), $this->newsbox(), $this->view());
-        $request = $this->request("", true);
+        $request = $this->request(null, true);
         $request->method("isCookieSet")->willReturn(true);
         $response = $sut($request);
         $this->assertStringEqualsFile(
@@ -72,7 +72,7 @@ class PrivacyTest extends TestCase
     public function testUserAgrees(): void
     {
         $sut = new Privacy($this->conf(1), $this->newsbox(), $this->view());
-        $request = $this->request("consent");
+        $request = $this->request("yes");
         $response = $sut($request);
         $this->assertEquals(["privacy_agreed", "yes", 86400], $response->cookie());
         $this->assertEquals("http://example.com/?some+query+string", $response->location());
@@ -95,10 +95,10 @@ class PrivacyTest extends TestCase
         $this->assertEquals("", $response->output());
     }
 
-    private function request(string $action = "", $show = false): Request
+    private function request(?string $privacyAgreed = null, $show = false): Request
     {
         $request = $this->createMock(Request::class);
-        $request->method("privacyAction")->willReturn($action);
+        $request->method("post")->willReturn($privacyAgreed);
         $request->method("showPrivacy")->willReturn($show);
         $request->method("privacyRedirectUrl")->willReturn("http://example.com/?some+query+string");
         $request->method("privacyFormUrl")->willReturn("/?&privacy_show");

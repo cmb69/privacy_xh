@@ -25,25 +25,6 @@ use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase
 {
-    /** @dataProvider privacyActions */
-    public function testPrivacyAction(array $post, string $expected): void
-    {
-        $sut = $this->sut();
-        $_POST = $post;
-        $action = $sut->privacyAction();
-        $this->assertEquals($expected, $action);
-    }
-
-    public function privacyActions(): array
-    {
-        return [
-            [[], ""],
-            [["privacy_agree" => []], ""],
-            [["privacy_agree" => "yes"], "consent"],
-            [["privacy_agree" => "no"], "decline"],
-        ];
-    }
-
     /** @dataProvider privacyRedirectUrls */
     public function testPrivacyRedirectUrl(string $queryString, string $expected): void
     {
@@ -69,6 +50,23 @@ class RequestTest extends TestCase
         $sut->method("queryString")->willReturn("Page&foo=bar");
         $url = $sut->privacyFormUrl();
         $this->assertEquals("/?Page&foo=bar&privacy_show", $url);
+    }
+
+    /** @dataProvider postData */
+    public function testPost(string $name, $value, ?string $expected): void
+    {
+        $_POST = [$name => $value];
+        $sut = $this->sut();
+        $this->assertEquals($expected, $sut->post($name));
+    }
+
+    public function postData(): array
+    {
+        return [
+            ["foo", "bar", "bar"],
+            ["foo", null, null],
+            ["foo", [], null],
+        ];
     }
 
     private function sut(): Request

@@ -50,14 +50,13 @@ class Privacy
         if ($request->adm()) {
             return Response::create();
         }
-        switch ($request->privacyAction()) {
-            default:
-                return $this->show($request);
-            case "consent":
-                return $this->consent($request);
-            case "decline":
-                return $this->decline($request);
+        if ($request->post("privacy_agree") === null) {
+            return $this->show($request);
         }
+        if ($request->post("privacy_agree") === "yes") {
+            return $this->consent($request);
+        }
+        return $this->decline($request);
     }
 
     private function show(Request $request): Response

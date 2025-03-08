@@ -29,17 +29,6 @@ class Request
         return new self();
     }
 
-    public function privacyAction(): string
-    {
-        if ($this->post("privacy_agree") === null) {
-            return "";
-        }
-        if ($this->post("privacy_agree") === "yes") {
-            return "consent";
-        }
-        return "decline";
-    }
-
     public function privacyRedirectUrl(): string
     {
         $url = CMSIMPLE_URL;
@@ -87,7 +76,7 @@ class Request
         return (int) $_SERVER["REQUEST_TIME"];
     }
 
-    protected function post(string $key): ?string
+    public function post(string $key): ?string
     {
         if (!isset($_POST[$key]) || !is_string($_POST[$key])) {
             return null;
