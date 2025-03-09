@@ -1,5 +1,5 @@
 <!-- privacy plugin info -->
-<h1>Privacy 1.0</h1>
+<h1>Privacy 1.1-dev</h1>
 <h2>System check</h2>
 <p class="xh_success">PHP version ≥ 7.1.0: okay</p>
 <p class="xh_success">CMSimple_XH version ≥ 1.7.0: okay</p>

@@ -22,7 +22,7 @@
  use Plib\Request;
  use Privacy\Dic;
 
-const PRIVACY_VERSION = "1.0";
+const PRIVACY_VERSION = "1.1-dev";
 
 function privacy(): string
 {
